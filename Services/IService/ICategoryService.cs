@@ -11,6 +11,7 @@ namespace Services.IService
     {
         IEnumerable<Category> GetCategorys();
         Category GetCategoryByID(int id);
+        void SaveCategory(Category category);
         void InsertCategory(Category category);
         void UpdateCategory(Category category);
         void DeleteCategory(Category category);

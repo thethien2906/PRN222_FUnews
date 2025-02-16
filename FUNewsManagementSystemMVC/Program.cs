@@ -1,7 +1,20 @@
+using DataAccessObjects.AppDbContext;
+using Microsoft.EntityFrameworkCore;
+using Repositories.IRepository;
+using Repositories.Repository;
+using Services;
+using Services.IService;
+using Services.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<FunewsManagementContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FUNewsManagement")));
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<Repositories.IRepository.ICategoryRepo, Repositories.Repository.CategoryRepo>();
+builder.Services.AddScoped<Services.IService.ICategoryService, Services.Service.CategoryService>();
 
 var app = builder.Build();
 

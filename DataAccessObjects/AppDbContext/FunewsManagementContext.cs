@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.IO;
-using Microsoft.Extensions.Configuration.Json;
-using Microsoft.Extensions.Configuration;
+﻿
 using BusinessObjects.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 namespace DataAccessObjects.AppDbContext;
 
 public partial class FunewsManagementContext : DbContext
@@ -26,20 +24,26 @@ public partial class FunewsManagementContext : DbContext
 
     public virtual DbSet<Tag> Tags { get; set; }
 
-    private string GetConnectionString()
-    {
-        string appSettingsPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "ElderlyCareMVC", "appsettings.json");
-
-
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddJsonFile(appSettingsPath, true, true)
-            .Build();
-        return configuration["ConnectionStrings:DefaultConnectionString"];
-    }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(GetConnectionString());
+        if (!optionsBuilder.IsConfigured)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("FUNewsManagement"));
+        }
+    }
+    private string GetConnectionString()
+    {
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", true, true)
+            .Build();
+
+        return configuration["ConnectionStrings:DB"]!;
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

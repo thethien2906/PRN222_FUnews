@@ -33,21 +33,34 @@ namespace DataAccessObjects
             List<Category> categorys = new List<Category>();
             try
             {
-                var _context = new FunewsManagementContext();
+                using var _context = new FunewsManagementContext();
                 categorys = _context.Categories.Where(x => x.IsActive == true).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return categorys;
+        }
+        public static void SaveCategory(Category category)
+        {
+            try
+            {
+                using var context = new FunewsManagementContext();
+                context.Categories.Add(category);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return categorys;
         }
         public Category GetCategoryById(int id)
         {
             Category category = null;
             try
             {
-                var _context = new FunewsManagementContext();
+                using var _context = new FunewsManagementContext();
                 category = _context.Categories.SingleOrDefault(category => category.CategoryId == id);
             }
             catch (Exception ex)
@@ -61,7 +74,7 @@ namespace DataAccessObjects
         {
             try
             {
-                var _context = new FunewsManagementContext();
+                using var _context = new FunewsManagementContext();
                 _context.Categories.Add(category);
                 _context.SaveChanges();
             }
@@ -77,7 +90,7 @@ namespace DataAccessObjects
             {
                 if (_category != null)
                 {
-                    var _context = new FunewsManagementContext();
+                    using var _context = new FunewsManagementContext();
                     _context.Entry<Category>(category).State = EntityState.Modified;
                     _context.SaveChanges();
                 }
@@ -97,11 +110,14 @@ namespace DataAccessObjects
         {
             try
             {
-                Category _category = GetCategoryById(category.CategoryId);
-                if (_category != null)
+                using var _context = new FunewsManagementContext();
+                var existingCategory = _context.Categories
+                    .Include(c => c.NewsArticles) // Include all related entities
+                    .SingleOrDefault(c => c.CategoryId == category.CategoryId);
+
+                if (existingCategory != null)
                 {
-                    var _context = new FunewsManagementContext();
-                    _context.Categories.Remove(category);
+                    _context.Categories.Remove(existingCategory);
                     _context.SaveChanges();
                 }
                 else
@@ -109,16 +125,18 @@ namespace DataAccessObjects
                     throw new Exception("Category does not exist.");
                 }
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
-                throw new Exception(ex.Message);
+                // Log the exception for more details
+                throw new Exception("Error while deleting category. Check inner exception for details.", ex);
             }
         }
+
         public void ChangeStatus(Category category)
         {
             try
             {
-                var _context = new FunewsManagementContext();
+                using var _context = new FunewsManagementContext();
                 var a = _context.Categories!.FirstOrDefault(c => c.CategoryId.Equals(category.CategoryId));
 
 
@@ -143,7 +161,7 @@ namespace DataAccessObjects
             List<Category> categorys = new List<Category>();
             try
             {
-                var _context = new FunewsManagementContext();
+                using var _context = new FunewsManagementContext();
                 categorys = _context.Categories
                     .Where(x => x.CategoryName.ToLower().Contains(search.ToLower()) && x.IsActive == true)
                     .ToList();
