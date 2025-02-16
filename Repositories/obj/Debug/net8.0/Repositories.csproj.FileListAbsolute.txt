@@ -1,9 +1,3 @@
-C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
-C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache
-C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfo.cs
-C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.csproj.CoreCompileInputs.cache
-C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.sourcelink.json
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\bin\Debug\net8.0\Repositories.deps.json
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\bin\Debug\net8.0\Repositories.runtimeconfig.json
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\bin\Debug\net8.0\Repositories.dll
@@ -12,6 +6,12 @@ C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\bin\Debug\net8
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\bin\Debug\net8.0\DataAccessObjects.dll
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\bin\Debug\net8.0\BusinessObjects.pdb
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\bin\Debug\net8.0\DataAccessObjects.pdb
+C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
+C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache
+C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfo.cs
+C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.csproj.CoreCompileInputs.cache
+C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.sourcelink.json
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Reposito.787EC4B2.Up2Date
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\Repositories.dll
 C:\Users\Mot\Desktop\PRN222\Assignments\Assignments1\Repositories\obj\Debug\net8.0\refint\Repositories.dll

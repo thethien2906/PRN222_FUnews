@@ -11,37 +11,50 @@ namespace Services.Service
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepo _categoryService;
+        private readonly ICategoryRepo _categoryRepo;
         public CategoryService(ICategoryRepo categoryService)
         {
-            _categoryService = categoryService;
+            _categoryRepo = categoryService;
 
         }
 
-        public void ChangeStatus(Category category) => _categoryService.ChangeStatus(category);
+        public void ChangeStatus(Category category) => _categoryRepo.ChangeStatus(category);
 
         public void DeleteCategory(Category category)
         {
-            _categoryService.DeleteCategory(category);
+            _categoryRepo.DeleteCategory(category);
         }
 
         public Category GetCategoryByID(int id)
         {
-            return _categoryService.GetCategoryByID(id);
+            return _categoryRepo.GetCategoryByID(id);
         }
 
-        public IEnumerable<Category> GetCategorys() => _categoryService.GetCategorys();
+        public IEnumerable<Category> GetCategorys() => _categoryRepo.GetCategorys();
 
         public void InsertCategory(Category category)
         {
-            _categoryService.InsertCategory(category);
+            _categoryRepo.InsertCategory(category);
         }
 
-        public IEnumerable<Category> Search(string search) => _categoryService.Search(search);
+        public void SaveCategory(Category category)
+        {
+            if (category.CategoryId == 0)
+            {
+                _categoryRepo.InsertCategory(category);
+            }
+            else
+            {
+                _categoryRepo.UpdateCategory(category);
+            }
+        }
+
+
+        public IEnumerable<Category> Search(string search) => _categoryRepo.Search(search);
 
         public void UpdateCategory(Category category)
         {
-            _categoryService.UpdateCategory(category);
+            _categoryRepo.UpdateCategory(category);
         }
     }
 }
