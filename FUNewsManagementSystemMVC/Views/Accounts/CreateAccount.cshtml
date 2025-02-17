@@ -1,0 +1,59 @@
+﻿@model BusinessObjects.Entities.SystemAccount
+
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<h1>Create Account</h1>
+
+<h4>Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Account Name -->
+            <div class="form-group">
+                <label asp-for="AccountName" class="control-label"></label>
+                <input asp-for="AccountName" class="form-control" />
+                <span asp-validation-for="AccountName" class="text-danger"></span>
+            </div>
+
+            <!-- Account Email -->
+            <div class="form-group">
+                <label asp-for="AccountEmail" class="control-label"></label>
+                <input asp-for="AccountEmail" class="form-control" />
+                <span asp-validation-for="AccountEmail" class="text-danger"></span>
+            </div>
+
+            <!-- Account Role -->
+            <div class="form-group">
+                <label asp-for="AccountRole" class="control-label"></label>
+                <select asp-for="AccountRole" class="form-control" asp-items="ViewBag.AccountRoles"></select>
+            </div>
+
+            <!-- Account Password -->
+            <div class="form-group">
+                <label asp-for="AccountPassword" class="control-label"></label>
+                <input asp-for="AccountPassword" type="password" class="form-control" />
+                <span asp-validation-for="AccountPassword" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Create Account" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

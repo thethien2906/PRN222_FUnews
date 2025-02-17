@@ -1730,6 +1730,19 @@
             "rid": "win"
           }
         }
+      },
+      "FUNewsManagementSystemMVC/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/FUNewsManagementSystemMVC.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FUNewsManagementSystemMVC.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -5016,10 +5029,16 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "FUNewsManagementSystemMVC/1.0.0": {
+      "type": "project",
+      "path": "../FUNewsManagementSystemMVC/FUNewsManagementSystemMVC.csproj",
+      "msbuildProject": "../FUNewsManagementSystemMVC/FUNewsManagementSystemMVC.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "FUNewsManagementSystemMVC >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.2",
@@ -5057,7 +5076,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj": {
+              "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

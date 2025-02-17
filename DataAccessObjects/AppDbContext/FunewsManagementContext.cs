@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Configuration;
-using BusinessObjects;
-namespace DataAccessObjects;
+using BusinessObjects.Entities;
+namespace DataAccessObjects.AppDbContext;
 
 public partial class FunewsManagementContext : DbContext
 {

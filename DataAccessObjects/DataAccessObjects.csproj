@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj" />
+    <ProjectReference Include="..\FUNewsManagementSystemMVC\FUNewsManagementSystemMVC.csproj" />
   </ItemGroup>
 
 </Project>
