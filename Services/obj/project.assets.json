@@ -1735,7 +1735,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "FUNewsManagementSystemMVC": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.2",
           "Microsoft.Extensions.Configuration.Json": "9.0.2"
         },
@@ -1751,7 +1750,6 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "BusinessObjects": "1.0.0",
-          "FUNewsManagementSystemMVC": "1.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.2",
           "Microsoft.Extensions.Configuration.Json": "9.0.2"
         },
@@ -1761,19 +1759,6 @@
         "runtime": {
           "bin/placeholder/DataAccessObjects.dll": {}
         }
-      },
-      "FUNewsManagementSystemMVC/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/FUNewsManagementSystemMVC.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/FUNewsManagementSystemMVC.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
       },
       "Repositories/1.0.0": {
         "type": "project",
@@ -5087,11 +5072,6 @@
       "path": "../DataAccessObjects/DataAccessObjects.csproj",
       "msbuildProject": "../DataAccessObjects/DataAccessObjects.csproj"
     },
-    "FUNewsManagementSystemMVC/1.0.0": {
-      "type": "project",
-      "path": "../FUNewsManagementSystemMVC/FUNewsManagementSystemMVC.csproj",
-      "msbuildProject": "../FUNewsManagementSystemMVC/FUNewsManagementSystemMVC.csproj"
-    },
     "Repositories/1.0.0": {
       "type": "project",
       "path": "../Repositories/Repositories.csproj",
@@ -5101,8 +5081,6 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "BusinessObjects >= 1.0.0",
-      "DataAccessObjects >= 1.0.0",
-      "FUNewsManagementSystemMVC >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.2",
@@ -5144,12 +5122,6 @@
           "projectReferences": {
             "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\BusinessObjects\\BusinessObjects.csproj": {
               "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\BusinessObjects\\BusinessObjects.csproj"
-            },
-            "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\DataAccessObjects\\DataAccessObjects.csproj": {
-              "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\DataAccessObjects\\DataAccessObjects.csproj"
-            },
-            "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj": {
-              "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj"
             },
             "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Repositories\\Repositories.csproj": {
               "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Repositories\\Repositories.csproj"
