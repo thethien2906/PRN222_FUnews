@@ -22,11 +22,6 @@ namespace Services.Services
             _accountRepo.DeleteAccount(account);
         }
 
-        public SystemAccount GetAccountByID(int id)
-        {
-            return _accountRepo.GetAccountByID(id);
-        }
-
         public IEnumerable<SystemAccount> GetAccounts() => _accountRepo.GetAccounts();
 
         public void InsertAccount(SystemAccount account)

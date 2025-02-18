@@ -5,12 +5,11 @@ namespace Repositories.IRepository
 {
     public interface IAccountRepo
     {
-        IEnumerable<SystemAccount> GetAccounts();
-        SystemAccount GetAccountByID(int id);
-        void InsertAccount(SystemAccount account);
-        void UpdateAccount(SystemAccount account);
-        void DeleteAccount(SystemAccount account);
         void ChangeStatus(SystemAccount account);
+        void DeleteAccount(SystemAccount account);
+        IEnumerable<SystemAccount> GetAccounts();
+        void InsertAccount(SystemAccount account);
         IEnumerable<SystemAccount> Search(string search);
+        void UpdateAccount(SystemAccount account);
     }
 }

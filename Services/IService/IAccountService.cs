@@ -7,7 +7,6 @@ namespace Services.IService
     public interface IAccountService
     {
         IEnumerable<SystemAccount> GetAccounts();
-        SystemAccount GetAccountByID(int id);
         void SaveAccount(SystemAccount account);
         void InsertAccount(SystemAccount account);
         void UpdateAccount(SystemAccount account);

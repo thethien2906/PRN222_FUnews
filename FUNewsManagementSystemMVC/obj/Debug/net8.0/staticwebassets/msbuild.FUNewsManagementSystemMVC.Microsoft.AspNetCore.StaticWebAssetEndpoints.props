@@ -28,13 +28,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\FUNewsManagementSystemMVC.dt8b3kx14z.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-n/s2IPo9P62O0RXUS1VVKCaeIJwFWSCjBwU979rmzZw="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1143"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022n/s2IPo9P62O0RXUS1VVKCaeIJwFWSCjBwU979rmzZw=\u0022"},{"Name":"Last-Modified","Value":"Mon, 17 Feb 2025 02:43:39 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1143"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022n/s2IPo9P62O0RXUS1VVKCaeIJwFWSCjBwU979rmzZw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 18 Feb 2025 00:20:10 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/FUNewsManagementSystemMVC/FUNewsManagementSystemMVC.dt8b3kx14z.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\FUNewsManagementSystemMVC.dt8b3kx14z.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"dt8b3kx14z"},{"Name":"integrity","Value":"sha256-n/s2IPo9P62O0RXUS1VVKCaeIJwFWSCjBwU979rmzZw="},{"Name":"label","Value":"_content/FUNewsManagementSystemMVC/FUNewsManagementSystemMVC.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1143"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022n/s2IPo9P62O0RXUS1VVKCaeIJwFWSCjBwU979rmzZw=\u0022"},{"Name":"Last-Modified","Value":"Mon, 17 Feb 2025 02:43:39 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1143"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022n/s2IPo9P62O0RXUS1VVKCaeIJwFWSCjBwU979rmzZw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 18 Feb 2025 00:20:10 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/FUNewsManagementSystemMVC/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
