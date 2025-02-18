@@ -1,7 +1,17 @@
+﻿using DataAccessObjects.AppDbContext;
+using Microsoft.EntityFrameworkCore;
+using Services.IService;
+using Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Đăng ký DbContext với chuỗi kết nối từ appsettings.json
+builder.Services.AddDbContext<FunewsManagementContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FUNewsManagement")));
+
+// Đăng ký các dịch vụ khác
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 var app = builder.Build();
 
