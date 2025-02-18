@@ -18,5 +18,8 @@ namespace Repositories.Repository
         public void UpdateNewsArticle(NewsArticle newsArticle) => NewsArticleManager.Instance.Update(newsArticle);
         public void DeleteNewsArticle(NewsArticle newsArticle) => NewsArticleManager.Instance.Remove(newsArticle);
         public IEnumerable<NewsArticle> SearchNewsArticle(string search) => NewsArticleManager.Instance.Search(search);
+        public IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate) =>
+          NewsArticleManager.Instance.GetNewsArticlesByPeriod(startDate, endDate);
+        
     }
 }

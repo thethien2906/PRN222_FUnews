@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BusinessObjects.Entities.NewsArticle>
+
+<h2>News Articles Report</h2>
+
+<form method="get">
+    <label>Start Date:</label>
+    <input type="date" name="startDate" required />
+    <label>End Date:</label>
+    <input type="date" name="endDate" required />
+    <button type="submit">Filter</button>
+</form>
+
+@if (!Model.Any())
+{
+    <p>No articles found in the selected date range.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Headline</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var article in Model)
+            {
+                <tr>
+                    <td>@article.NewsTitle</td>
+                    <td>@article.Headline</td>
+                    <td>@article.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

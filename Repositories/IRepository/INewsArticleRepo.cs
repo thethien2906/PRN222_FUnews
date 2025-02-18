@@ -15,5 +15,6 @@ namespace Repositories.IRepository
         void UpdateNewsArticle(NewsArticle obj);
         void DeleteNewsArticle(NewsArticle id);
         IEnumerable<NewsArticle> SearchNewsArticle(string search);
+        IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate);
     }
 }
