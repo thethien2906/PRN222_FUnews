@@ -7,21 +7,27 @@
     <input type="date" name="startDate" required />
     <label>End Date:</label>
     <input type="date" name="endDate" required />
-    <button type="submit">Filter</button>
+    <button type="submit">Create Report</button>
 </form>
 
-@if (!Model.Any())
+@if (ViewData["Message"] != null)
 {
-    <p>No articles found in the selected date range.</p>
+    <p style="color: red;">@ViewData["Message"]</p>
 }
-else
+
+@if (Model.Any())
 {
     <table class="table">
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Headline</th>
+                <th>Category</th>
+                <th>Tags</th>
+                <th>Status</th>
+                <th>Content</th>
+                <th>Created By</th>
                 <th>Created Date</th>
+                <th>Modified Date</th>
             </tr>
         </thead>
         <tbody>
@@ -29,8 +35,13 @@ else
             {
                 <tr>
                     <td>@article.NewsTitle</td>
-                    <td>@article.Headline</td>
+                    <td>@article.Category?.CategoryName</td>
+                    <td>@string.Join(", ", article.Tags.Select(t => t.TagName))</td>
+                    <td>@(article.NewsStatus == true ? "Published" : "Draft")</td>
+                    <td>@article.NewsContent</td>
+                    <td>@article.CreatedBy?.AccountName</td>
                     <td>@article.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@article.ModifiedDate?.ToString("yyyy-MM-dd")</td>
                 </tr>
             }
         </tbody>

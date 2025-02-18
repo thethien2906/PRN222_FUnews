@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Entities;
 using DataAccessObjects.AppDbContext;
 using Services.IService;
+using Services.Service;
 
 namespace FUNewsManagementSystemMVC.Controllers
 {
@@ -172,8 +173,15 @@ namespace FUNewsManagementSystemMVC.Controllers
                 return View(new List<NewsArticle>());
             }
 
+            if (endDate < startDate)
+            {
+                ViewData["Message"] = "End date must be greater than start date.";
+                return View(new List<NewsArticle>());
+            }
+
             var articles = _contextNewsArticle.GetNewsArticlesByPeriod(startDate.Value, endDate.Value);
             return View(articles);
         }
     }
 }
+
