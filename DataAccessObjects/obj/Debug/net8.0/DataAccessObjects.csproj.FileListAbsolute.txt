@@ -34,3 +34,21 @@ C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObj
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.pdb
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.genruntimeconfig.cache
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\ref\DataAccessObjects.dll
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.deps.json
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.runtimeconfig.json
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.dll
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.pdb
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\bin\Debug\net8.0\BusinessObjects.dll
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\bin\Debug\net8.0\BusinessObjects.pdb
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.AssemblyInfoInputs.cache
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.AssemblyInfo.cs
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.sourcelink.json
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.csproj.CopyComplete
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.dll
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\refint\DataAccessObjects.dll
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.pdb
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.genruntimeconfig.cache
+C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\ref\DataAccessObjects.dll

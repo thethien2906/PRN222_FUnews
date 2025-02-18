@@ -125,5 +125,24 @@ namespace DataAccessObjects
             }
             return articles;
         }
+
+        public IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate)
+        {
+            List<NewsArticle> articles = new List<NewsArticle>();
+            try
+            {
+                using var _context = new FunewsManagementContext();
+                articles = _context.NewsArticles
+                    .Where(a => a.CreatedDate >= startDate && a.CreatedDate <= endDate)
+                    .OrderByDescending(a => a.CreatedDate)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return articles;
+        }
+
     }
 }

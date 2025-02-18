@@ -16,5 +16,6 @@ namespace Services.IService
         void UpdateNewsArticle(NewsArticle newsArticle);
         void DeleteNewsArticle(NewsArticle newsArticle);
         IEnumerable <NewsArticle> SearchNewsArticle(string search);
+        IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate);
     }
 }
