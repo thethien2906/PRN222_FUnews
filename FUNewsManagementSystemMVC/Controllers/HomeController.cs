@@ -15,6 +15,7 @@ namespace FUNewsManagementSystemMVC.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("UserId", "1");
             return View();
         }
 

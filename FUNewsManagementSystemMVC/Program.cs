@@ -21,6 +21,15 @@ builder.Services.AddScoped<INewsArticleRepo, NewsArticleRepo>();
 builder.Services.AddScoped<INewsArticleService, NewsArticleService>();
 builder.Services.AddScoped<Repositories.IRepository.INewsArticleRepo, Repositories.Repository.NewsArticleRepo>();
 builder.Services.AddScoped<Services.IService.INewsArticleService, Services.Service.NewsArticleService>();
+// HTTP session
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(20); // Set session timeout
+    options.Cookie.HttpOnly = true; // For security
+    options.Cookie.IsEssential = true; // Ensure session cookie is always created
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,6 +44,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

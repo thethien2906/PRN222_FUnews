@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj": {}
+    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
+    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
+        "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
         "projectName": "BusinessObjects",
-        "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\obj\\",
+        "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
+        "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
+        "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -81,25 +82,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj": {
+    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj",
+        "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj",
         "projectName": "DataAccessObjects",
-        "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\obj\\",
+        "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj",
+        "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
+        "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -113,8 +110,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
               }
             }
           }
@@ -123,6 +120,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -166,25 +168,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj": {
+    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
+        "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
         "projectName": "FUNewsManagementSystemMVC",
-        "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\FUNewsManagementSystemMVC\\obj\\",
+        "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
+        "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
+        "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\FUNewsManagementSystemMVC\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -198,14 +196,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
               },
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj"
               },
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Services\\Services.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Services\\Services.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\Services.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\Services.csproj"
               }
             }
           }
@@ -214,6 +212,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -250,25 +253,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Repositories\\Repositories.csproj": {
+    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Repositories\\obj\\",
+        "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
+        "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -282,11 +281,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
               },
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj"
               }
             }
           }
@@ -295,6 +294,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -338,25 +342,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Services\\Services.csproj": {
+    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Services\\Services.csproj",
+        "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Services\\obj\\",
+        "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
+        "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -370,11 +370,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
               },
-              "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Repositories\\Repositories.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Source\\Repos\\thethien2906\\PRN222_FUnews\\Repositories\\Repositories.csproj"
+              "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -383,6 +383,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -426,7 +431,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
