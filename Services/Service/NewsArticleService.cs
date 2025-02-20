@@ -36,6 +36,9 @@ namespace Services.Service
             _newsArticleRepo.DeleteNewsArticle(newsArticle);
         }
         public IEnumerable<NewsArticle> SearchNewsArticle(string search) => _newsArticleRepo.SearchNewsArticle(search);
+        public IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate) =>
+          _newsArticleRepo.GetNewsArticlesByPeriod(startDate, endDate);
+        
 
 
 
