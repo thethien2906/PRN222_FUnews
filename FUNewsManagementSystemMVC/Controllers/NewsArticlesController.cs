@@ -8,18 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Entities;
 using DataAccessObjects.AppDbContext;
 using Services.IService;
-using Services.Service;
-
+    
 namespace FUNewsManagementSystemMVC.Controllers
 {
     public class NewsArticlesController : Controller
     {
         //private readonly FunewsManagementContext _context;
         private readonly INewsArticleService _contextNewsArticle;
-        public NewsArticlesController(INewsArticleService contextNewsArticle)
+        private readonly ICategoryService _contextCategory;
+
+        public NewsArticlesController(INewsArticleService contextNewsArticle, ICategoryService contextCategory)
         {
             _contextNewsArticle = contextNewsArticle;
+            _contextCategory = contextCategory;
         }
+        
 
         // GET: NewsArticles
         public async Task<IActionResult> Index()
@@ -48,9 +51,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // GET: NewsArticles/Create
         public IActionResult Create()
         {
-            //ViewData["CategoryId"] = new SelectList(_contextNewsArticle.GetAllNewsArticles(), "CategoryId", "CategoryDesciption");
-            //ViewData["CreatedById"] = new SelectList(_context.SystemAccounts, "AccountId", "AccountId");
-            ViewData["NewsArticleId"] = new SelectList(_contextNewsArticle.GetAllNewsArticles(), "NewsArticleId", "NewsTitle");
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName");
             return View();
         }
 
@@ -59,18 +60,41 @@ namespace FUNewsManagementSystemMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NewsArticleId,NewsTitle,Headline,CreatedDate,NewsContent,NewsSource,CategoryId,NewsStatus,CreatedById,UpdatedById,ModifiedDate")] NewsArticle newsArticle)
+        public async Task<IActionResult> Create(NewsArticle newsArticle)
         {
+            ModelState.Remove("NewsArticleId");
             if (ModelState.IsValid)
             {
-                _contextNewsArticle.CreateNewsArticle(newsArticle);
+                try
+                {
+                    var lastArticle = _contextNewsArticle.GetAllNewsArticles().OrderByDescending(n => n.NewsArticleId).FirstOrDefault();
+                    int newId = lastArticle != null ? int.Parse(lastArticle.NewsArticleId) + 1 : 1;
+                    newsArticle.NewsArticleId = newId.ToString();
+
+                    newsArticle.CreatedDate = DateTime.Now;
+
+                    newsArticle.ModifiedDate = DateTime.Now;
+
+                    var userId = HttpContext.Session.GetString("UserId");
+
+                    newsArticle.CreatedById = short.Parse(userId);
+                    newsArticle.UpdatedById = short.Parse(userId);
+
+                    
+                    _contextNewsArticle.CreateNewsArticle(newsArticle);
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception (ex) here
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
             }
-            //ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryDesciption", newsArticle.CategoryId);
-            //ViewData["CreatedById"] = new SelectList(_context.SystemAccounts, "AccountId", "AccountId", newsArticle.CreatedById);
-            ViewData["NewsArticleId"] = new SelectList(_contextNewsArticle.GetAllNewsArticles(), "NewsArticleId", "NewsTitle", newsArticle.NewsArticleId);
+
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
             return View(newsArticle);
         }
-
         // GET: NewsArticles/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
@@ -84,9 +108,7 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 return NotFound();
             }
-            //ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryDesciption", newsArticle.CategoryId);
-            //ViewData["CreatedById"] = new SelectList(_context.SystemAccounts, "AccountId", "AccountId", newsArticle.CreatedById);
-            ViewData["NewsArticleId"] = new SelectList(_contextNewsArticle.GetAllNewsArticles(), "NewsArticleId", "NewsTitle", newsArticle.NewsArticleId);
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
             return View(newsArticle);
         }
 
@@ -106,6 +128,10 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 try
                 {
+                    newsArticle.ModifiedDate = DateTime.Now;
+                    var userId = HttpContext.Session.GetString("UserId");
+                    newsArticle.UpdatedById = short.Parse(userId);
+
                     _contextNewsArticle.UpdateNewsArticle(newsArticle);
                     return RedirectToAction(nameof(Index));
                 }
@@ -122,9 +148,7 @@ namespace FUNewsManagementSystemMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryDesciption", newsArticle.CategoryId);
-            //ViewData["CreatedById"] = new SelectList(_context.SystemAccounts, "AccountId", "AccountId", newsArticle.CreatedById);
-            ViewData["NewsArticleId"] = new SelectList(_contextNewsArticle.GetAllNewsArticles(), "NewsArticleId", "NewsTitle", newsArticle.NewsArticleId);
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
             return View(newsArticle);
         }
 
