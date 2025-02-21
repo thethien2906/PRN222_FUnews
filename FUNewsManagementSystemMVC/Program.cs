@@ -14,13 +14,12 @@ builder.Services.AddDbContext<FunewsManagementContext>(options =>
 // Category
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<Repositories.IRepository.ICategoryRepo, Repositories.Repository.CategoryRepo>();
-builder.Services.AddScoped<Services.IService.ICategoryService, Services.Service.CategoryService>();
 // NewsArticle
 builder.Services.AddScoped<INewsArticleRepo, NewsArticleRepo>();
 builder.Services.AddScoped<INewsArticleService, NewsArticleService>();
-builder.Services.AddScoped<Repositories.IRepository.INewsArticleRepo, Repositories.Repository.NewsArticleRepo>();
-builder.Services.AddScoped<Services.IService.INewsArticleService, Services.Service.NewsArticleService>();
+// SystemAccount
+builder.Services.AddScoped<IAccountRepo, AccountRepo>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 // HTTP session
 builder.Services.AddSession(options =>
 {

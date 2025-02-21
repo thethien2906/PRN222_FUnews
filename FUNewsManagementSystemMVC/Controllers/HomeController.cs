@@ -15,7 +15,6 @@ namespace FUNewsManagementSystemMVC.Controllers
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("UserId", "1");
             return View();
         }
 
@@ -23,7 +22,27 @@ namespace FUNewsManagementSystemMVC.Controllers
         {
             return View();
         }
+        public IActionResult Lecturer()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            if (string.IsNullOrEmpty(userName))
+            {
+                return RedirectToAction("Login", "SystemAccounts"); 
+            }
+            ViewBag.UserName = userName;
+            return View();
+        }
 
+        public IActionResult Staff()
+        {
+            var userName = HttpContext.Session.GetString("UserName");
+            if (string.IsNullOrEmpty(userName))
+            {
+                return RedirectToAction("Login", "SystemAccounts"); 
+            }
+            ViewBag.UserName = userName;
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
