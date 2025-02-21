@@ -27,6 +27,11 @@ namespace FUNewsManagementSystemMVC.Controllers
         // GET: NewsArticles
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("UserId") == null)
+            {
+                // Redirect to the login page or display an error message
+                return RedirectToAction("Login", "SystemAccounts");
+            }
             var funewsManagementContext = _contextNewsArticle.GetAllNewsArticles();
             return View(funewsManagementContext.ToList());
         }
