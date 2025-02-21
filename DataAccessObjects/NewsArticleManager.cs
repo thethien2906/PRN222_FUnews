@@ -54,6 +54,17 @@ namespace DataAccessObjects
             }
             return article;
         }
+        public IEnumerable<NewsArticle> GetNewsArticleByCreator(short creatorId)
+        {
+            using var _context = new FunewsManagementContext();
+
+            return _context.NewsArticles
+            .Where(article => article.CreatedById == creatorId)
+            .Include(article => article.Category)  
+            .OrderByDescending(article => article.CreatedDate)
+            .ToList();
+
+        }
         public void AddNew(NewsArticle article)
         {
             try
@@ -144,5 +155,23 @@ namespace DataAccessObjects
             return articles;
         }
 
+        public IEnumerable<NewsArticle> GetActiveNewsArticles()
+        {
+            List<NewsArticle> articles = new List<NewsArticle>();
+            try
+            {
+                using var _context = new FunewsManagementContext();
+                articles = _context.NewsArticles
+                    .Where(a => a.NewsStatus == true)
+                    .Include(a => a.Category)
+                    .OrderByDescending(a => a.CreatedDate)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return articles;
+        }
     }
 }

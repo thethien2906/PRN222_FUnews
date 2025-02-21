@@ -9,6 +9,9 @@
 
     <div class="d-flex justify-content-between mb-3">
         <a asp-action="Create" class="btn btn-primary">Create New Article</a>
+        <div class="mt-auto">
+            <a href="@Url.Action("Index", "Tags")" class="btn btn-primary">Tags</a>
+        </div>
     </div>
 
     <table class="table table-striped table-hover">
@@ -21,7 +24,6 @@
                 <th>Source</th>
                 <th>Status</th>
                 <th>Category</th>
-                <th>Author</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -36,7 +38,7 @@
                         @Html.DisplayFor(modelItem => item.Headline)
                     </td>
                     <td>
-                        @Html.DisplayNameFor(model => model.CreatedDate)
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
                     </td>
                     <td>
                         @(item.NewsContent.Length > 50 ? item.NewsContent.Substring(0, 50) + "..." : item.NewsContent)
@@ -56,9 +58,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Category.CategoryDesciption)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedBy.AccountId)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-warning">Edit</a>

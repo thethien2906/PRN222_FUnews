@@ -15,8 +15,8 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FUNewsManagementSystemMVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -28,10 +28,30 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+
+                    <div class="d-flex align-items-center">
+                        @if (Context.Session.GetString("UserId") != null)
+                        {
+                            var userName = Context.Session.GetString("UserName");
+
+                            <span class="card-title text-center me-3">Welcome, @userName</span>
+
+                            <form asp-controller="SystemAccounts" asp-action="Logout" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger">Log Out</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-controller="SystemAccounts" asp-action="Login" class="btn btn-primary">Login</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
