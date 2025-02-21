@@ -1,42 +1,66 @@
 ﻿@model BusinessObjects.Entities.SystemAccount
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Account Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Account Details</h3>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4 text-muted">
+                            @Html.DisplayNameFor(model => model.AccountName)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <strong>@Html.DisplayFor(model => model.AccountName)</strong>
+                        </dd>
 
-<div>
-    <h4>SystemAccount</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountEmail)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountEmail)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountRole)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountRole)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AccountPassword)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AccountPassword)
-        </dd>
-    </dl>
+                        <dt class="col-sm-4 text-muted">
+                            @Html.DisplayNameFor(model => model.AccountEmail)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <span class="text-primary">@Html.DisplayFor(model => model.AccountEmail)</span>
+                        </dd>
+
+                        <dt class="col-sm-4 text-muted">
+                            @Html.DisplayNameFor(model => model.AccountRole)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-success">@Html.DisplayFor(model => model.AccountRole)</span>
+                        </dd>
+
+                        <dt class="col-sm-4 text-muted">
+                            @Html.DisplayNameFor(model => model.AccountPassword)
+                        </dt>
+                        <dd class="col-sm-8">
+                            <span class="text-danger">••••••••</span> <!-- Ẩn password -->
+                        </dd>
+                    </dl>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-action="Edit" asp-route-id="@Model?.AccountId" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.AccountId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script>
+        console.log("Account details page loaded");
+    </script>
+}
