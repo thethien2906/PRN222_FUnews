@@ -18,5 +18,6 @@ namespace Services.IService
         IEnumerable <NewsArticle> SearchNewsArticle(string search);
         IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate);
         IEnumerable<NewsArticle> GetNewsArticleByCreator(short creatorId);
+        IEnumerable<NewsArticle> GetActiveNewsArticles();
     }
 }

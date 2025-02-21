@@ -155,5 +155,23 @@ namespace DataAccessObjects
             return articles;
         }
 
+        public IEnumerable<NewsArticle> GetActiveNewsArticles()
+        {
+            List<NewsArticle> articles = new List<NewsArticle>();
+            try
+            {
+                using var _context = new FunewsManagementContext();
+                articles = _context.NewsArticles
+                    .Where(a => a.NewsStatus == true)
+                    .Include(a => a.Category)
+                    .OrderByDescending(a => a.CreatedDate)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return articles;
+        }
     }
 }

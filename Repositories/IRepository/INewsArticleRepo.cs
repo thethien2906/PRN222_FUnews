@@ -17,5 +17,8 @@ namespace Repositories.IRepository
         IEnumerable<NewsArticle> SearchNewsArticle(string search);
         IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate);
         IEnumerable<NewsArticle> GetNewsArticlesByCreatorId(short creatorId);
+
+        IEnumerable<NewsArticle> GetActiveNewsArticles();
+
     }
 }
