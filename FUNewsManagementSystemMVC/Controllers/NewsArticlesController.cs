@@ -35,7 +35,18 @@ namespace FUNewsManagementSystemMVC.Controllers
             var funewsManagementContext = _contextNewsArticle.GetAllNewsArticles();
             return View(funewsManagementContext.ToList());
         }
+        // GET: NewsArticles/History
+        public IActionResult History()
+        {
+            if (HttpContext.Session.GetString("UserId") == null)
+            {
+                return RedirectToAction("Login", "SystemAccounts");
+            }
 
+            var userId = short.Parse(HttpContext.Session.GetString("UserId"));
+            var myArticles = _contextNewsArticle.GetNewsArticleByCreator(userId);
+            return View(myArticles.ToList());
+        }
         // GET: NewsArticles/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -122,7 +133,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("NewsArticleId,NewsTitle,Headline,CreatedDate,NewsContent,NewsSource,CategoryId,NewsStatus,CreatedById,UpdatedById,ModifiedDate")] NewsArticle newsArticle)
+        public async Task<IActionResult> Edit(string id, [Bind("NewsArticleId,NewsTitle,Headline,NewsContent,NewsSource,CategoryId,NewsStatus,UpdatedById,ModifiedDate")] NewsArticle newsArticle)
         {
             if (id != newsArticle.NewsArticleId)
             {
@@ -133,6 +144,13 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 try
                 {
+                    var existingArticle = _contextNewsArticle.GetNewsArticleById(id); // Get existing article
+                    if (existingArticle == null)
+                    {
+                        return NotFound();
+                    }
+                    newsArticle.CreatedDate = existingArticle.CreatedDate;
+                    newsArticle.CreatedById = existingArticle.CreatedById;
                     newsArticle.ModifiedDate = DateTime.Now;
                     var userId = HttpContext.Session.GetString("UserId");
                     newsArticle.UpdatedById = short.Parse(userId);
@@ -192,7 +210,7 @@ namespace FUNewsManagementSystemMVC.Controllers
             var tmp = _contextNewsArticle.GetNewsArticleById(id);
             return (tmp != null) ? true : false;
         }
-
+        
         // GET: NewsArticles/Report
         public IActionResult Report(DateTime? startDate, DateTime? endDate)
         {
