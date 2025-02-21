@@ -3,22 +3,105 @@
     var userName = Context.Session.GetString("UserName");
 }
 
-<h1>Staff Dashboard</h1>
+<!-- Thông tin chào mừng -->
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">Welcome @userName</h2>
+                    <h2 class="card-title text-center">Welcome @userName</h2>
                     @if (string.IsNullOrEmpty(userName))
                     {
-                        <p class="text-danger">Warning: UserName not found in session</p>
+                        <p class="text-danger text-center">Warning: UserName not found in session</p>
                     }
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- 4 ô chức năng -->
+<div class="container mt-5">
+    <div class="row d-flex">
+        <!-- Ô Manage Category -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column text-center">
+                    <h5 class="card-title">Manage Categories</h5>
+                    <i class="fas fa-th-large" style="font-size: 50px;"></i>
+                    <p class="card-text">Manage category information, including deleting unused categories.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("Index", "Categories")" class="btn btn-primary">Go to Categories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ô Manage News Articles -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column text-center">
+                    <h5 class="card-title">Manage News Articles</h5>
+                    <i class="fas fa-newspaper" style="font-size: 50px;"></i>
+                    <p class="card-text">Manage news articles, including adding tags.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("ManageArticles", "Staff")" class="btn btn-primary">Go to News</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ô Manage Profile -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column text-center">
+                    <h5 class="card-title">Manage Profile</h5>
+                    <i class="fas fa-user-cog" style="font-size: 50px;"></i>
+                    <p class="card-text">Manage your profile information.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("Profile", "SystemAccounts")" class="btn btn-primary">Go to Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ô View News History -->
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column text-center">
+                    <h5 class="card-title">View News History</h5>
+                    <i class="fas fa-history" style="font-size: 50px;"></i>
+                    <p class="card-text">View news history created by you.</p>
+                    <div class="mt-auto">
+                        <a href="@Url.Action("ViewHistory", "Staff")" class="btn btn-primary">Go to History</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thêm link tới các thư viện icons như FontAwesome cho các biểu tượng -->
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mt-auto {
+            margin-top: auto;
+        }
+    </style>
+}
 
 @section Scripts {
     <script>
