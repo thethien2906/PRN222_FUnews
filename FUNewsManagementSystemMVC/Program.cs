@@ -20,6 +20,9 @@ builder.Services.AddScoped<INewsArticleService, NewsArticleService>();
 // SystemAccount
 builder.Services.AddScoped<IAccountRepo, AccountRepo>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+// Tag
+builder.Services.AddScoped<ITagRepo, TagRepo>();
+builder.Services.AddScoped<ITagService, TagService>();
 // HTTP session
 builder.Services.AddSession(options =>
 {
