@@ -40,7 +40,7 @@ namespace DataAccessObjects
                 throw new Exception(e.Message);
             }
         }
-        public SystemAccount GetSystemAccountById(int id)
+         public SystemAccount GetSystemAccountById(int id)
         {
             SystemAccount systemAccount = null;
             try
