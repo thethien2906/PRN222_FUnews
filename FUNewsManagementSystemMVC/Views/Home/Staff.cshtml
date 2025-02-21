@@ -45,7 +45,7 @@
                     <i class="fas fa-newspaper" style="font-size: 50px;"></i>
                     <p class="card-text">Manage news articles, including adding tags.</p>
                     <div class="mt-auto">
-                        <a href="@Url.Action("ManageArticles", "Staff")" class="btn btn-primary">Go to News</a>
+                        <a href="@Url.Action("Index", "NewsArticles")" class="btn btn-primary">Go to News</a>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <i class="fas fa-user-cog" style="font-size: 50px;"></i>
                     <p class="card-text">Manage your profile information.</p>
                     <div class="mt-auto">
-                        <a href="@Url.Action("Profile", "SystemAccounts")" class="btn btn-primary">Go to Profile</a>
+                        <a href="@Url.Action("EditProfile", "SystemAccounts")" class="btn btn-primary">Go to Profile</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <i class="fas fa-history" style="font-size: 50px;"></i>
                     <p class="card-text">View news history created by you.</p>
                     <div class="mt-auto">
-                        <a href="@Url.Action("ViewHistory", "Staff")" class="btn btn-primary">Go to History</a>
+                        <a href="@Url.Action("History", "NewsArticles")" class="btn btn-primary">Go to History</a>
                     </div>
                 </div>
             </div>

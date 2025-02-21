@@ -16,5 +16,6 @@ namespace Repositories.IRepository
         void DeleteNewsArticle(NewsArticle id);
         IEnumerable<NewsArticle> SearchNewsArticle(string search);
         IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate);
+        IEnumerable<NewsArticle> GetNewsArticlesByCreatorId(short creatorId);
     }
 }

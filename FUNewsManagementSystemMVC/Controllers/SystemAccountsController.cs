@@ -41,57 +41,57 @@ namespace FUNewsManagementSystemMVC.Controllers
             return View(account);  // Truyền thông tin tài khoản vào View
         }
         // -------- Phần này Minh Đạt đang bị lỗi, fix sau ------
-        // GET: Profile/Edit
-        //public IActionResult EditProfile()
-        //{
-        //    var userId = HttpContext.Session.GetString("UserId");
-        //    if (userId == null)
-        //    {
-        //        return RedirectToAction("Login", "SystemAccounts");
-        //    }
+        //GET: Profile/Edit
+        public IActionResult EditProfile()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "SystemAccounts");
+            }
 
-        //    var account = _accountService.GetAccountById(int.Parse(userId));
-        //    if (account == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var account = _accountService.GetAccountById(int.Parse(userId));
+            if (account == null)
+            {
+                return NotFound();
+            }
 
-        //    return View(account); // Truyền thông tin tài khoản vào View
-        //}
+            return View(account); // Truyền thông tin tài khoản vào View
+        }
 
-        //// POST: Profile/Edit
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult EditProfile(SystemAccount model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var account = _accountService.GetAccountById(model.AccountId);
-        //        if (account == null)
-        //        {
-        //            return NotFound();
-        //        }
+        // POST: Profile/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditProfile(SystemAccount model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = HttpContext.Session.GetString("UserId");
 
-        //        // Cập nhật thông tin tài khoản
-        //        account.AccountName = model.AccountName;
-        //        account.AccountEmail = model.AccountEmail;
-        //        account.AccountPassword = model.AccountPassword; // Nếu cần
+                var account = _accountService.GetAccountById(int.Parse(userId));
+                if (account == null)
+                {
+                    return NotFound();
+                }
+                account.AccountName = model.AccountName;
+                account.AccountEmail = model.AccountEmail;
+                account.AccountPassword = model.AccountPassword;
 
-        //        _accountService.UpdateAccount(account); // Lưu lại thay đổi
+                _accountService.UpdateAccount(account); // Lưu lại thay đổi
 
-        //        return RedirectToAction("rofile", "SystemAccounts"); // Quay lại trang profile
-        //    }
-        //    else
-        //    {
-        //        // Kiểm tra và log thông tin lỗi nếu ModelState không hợp lệ
-        //        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-        //        {
-        //            Console.WriteLine(error.ErrorMessage);  // Hoặc log vào file nếu cần
-        //        }
+                return RedirectToAction("EditProfile", "SystemAccounts"); // Quay lại trang profile
+            }
+            else
+            {
+                // Kiểm tra và log thông tin lỗi nếu ModelState không hợp lệ
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);  // Hoặc log vào file nếu cần
+                }
 
-        //        return View(model); // Trả lại view với thông báo lỗi nếu có
-        //    }
-        //}
+                return View(model); // Trả lại view với thông báo lỗi nếu có
+            }
+        }
         // LOGIN
         public IActionResult Login()
         {

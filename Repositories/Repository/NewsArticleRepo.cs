@@ -20,6 +20,6 @@ namespace Repositories.Repository
         public IEnumerable<NewsArticle> SearchNewsArticle(string search) => NewsArticleManager.Instance.Search(search);
         public IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate) =>
           NewsArticleManager.Instance.GetNewsArticlesByPeriod(startDate, endDate);
-        
+        public IEnumerable<NewsArticle> GetNewsArticlesByCreatorId(short categoryID) => NewsArticleManager.Instance.GetNewsArticleByCreator(categoryID);
     }
 }

@@ -54,6 +54,17 @@ namespace DataAccessObjects
             }
             return article;
         }
+        public IEnumerable<NewsArticle> GetNewsArticleByCreator(short creatorId)
+        {
+            using var _context = new FunewsManagementContext();
+
+            return _context.NewsArticles
+            .Where(article => article.CreatedById == creatorId)
+            .Include(article => article.Category)  
+            .OrderByDescending(article => article.CreatedDate)
+            .ToList();
+
+        }
         public void AddNew(NewsArticle article)
         {
             try
