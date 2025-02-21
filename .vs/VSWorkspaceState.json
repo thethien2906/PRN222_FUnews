@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\FUNewsManagementSystemMVC",
-    "\\FUNewsManagementSystemMVC\\Controllers",
-    "\\Services"
+    ""
   ],
-  "SelectedNode": "\\FUNewsManagementSystemMVC\\Controllers\\HomeController.cs",
+  "SelectedNode": "\\FUNewsManagementSystemMVC.sln",
   "PreviewInSolutionExplorer": false
 }
