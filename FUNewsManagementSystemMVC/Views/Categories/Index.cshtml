@@ -1,81 +1,53 @@
 ﻿@model IEnumerable<BusinessObjects.Entities.Category>
 
 @{
-    ViewData["Title"] = "Category Management";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Category Management</h2>
+<h1>Index</h1>
 
-<!-- Success and Error Messages -->
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-}
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
-}
-
-<!-- Create Category Button -->
-<button onclick="openModal('/Categories/Create', 'Create Category')" class="btn btn-primary mb-3">Create New Category</button>
-
-<!-- Category Table -->
-<table class="table table-bordered">
-    <thead class="thead-dark">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
         <tr>
-            <th>Category Name</th>
-            <th>Description</th>
-            <th>Parent Category</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryDesciption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentCategory)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.CategoryName</td>
-                <td>@item.CategoryDesciption</td>
-                <td>@(item.ParentCategory != null ? item.ParentCategory.CategoryName : "None")</td>
-                <td>
-                    @if (item.IsActive == true)
-                    {
-                        <span class="badge badge-success">Active</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-danger">Inactive</span>
-                    }
-                </td>
-                <td>
-                    <button onclick="openModal('/Categories/Edit/@item.CategoryId', 'Edit Category')" class="btn btn-warning btn-sm">Edit</button>
-                    <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryDesciption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentCategory.CategoryDesciption)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
-
-<!-- Bootstrap Modal -->
-<div class="modal fade" id="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle"></h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
-    </div>
-</div>
-
-<!-- JavaScript for Handling Modals -->
-<script>
-    function openModal(url, title) {
-        $("#modalTitle").text(title);
-        $("#modalBody").load(url, function () {
-            $("#modal").modal("show");
-        });
-    }
-</script>
