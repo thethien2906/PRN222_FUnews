@@ -12,7 +12,10 @@ namespace FUNewsManagementSystemMVC.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult Admin()
+        {
+            return View();  
+        }
         public IActionResult Index()
         {
             return View();
