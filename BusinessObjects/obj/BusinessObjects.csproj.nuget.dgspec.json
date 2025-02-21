@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {}
+    "C:\\Users\\Mot\\Desktop\\PRN222\\Assignments\\Assignments1\\BusinessObjects\\BusinessObjects.csproj": {}
   },
   "projects": {
-    "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
+    "C:\\Users\\Mot\\Desktop\\PRN222\\Assignments\\Assignments1\\BusinessObjects\\BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
+        "projectUniqueName": "C:\\Users\\Mot\\Desktop\\PRN222\\Assignments\\Assignments1\\BusinessObjects\\BusinessObjects.csproj",
         "projectName": "BusinessObjects",
-        "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
-        "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
-        "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\obj\\",
+        "projectPath": "C:\\Users\\Mot\\Desktop\\PRN222\\Assignments\\Assignments1\\BusinessObjects\\BusinessObjects.csproj",
+        "packagesPath": "C:\\Users\\Mot\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mot\\Desktop\\PRN222\\Assignments\\Assignments1\\BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mot\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -82,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
