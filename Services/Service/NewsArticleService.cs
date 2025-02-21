@@ -40,6 +40,7 @@ namespace Services.Service
           _newsArticleRepo.GetNewsArticlesByPeriod(startDate, endDate);
         
         public IEnumerable<NewsArticle> GetNewsArticleByCreator(short category) => _newsArticleRepo.GetNewsArticlesByCreatorId(category);
+        public IEnumerable<NewsArticle> GetActiveNewsArticles() => _newsArticleRepo.GetActiveNewsArticles();
 
 
     }

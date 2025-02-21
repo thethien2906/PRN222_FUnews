@@ -1,5 +1,6 @@
 using FUNewsManagementSystemMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Services.IService;
 using System.Diagnostics;
 
 namespace FUNewsManagementSystemMVC.Controllers
@@ -7,10 +8,11 @@ namespace FUNewsManagementSystemMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly INewsArticleService _contextNewsArticle;
+        public HomeController(ILogger<HomeController> logger, INewsArticleService contextNewsArticle)
         {
             _logger = logger;
+            _contextNewsArticle = contextNewsArticle;
         }
         public IActionResult Admin()
         {
@@ -18,7 +20,8 @@ namespace FUNewsManagementSystemMVC.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var activeNewsArticles = _contextNewsArticle.GetActiveNewsArticles();
+            return View(activeNewsArticles.ToList());
         }
 
         public IActionResult Privacy()
@@ -50,6 +53,22 @@ namespace FUNewsManagementSystemMVC.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        // GET: NewsArticles/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var newsArticle = _contextNewsArticle.GetNewsArticleById(id);
+            if (newsArticle == null)
+            {
+                return NotFound();
+            }
+
+            return View(newsArticle);
         }
     }
 }

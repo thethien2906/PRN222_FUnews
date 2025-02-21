@@ -21,5 +21,6 @@ namespace Repositories.Repository
         public IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate) =>
           NewsArticleManager.Instance.GetNewsArticlesByPeriod(startDate, endDate);
         public IEnumerable<NewsArticle> GetNewsArticlesByCreatorId(short categoryID) => NewsArticleManager.Instance.GetNewsArticleByCreator(categoryID);
+        public IEnumerable<NewsArticle> GetActiveNewsArticles() => NewsArticleManager.Instance.GetActiveNewsArticles();
     }
 }
