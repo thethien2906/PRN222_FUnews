@@ -1,24 +1,93 @@
 ﻿@model BusinessObjects.Entities.SystemAccount
 
+@{
+    ViewData["Title"] = "Login";
+}
+<style>
+    body {
+        background-color: #f0f8ff; /* Màu nền xanh dương nhẹ */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff; /* Màu nền trắng */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #007bff; /* Màu xanh dương nhẹ */
+        margin-bottom: 30px;
+    }
+
+    .form-group input {
+        border-radius: 5px;
+        border: 1px solid #007bff; /* Đường viền xanh dương */
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-group input:focus {
+        border-color: #0056b3; /* Đổi màu khi focus */
+        box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+
 <h2>Login</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login" method="post" asp-controller="SystemAccounts">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AccountEmail" class="control-label"></label>
-                <input asp-for="AccountEmail" class="form-control" />
-                <span asp-validation-for="AccountEmail" class="text-danger"></span>
+<div class="login-container">
+    <form asp-action="Login" method="post" asp-controller="SystemAccounts">
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
             </div>
-            <div class="form-group">
-                <label asp-for="AccountPassword" class="control-label"></label>
-                <input asp-for="AccountPassword" class="form-control" type="password" />
-                <span asp-validation-for="AccountPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        }
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="AccountEmail" class="control-label">Email</label>
+            <input asp-for="AccountEmail" class="form-control" value="@Model.AccountEmail" />
+            <span asp-validation-for="AccountEmail" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AccountPassword" class="control-label">Password</label>
+            <input asp-for="AccountPassword" class="form-control" type="password" />
+            <span asp-validation-for="AccountPassword" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
 </div>

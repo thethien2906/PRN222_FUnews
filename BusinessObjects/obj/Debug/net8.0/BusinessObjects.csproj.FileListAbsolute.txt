@@ -57,3 +57,18 @@ C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\BusinessObjec
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\BusinessObjects\obj\Debug\net8.0\BusinessObjects.pdb
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\BusinessObjects\obj\Debug\net8.0\BusinessObjects.genruntimeconfig.cache
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\BusinessObjects\obj\Debug\net8.0\ref\BusinessObjects.dll
+D:\WorkSpacae .Net\assignment1\BusinessObjects\bin\Debug\net8.0\BusinessObjects.deps.json
+D:\WorkSpacae .Net\assignment1\BusinessObjects\bin\Debug\net8.0\BusinessObjects.runtimeconfig.json
+D:\WorkSpacae .Net\assignment1\BusinessObjects\bin\Debug\net8.0\BusinessObjects.dll
+D:\WorkSpacae .Net\assignment1\BusinessObjects\bin\Debug\net8.0\BusinessObjects.pdb
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.csproj.AssemblyReference.cache
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.AssemblyInfoInputs.cache
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.AssemblyInfo.cs
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.csproj.CoreCompileInputs.cache
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.sourcelink.json
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.dll
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\refint\BusinessObjects.dll
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.pdb
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\BusinessObjects.genruntimeconfig.cache
+D:\WorkSpacae .Net\assignment1\BusinessObjects\obj\Debug\net8.0\ref\BusinessObjects.dll

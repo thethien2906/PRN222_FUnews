@@ -52,3 +52,21 @@ C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObj
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.pdb
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.genruntimeconfig.cache
 C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\DataAccessObjects\obj\Debug\net8.0\ref\DataAccessObjects.dll
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.deps.json
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.runtimeconfig.json
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.dll
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\bin\Debug\net8.0\DataAccessObjects.pdb
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\bin\Debug\net8.0\BusinessObjects.dll
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\bin\Debug\net8.0\BusinessObjects.pdb
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.csproj.AssemblyReference.cache
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.AssemblyInfoInputs.cache
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.AssemblyInfo.cs
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.csproj.CoreCompileInputs.cache
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.sourcelink.json
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAcce.79975846.Up2Date
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.dll
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\refint\DataAccessObjects.dll
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.pdb
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\DataAccessObjects.genruntimeconfig.cache
+D:\WorkSpacae .Net\assignment1\DataAccessObjects\obj\Debug\net8.0\ref\DataAccessObjects.dll

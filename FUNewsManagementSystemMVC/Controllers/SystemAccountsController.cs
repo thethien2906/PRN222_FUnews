@@ -10,16 +10,19 @@ using DataAccessObjects.AppDbContext;
 using DataAccessObjects.Helpers;
 using static BusinessObjects.Entities.SystemAccount;
 using Services.IService;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
 
 namespace FUNewsManagementSystemMVC.Controllers
 {
     public class SystemAccountsController : Controller
     {
         private readonly IAccountService _accountService;
-
-        public SystemAccountsController(IAccountService accountService)
+        private readonly IConfiguration _configuration;
+        public SystemAccountsController(IAccountService accountService, IConfiguration configuration)
         {
             _accountService = accountService;
+            _configuration = configuration;
         }
         // LOGIN
         public IActionResult Login()
@@ -35,15 +38,31 @@ namespace FUNewsManagementSystemMVC.Controllers
                 return View(model);
             }
 
+            // Kiểm tra tài khoản admin từ appsettings.json
+            var adminEmail = _configuration["Admin:Account"];
+            var adminPassword = _configuration["Admin:Pass"];
+
+            if (model.AccountEmail == adminEmail && model.AccountPassword == adminPassword)
+            {
+                // Lưu thông tin tài khoản admin vào session và điều hướng đến trang quản trị
+                HttpContext.Session.SetString("UserId", "admin");
+                HttpContext.Session.SetString("UserName", "Admin");
+                HttpContext.Session.SetString("Role", "admin");
+
+                return RedirectToAction("Admin", "Home");  // Định tuyến đến trang Admin
+            }
+
             var account = _accountService.GetAccounts()
                 .FirstOrDefault(a => a.AccountEmail == model.AccountEmail && a.AccountPassword == model.AccountPassword);
 
             if (account != null)
             {
+                // Lưu thông tin tài khoản vào session
                 HttpContext.Session.SetString("UserId", account.AccountId.ToString());
                 HttpContext.Session.SetString("UserName", account.AccountName);
                 HttpContext.Session.SetString("Role", account.AccountRole.ToString());
 
+                // Điều hướng theo vai trò người dùng
                 if (account.AccountRole == 1)
                 {
                     return RedirectToAction("Staff", "Home");
@@ -63,6 +82,7 @@ namespace FUNewsManagementSystemMVC.Controllers
                 return View(model);
             }
         }
+
         // LOGOUT
         public IActionResult Logout()
         {
