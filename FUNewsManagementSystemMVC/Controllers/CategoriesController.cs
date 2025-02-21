@@ -1,86 +1,143 @@
 ﻿using BusinessObjects.Entities;
+using DataAccessObjects.AppDbContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Services.IService;
 
 namespace FUNewsManagementSystemMVC.Controllers
 {
     public class CategoriesController : Controller
     {
+        private readonly FunewsManagementContext _context;
         private readonly ICategoryService _contextCategory;
-
         public CategoriesController(ICategoryService contextCategory)
         {
             _contextCategory = contextCategory;
         }
 
         // GET: Categories
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var categories = _contextCategory.GetCategorys();
-            return View(categories.ToList());
+            if (HttpContext.Session.GetString("UserId") == null)
+            {
+                // Redirect to the login page or display an error message
+                return RedirectToAction("Login", "SystemAccounts");
+            }
+            var funewsManagementContext = _contextCategory.GetCategorys();
+            return View(funewsManagementContext.ToList());
         }
 
-        // CREATE CATEGORY - SHOW POPUP FORM
+        // GET: Categories/Details/5
+        public async Task<IActionResult> Details(short? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var category = _contextCategory.GetCategoryByID((int)id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+        }
+
+        // GET: Categories/Create
         public IActionResult Create()
         {
-            ViewData["ParentCategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName");
-            return PartialView("_CreateEdit", new Category()); // Load partial view in popup
+            ViewData["ParentCategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryDesciption");
+            return View();
         }
 
-        // CREATE CATEGORY - SAVE DATA
+        // POST: Categories/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("CategoryId,CategoryName,CategoryDesciption,ParentCategoryId,IsActive")] Category category)
+        public async Task<IActionResult> Create([Bind("CategoryId,CategoryName,CategoryDesciption,ParentCategoryId,IsActive")] Category category)
         {
             if (ModelState.IsValid)
             {
                 _contextCategory.SaveCategory(category);
-                TempData["SuccessMessage"] = "Category created successfully.";
-                return Json(new { success = true }); // Return success response
+            }
+            ViewData["ParentCategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryDesciption", category.ParentCategoryId);
+            return View(category);
+        }
+
+        // GET: Categories/Edit/5
+        public async Task<IActionResult> Edit(short? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
             }
 
-            ViewData["ParentCategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", category.ParentCategoryId);
-            return PartialView("_CreateEdit", category);
+            var category = _contextCategory.GetCategoryByID((int)id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            ViewData["ParentCategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryDesciption", category.ParentCategoryId);
+            return View(category);
         }
 
-        // EDIT CATEGORY - SHOW POPUP FORM
-        public IActionResult Edit(int id)
-        {
-            var category = _contextCategory.GetCategoryByID(id);
-            if (category == null) return NotFound();
-
-            ViewData["ParentCategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", category.ParentCategoryId);
-            return PartialView("_CreateEdit", category);
-        }
-
-        // EDIT CATEGORY - SAVE DATA
+        // POST: Categories/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("CategoryId,CategoryName,CategoryDesciption,ParentCategoryId,IsActive")] Category category)
+        public async Task<IActionResult> Edit(short id, [Bind("CategoryId,CategoryName,CategoryDesciption,ParentCategoryId,IsActive")] Category category)
         {
-            if (id != category.CategoryId) return NotFound();
+            if (id != category.CategoryId)
+            {
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
-                _contextCategory.UpdateCategory(category);
-                TempData["SuccessMessage"] = "Category updated successfully.";
-                return Json(new { success = true });
+                try
+                {
+                    _contextCategory.UpdateCategory(category);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CategoryExists(category.CategoryId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["ParentCategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryDesciption", category.ParentCategoryId);
+            return View(category);
+        }
+
+        // GET: Categories/Delete/5
+        public async Task<IActionResult> Delete(short? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
             }
 
-            ViewData["ParentCategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", category.ParentCategoryId);
-            return PartialView("_CreateEdit", category);
+            var category = _contextCategory.GetCategoryByID((int)id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
         }
 
-        // DELETE CATEGORY - SHOW CONFIRMATION PAGE
-        public IActionResult Delete(int id)
-        {
-            var category = _contextCategory.GetCategoryByID(id);
-            if (category == null) return NotFound();
-
-            return PartialView("_Delete", category);
-        }
-
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(short id)
