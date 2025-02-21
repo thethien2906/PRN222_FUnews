@@ -39,14 +39,14 @@
                 <td>@item.CategoryDesciption</td>
                 <td>@(item.ParentCategory != null ? item.ParentCategory.CategoryName : "None")</td>
                 <td>
-                    @if (item.IsActive == true)
-                    {
-                        <span class="badge badge-success">Active</span>
-                    }
-                    else
-                    {
-                        <span class="badge badge-danger">Inactive</span>
-                    }
+                        @if (item.IsActive == true)
+                        {
+                        <span>Active</span>
+                        }
+                        else
+                        {
+                        <span>Inactive</span>
+                        }
                 </td>
                 <td>
                     <button onclick="openModal('/Categories/Edit/@item.CategoryId', 'Edit Category')" class="btn btn-warning btn-sm">Edit</button>
