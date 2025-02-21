@@ -1,14 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "HMwHEDjqIOHDvMsESci74nJlAXEaXxIXK3YciqS3HMuPg1SCygbBi5ILSt40mDcp7Ar+ys1BXDzEoy/IvCGg6A==",
+  "dgSpecHash": "u4ZroMbzihqFKjBoOwxZi4sZCuEVAmOzQGczAWUAfv7P1RX73dZ5AluM1qXLSB6cEwu0pVB+oCWqmiOf5VTaIw==",
   "success": true,
-  "projectFilePath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj",
+  "projectFilePath": "C:\\FPT\\PRN222\\New folder\\FUNewsManagementSystemMVC\\DataAccessObjects\\DataAccessObjects.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\IdeaPad\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\IdeaPad\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\IdeaPad\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\IdeaPad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\9.0.2\\microsoft.aspnetcore.cryptography.internal.9.0.2.nupkg.sha512",
-    "C:\\Users\\IdeaPad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\9.0.2\\microsoft.aspnetcore.cryptography.keyderivation.9.0.2.nupkg.sha512",
     "C:\\Users\\IdeaPad\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\IdeaPad\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",
     "C:\\Users\\IdeaPad\\.nuget\\packages\\microsoft.build.locator\\1.7.8\\microsoft.build.locator.1.7.8.nupkg.sha512",
