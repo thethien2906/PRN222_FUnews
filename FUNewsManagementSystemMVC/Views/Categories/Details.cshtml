@@ -4,39 +4,141 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Category Details</h1>
 
-<div>
-    <h4>Category</h4>
+<div class="container mt-4">
+    <h4>Category Information</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl class="row table-bordered">
+        <dt class="col-sm-3 table-bordered">
             @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9 table-bordered">
             @Html.DisplayFor(model => model.CategoryName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-3 table-bordered">
             @Html.DisplayNameFor(model => model.CategoryDesciption)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9 table-bordered">
             @Html.DisplayFor(model => model.CategoryDesciption)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-3 table-bordered">
             @Html.DisplayNameFor(model => model.IsActive)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9 table-bordered">
             @Html.DisplayFor(model => model.IsActive)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-3 table-bordered">
             @Html.DisplayNameFor(model => model.ParentCategory)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-9 table-bordered">
             @Html.DisplayFor(model => model.ParentCategory.CategoryDesciption)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.CategoryId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="text-center mt-4">
+    <a asp-action="Edit" asp-route-id="@Model?.CategoryId" class="btn btn-warning btn-lg">Edit</a> |
+    <a asp-action="Index" class="btn btn-secondary btn-lg">Back to List</a>
 </div>
+
+@section Styles {
+    <style>
+        .container {
+            max-width: 900px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Styling for buttons */
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+            .btn-warning:hover {
+                background-color: #e0a800;
+                border-color: #d39e00;
+                transform: translateY(-2px);
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+                transform: translateY(-2px);
+            }
+
+       
+        dl.row {
+            margin-top: 20px;
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        }
+
+        /* Các ô trong bảng dl */
+        dt, dd {
+            padding: 12px; 
+            border-bottom: 1px solid #ddd; 
+        }
+
+        dt {
+            font-weight: bold;
+            color: #333;
+            background-color: #f8f9fa; /* Màu nền sáng cho nhãn */
+        }
+
+        dd {
+            font-size: 16px;
+            padding-left: 20px;
+            color: #555;
+        }
+
+      
+        .table-bordered {
+            border: 1px solid #ddd;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+            .btn-warning:hover {
+                background-color: #e0a800;
+                border-color: #d39e00;
+                transform: translateY(-2px);
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+                transform: translateY(-2px);
+            }
+    </style>
+}
