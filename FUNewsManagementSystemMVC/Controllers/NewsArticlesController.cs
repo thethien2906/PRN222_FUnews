@@ -76,7 +76,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NewsArticle newsArticle)
+        public async Task<IActionResult> Create([Bind("NewsArticleId,NewsTitle,Headline,NewsContent,NewsSource,CategoryId,NewsStatus,CreatedById,UpdatedById,ModifiedDate")] NewsArticle newsArticle)
         {
             ModelState.Remove("NewsArticleId");
             if (ModelState.IsValid)

@@ -8026,7 +8026,6 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "BusinessObjects >= 1.0.0",
-      "DataAccessObjects >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.11",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.7",
       "Services >= 1.0.0"
@@ -8061,9 +8060,6 @@
           "projectReferences": {
             "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
               "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
-            },
-            "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj": {
-              "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj"
             },
             "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\Services.csproj": {
               "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Services\\Services.csproj"
