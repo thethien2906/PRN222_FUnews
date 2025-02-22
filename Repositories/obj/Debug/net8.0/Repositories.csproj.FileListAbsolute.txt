@@ -38,26 +38,6 @@ C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\Repositories\obj\Debug\ne
 C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.pdb
 C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.genruntimeconfig.cache
 C:\Users\Admin\Source\Repos\thethien2906\PRN222_FUnews\Repositories\obj\Debug\net8.0\ref\Repositories.dll
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.deps.json
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.runtimeconfig.json
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.dll
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.pdb
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\BusinessObjects.dll
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\DataAccessObjects.dll
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\BusinessObjects.pdb
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\DataAccessObjects.pdb
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfo.cs
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.csproj.CoreCompileInputs.cache
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.sourcelink.json
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Reposito.787EC4B2.Up2Date
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.dll
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\refint\Repositories.dll
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.pdb
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.genruntimeconfig.cache
-C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\ref\Repositories.dll
 D:\WorkSpacae .Net\assignment1\Repositories\bin\Debug\net8.0\Repositories.deps.json
 D:\WorkSpacae .Net\assignment1\Repositories\bin\Debug\net8.0\Repositories.runtimeconfig.json
 D:\WorkSpacae .Net\assignment1\Repositories\bin\Debug\net8.0\Repositories.dll
@@ -78,3 +58,23 @@ D:\WorkSpacae .Net\assignment1\Repositories\obj\Debug\net8.0\refint\Repositories
 D:\WorkSpacae .Net\assignment1\Repositories\obj\Debug\net8.0\Repositories.pdb
 D:\WorkSpacae .Net\assignment1\Repositories\obj\Debug\net8.0\Repositories.genruntimeconfig.cache
 D:\WorkSpacae .Net\assignment1\Repositories\obj\Debug\net8.0\ref\Repositories.dll
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.deps.json
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.runtimeconfig.json
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.dll
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\Repositories.pdb
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\BusinessObjects.dll
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\DataAccessObjects.dll
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\BusinessObjects.pdb
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\bin\Debug\net8.0\DataAccessObjects.pdb
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfo.cs
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.csproj.CoreCompileInputs.cache
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.sourcelink.json
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Reposito.787EC4B2.Up2Date
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.dll
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\refint\Repositories.dll
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.pdb
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.genruntimeconfig.cache
+C:\FPT\PRN222\New folder\New folder\FUNewsManagement\PRN222_FUnews\Repositories\obj\Debug\net8.0\ref\Repositories.dll

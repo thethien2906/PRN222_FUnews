@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Entities;
-using DataAccessObjects.AppDbContext;
 using Services.IService;
     
 namespace FUNewsManagementSystemMVC.Controllers

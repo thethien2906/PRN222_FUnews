@@ -16,7 +16,7 @@ namespace Repositories.Repository
         public Tag Get(int id) => TagManager.Instance.GetTagById(id);
         public void Add(Tag tag) => TagManager.Instance.AddNew(tag);
         public void Update(Tag tag) => TagManager.Instance.Update(tag);
-        public ServiceResponse Delete(Tag tag) => TagManager.Instance.Delete(tag);
+        public void Delete(Tag tag) => TagManager.Instance.Delete(tag);
         public IEnumerable<Tag> GetTagsByArticleId(string id) => TagManager.Instance.GetTagsByNewsArticle(id);
     }
 }

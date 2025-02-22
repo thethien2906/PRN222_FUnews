@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Entities;
 using DataAccessObjects.AppDbContext;
 using Services.IService;
+using Services.DTOs;
+using Services;
 
 namespace FUNewsManagementSystemMVC.Controllers
 {
@@ -29,14 +31,7 @@ namespace FUNewsManagementSystemMVC.Controllers
                 return RedirectToAction("Login", "SystemAccounts");
             }
             var tags = _contextTag.GetAllTags();
-            // Load associated news articles for each tag
-            foreach (var tag in tags)
-            {
-                tag.NewsArticles = _contextTag.GetTagsByArticleId(tag.TagId.ToString())
-                    .SelectMany(t => t.NewsArticles)
-                    .Distinct()
-                    .ToList();
-            }
+            
             return View(tags);
         }
 
@@ -68,7 +63,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult>Create([Bind("TagId,TagName,Note")] Tag tag)
+        public async Task<IActionResult>Create([Bind("TagId,TagName,Note")] TagDTO tagDTO)
         {
             ModelState.Remove("TagId");
             if (ModelState.IsValid)
@@ -78,8 +73,8 @@ namespace FUNewsManagementSystemMVC.Controllers
                     // Tag id auto increment
                     var lastTag = _contextTag.GetAllTags().OrderByDescending(n => n.TagId).FirstOrDefault();
                     int newId = lastTag != null ? lastTag.TagId + 1 : 1;
-                    tag.TagId = newId;
-                    _contextTag.AddTag(tag);
+                    tagDTO.TagId = newId;
+                    _contextTag.AddTag(tagDTO);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
@@ -87,7 +82,7 @@ namespace FUNewsManagementSystemMVC.Controllers
                     ModelState.AddModelError("", ex.Message);
                 } 
             }
-            return View(tag);
+            return View(tagDTO);
         }
 
         // GET: Tags/Edit/5
@@ -111,7 +106,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TagId,TagName,Note")] Tag tag)
+        public async Task<IActionResult> Edit(int id, [Bind("TagId,TagName,Note")] TagDTO tag)
         {
             if (id != tag.TagId)
             {
@@ -167,20 +162,11 @@ namespace FUNewsManagementSystemMVC.Controllers
             var tag = _contextTag.GetTagById(id);
             if (tag == null)
             {
-                TempData["ErrorMessage"] = "Tag not found.";
-                return RedirectToAction(nameof(Index));
+                _contextTag.DeleteTag(tag); // Xóa tài khoản
             }
 
-            var response = _contextTag.DeleteTag(tag);
-
-            if (response.IsSuccess)
-            {
-                TempData["SuccessMessage"] = response.Message;
-            }
-            else
-            {
-                TempData["ErrorMessage"] = response.Message;
-            }
+            
+            
 
             return RedirectToAction("Delete", "Tags");
         }
