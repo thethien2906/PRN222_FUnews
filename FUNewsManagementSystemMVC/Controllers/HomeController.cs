@@ -35,8 +35,11 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 return RedirectToAction("Login", "SystemAccounts"); 
             }
+
             ViewBag.UserName = userName;
-            return View();
+            var activeNewsArticles = _contextNewsArticle.GetActiveNewsArticles();
+
+            return View(activeNewsArticles.ToList());
         }
 
         public IActionResult Staff()
