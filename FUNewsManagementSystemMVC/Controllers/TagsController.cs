@@ -68,7 +68,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult>Create(Tag tag)
+        public async Task<IActionResult>Create([Bind("TagId,TagName,Note")] Tag tag)
         {
             ModelState.Remove("TagId");
             if (ModelState.IsValid)
