@@ -13,7 +13,7 @@ namespace Repositories.IRepository
         Tag Get(int id);
         void Add(Tag tag);
         void Update(Tag tag);
-        ServiceResponse Delete(Tag tag);
+        void Delete(Tag tag);
         IEnumerable<Tag> GetTagsByArticleId(string articleId);
     }
 }
