@@ -1,4 +1,4 @@
-﻿@model BusinessObjects.Entities.SystemAccount
+﻿@model Services.DTOs.SystemAccountDTO
 
 @{
     ViewData["Title"] = "Account Details";
@@ -12,43 +12,59 @@
                     <h3>Account Details</h3>
                 </div>
                 <div class="card-body">
-                    <dl class="row">
-                        <dt class="col-sm-4 text-muted">
-                            @Html.DisplayNameFor(model => model.AccountName)
-                        </dt>
-                        <dd class="col-sm-8">
-                            <strong>@Html.DisplayFor(model => model.AccountName)</strong>
-                        </dd>
+                    @if (Model == null)
+                    {
+                        <p class="text-muted">No account details found.</p>
+                    }
+                    else
+                    {
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">
+                                @Html.DisplayNameFor(model => model.AccountName)
+                            </dt>
+                            <dd class="col-sm-8">
+                                <strong>@Html.DisplayFor(model => model.AccountName)</strong>
+                            </dd>
 
-                        <dt class="col-sm-4 text-muted">
-                            @Html.DisplayNameFor(model => model.AccountEmail)
-                        </dt>
-                        <dd class="col-sm-8">
-                            <span class="text-primary">@Html.DisplayFor(model => model.AccountEmail)</span>
-                        </dd>
+                            <dt class="col-sm-4 text-muted">
+                                @Html.DisplayNameFor(model => model.AccountEmail)
+                            </dt>
+                            <dd class="col-sm-8">
+                                <span class="text-primary">@Html.DisplayFor(model => model.AccountEmail)</span>
+                            </dd>
 
-                        <dt class="col-sm-4 text-muted">
-                            @Html.DisplayNameFor(model => model.AccountRole)
-                        </dt>
-                        <dd class="col-sm-8">
-                            <span class="badge bg-success">@Html.DisplayFor(model => model.AccountRole)</span>
-                        </dd>
+                            <dt class="col-sm-4 text-muted">
+                                @Html.DisplayNameFor(model => model.AccountRole)
+                            </dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-success">@Html.DisplayFor(model => model.AccountRole)</span>
+                            </dd>
 
-                        <dt class="col-sm-4 text-muted">
-                            @Html.DisplayNameFor(model => model.AccountPassword)
-                        </dt>
-                        <dd class="col-sm-8">
-                            <span class="text-danger">••••••••</span> <!-- Ẩn password -->
-                        </dd>
-                    </dl>
+                            <dt class="col-sm-4 text-muted">
+                                @Html.DisplayNameFor(model => model.AccountPassword)
+                            </dt>
+                            <dd class="col-sm-8">
+                                <span class="text-muted">••••••••</span> <!-- Ẩn mật khẩu an toàn hơn -->
+                            </dd>
+                        </dl>
+                    }
                 </div>
                 <div class="card-footer text-center">
-                    <a asp-action="Edit" asp-route-id="@Model?.AccountId" class="btn btn-warning">
-                        <i class="fas fa-edit"></i> Edit
-                    </a>
-                    <a asp-action="Index" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Back to List
-                    </a>
+                    @if (Model != null)
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.AccountId" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    }
                 </div>
             </div>
         </div>
@@ -56,7 +72,7 @@
 </div>
 
 @section Styles {
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-p9O+08hQdZVnyUcDjNSZc7qB9jkm8p+wkZ9ZbVoXMOh+2ONSLnZYVXdXNc3Y8XYoO6SFt5mONOf+rmDteDyrGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 }
 
 @section Scripts {

@@ -1,4 +1,4 @@
-﻿@model BusinessObjects.Entities.SystemAccount
+﻿@model Services.DTOs.SystemAccountDTO
 
 @{
     ViewData["Title"] = "Edit Account";
@@ -12,7 +12,8 @@
                     <h3>Edit Account</h3>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Edit">
+                    <form asp-action="Edit" asp-route-id="@Model?.AccountId" method="post">
+                        @Html.AntiForgeryToken() <!-- Thêm token bảo mật -->
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
                         <input type="hidden" asp-for="AccountId" />
 
@@ -31,16 +32,16 @@
                         <div class="mb-3">
                             <label asp-for="AccountRole" class="form-label fw-bold"></label>
                             <select asp-for="AccountRole" class="form-select">
-                                <option value="Admin">Admin</option>
-                                <option value="Staff">Staff</option>
-                                <option value="User">User</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Staff</option>
+                                <option value="3">User</option>
                             </select>
                             <span asp-validation-for="AccountRole" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="AccountPassword" class="form-label fw-bold"></label>
-                            <input asp-for="AccountPassword" type="password" class="form-control" placeholder="Enter new password" />
+                            <input asp-for="AccountPassword" type="password" class="form-control" placeholder="Enter new password (leave blank to keep current password)" />
                             <span asp-validation-for="AccountPassword" class="text-danger"></span>
                         </div>
 
@@ -60,7 +61,7 @@
 </div>
 
 @section Styles {
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-p9O+08hQdZVnyUcDjNSZc7qB9jkm8p+wkZ9ZbVoXMOh+2ONSLnZYVXdXNc3Y8XYoO6SFt5mONOf+rmDteDyrGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 }
 
 @section Scripts {
