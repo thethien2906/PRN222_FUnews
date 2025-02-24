@@ -5,7 +5,6 @@ using Repositories.Repository;
 using Services;
 using Services.IService;
 using Services.Service;
-using TechTalk.SpecFlow.Assist;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

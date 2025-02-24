@@ -1,4 +1,4 @@
-﻿@model BusinessObjects.Entities.SystemAccount
+﻿@model Services.DTOs.SystemAccountDTO
 
 @{
     ViewData["Title"] = "Delete Account";
@@ -41,16 +41,17 @@
                             @Html.DisplayNameFor(model => model.AccountPassword)
                         </dt>
                         <dd class="col-sm-8">
-                            <span class="text-danger">••••••••</span> <!-- Ẩn mật khẩu -->
+                            <span class="text-muted">••••••••</span> <!-- Ẩn mật khẩu an toàn hơn -->
                         </dd>
                     </dl>
                 </div>
 
                 <div class="card-footer text-center">
-                    <form asp-action="Delete">
+                    <form asp-action="Delete" asp-route-id="@Model.AccountId" method="post">
+                        @Html.AntiForgeryToken() <!-- Thêm token bảo mật -->
                         <input type="hidden" asp-for="AccountId" />
                         <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i> Delete
+                            <i class="fas fa-trash"></i> Delete
                         </button>
                         <a asp-action="Index" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i> Cancel
@@ -63,7 +64,7 @@
 </div>
 
 @section Styles {
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-p9O+08hQdZVnyUcDjNSZc7qB9jkm8p+wkZ9ZbVoXMOh+2ONSLnZYVXdXNc3Y8XYoO6SFt5mONOf+rmDteDyrGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 }
 
 @section Scripts {
