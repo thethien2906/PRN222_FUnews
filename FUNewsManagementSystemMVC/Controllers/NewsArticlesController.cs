@@ -66,7 +66,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // GET: NewsArticles/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName");
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategories(), "CategoryId", "CategoryName");
             return View();
         }
 
@@ -107,7 +107,7 @@ namespace FUNewsManagementSystemMVC.Controllers
                 }
             }
 
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategories(), "CategoryId", "CategoryName", newsArticle.CategoryId);
             return View(newsArticle);
         }
         // GET: NewsArticles/Edit/5
@@ -123,7 +123,7 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategories(), "CategoryId", "CategoryName", newsArticle.CategoryId);
             return View(newsArticle);
         }
 
@@ -170,7 +170,7 @@ namespace FUNewsManagementSystemMVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategories(), "CategoryId", "CategoryName", newsArticle.CategoryId);
             return View(newsArticle);
         }
 

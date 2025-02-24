@@ -9,7 +9,7 @@ namespace Repositories.IRepository
 {
     public interface ICategoryRepo
     {
-        IEnumerable<Category> GetCategorys();
+        IEnumerable<Category> GetCategories();
         Category GetCategoryByID(int id);
         void InsertCategory(Category category);
         void UpdateCategory(Category category);

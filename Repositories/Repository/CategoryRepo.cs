@@ -12,7 +12,7 @@ namespace Repositories.Repository
 
         public Category GetCategoryByID(int id) => CategoryManager.Instance.GetCategoryById(id);
 
-        public IEnumerable<Category> GetCategorys() => CategoryManager.Instance.GetCategoryList();
+        public IEnumerable<Category> GetCategories() => CategoryManager.Instance.GetCategoryList();
 
         public void InsertCategory(Category category) => CategoryManager.Instance.AddNew(category);
 

@@ -20,3 +20,7 @@ FUNewsManagementSystemMVC/bin/Debug/net8.0/DataAccessObjects.pdb
 **/obj/
 *.user
 *.suo
+*/**/bin/Debug
+*/**/bin/Release
+*/**/obj/Debug
+*/**/obj/Release

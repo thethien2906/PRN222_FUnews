@@ -85,34 +85,31 @@ namespace DataAccessObjects
         }
         public void Update(Category category)
         {
-            Category _category = GetCategoryById(category.CategoryId);
+            var _category = GetCategoryById(category.CategoryId);
+            if (_category == null)
+            {
+                throw new Exception("Category does not exist.");
+            }
+
             try
             {
-                if (_category != null)
-                {
-                    using var _context = new FunewsManagementContext();
-                    _context.Entry<Category>(category).State = EntityState.Modified;
-                    _context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("The category does not exist");
-                }
+                using var _context = new FunewsManagementContext();
+                _context.Entry(category).State = EntityState.Modified;
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Error updating category: " + ex.Message);
             }
-
-
         }
+
         public void Remove(Category category)
         {
             try
             {
                 using var _context = new FunewsManagementContext();
                 var existingCategory = _context.Categories
-                    .Include(c => c.NewsArticles) // Include all related entities
+                    .Include(c => c.NewsArticles) // Ensure no dependencies
                     .SingleOrDefault(c => c.CategoryId == category.CategoryId);
 
                 if (existingCategory != null)
@@ -127,10 +124,10 @@ namespace DataAccessObjects
             }
             catch (DbUpdateException ex)
             {
-                // Log the exception for more details
-                throw new Exception("Error while deleting category. Check inner exception for details.", ex);
+                throw new Exception("Error deleting category. Check related entities.", ex);
             }
         }
+
 
         public void ChangeStatus(Category category)
         {

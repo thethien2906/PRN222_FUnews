@@ -1,18 +1,17 @@
 ﻿@model Services.DTOs.CategoryDTO
 
-<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Category</h5>
+                <h5 class="modal-title" id="categoryModalLabel">Create Category</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span>&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="editCategoryForm">
+                <form id="createCategoryForm">
                     @Html.AntiForgeryToken()
-                    <input type="hidden" asp-for="CategoryId" />
                     <div class="form-group">
                         <label for="CategoryName">Category Name</label>
                         <input type="text" asp-for="CategoryName" class="form-control" required />
@@ -35,26 +34,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateCategory">Update</button>
+                <button type="button" class="btn btn-primary" id="saveCategory">Save</button>
             </div>
         </div>
     </div>
 </div>
 
-
 <script>
     $(document).ready(function () {
-    $('#updateCategory').click(function () {
+    $('#saveCategory').click(function () {
         $.ajax({
-            url: "@Url.Action("Edit", "Categories")",
+            url: "@Url.Action("Create", "Categories")",
             type: "POST",
-            contentType: "application/x-www-form-urlencoded",
-            data: $('#editCategoryForm').serialize(),
+            contentType: "application/x-www-form-urlencoded",  // Ensures correct format
+            data: $('#createCategoryForm').serialize(),
             success: function (response) {
                 if (response.success) {
                     location.reload();
                 } else {
-                    alert("Validation Errors: " + response.errors.join(\"\\n\"));
+                    alert("Validation Errors: " + response.errors.join("\n"));
                 }
             },
             error: function (xhr) {
@@ -62,6 +60,5 @@
             }
         });
     });
-
     });
 </script>
