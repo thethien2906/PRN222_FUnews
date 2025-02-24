@@ -5,6 +5,7 @@ using Repositories.Repository;
 using Services;
 using Services.IService;
 using Services.Service;
+using TechTalk.SpecFlow.Assist;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<FunewsManagementContext>(options =>
 // Category
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddAntiforgery(options => options.HeaderName = "RequestVerificationToken");
 // NewsArticle
 builder.Services.AddScoped<INewsArticleRepo, NewsArticleRepo>();
 builder.Services.AddScoped<INewsArticleService, NewsArticleService>();
