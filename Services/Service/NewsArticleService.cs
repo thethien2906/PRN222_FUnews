@@ -53,7 +53,7 @@ namespace Services.Service
             _newsArticleRepo.SearchNewsArticle(search).Select(ConvertToDTO);
 
         public IEnumerable<NewsArticleDTO> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate) =>
-            _newsArticleRepo.GetNewsArticlesByPeriod(startDate, endDate).Select(ConvertToDTO);
+            _newsArticleRepo.GetNewsArticlesByPeriod(startDate, endDate).OrderByDescending(a => a.CreatedDate).Select(ConvertToDTO).ToList();
 
         public IEnumerable<NewsArticleDTO> GetNewsArticleByCreator(short creatorId) =>
             _newsArticleRepo.GetNewsArticlesByCreatorId(creatorId).Select(ConvertToDTO);
