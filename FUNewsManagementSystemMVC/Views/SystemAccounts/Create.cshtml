@@ -1,56 +1,73 @@
-﻿@model BusinessObjects.Entities.SystemAccount
+﻿@model Services.DTOs.SystemAccountDTO
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Account";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Create New Account</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>SystemAccount</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-@*             <div class="form-group">
-                <label asp-for="AccountId" class="control-label"></label>
-                <input asp-for="AccountId" class="form-control" />
-                <span asp-validation-for="AccountId" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <label asp-for="AccountName" class="control-label"></label>
-                <input asp-for="AccountName" class="form-control" />
-                <span asp-validation-for="AccountName" class="text-danger"></span>
+                        <div class="form-group mb-3">
+                            <label asp-for="AccountName" class="fw-bold"></label>
+                            <input asp-for="AccountName" class="form-control" placeholder="Enter full name" />
+                            <span asp-validation-for="AccountName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="AccountEmail" class="fw-bold"></label>
+                            <input asp-for="AccountEmail" class="form-control" placeholder="Enter email address" />
+                            <span asp-validation-for="AccountEmail" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="AccountRole" class="fw-bold"></label>
+                            <select asp-for="AccountRole" class="form-control">
+                                <option value="" disabled selected>-- Select Role --</option>
+                                <option value="1">Staff</option>
+                                <option value="2">Lecturer</option>
+                                
+                            </select>
+                            <span asp-validation-for="AccountRole" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="AccountPassword" class="fw-bold"></label>
+                            <input asp-for="AccountPassword" type="password" class="form-control" placeholder="Enter password" />
+                            <span asp-validation-for="AccountPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-user-plus"></i> Create Account
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="AccountEmail" class="control-label"></label>
-                <input asp-for="AccountEmail" class="form-control" />
-                <span asp-validation-for="AccountEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountRole" class="control-label"></label>
-                <select asp-for="AccountRole" class="form-control">
-                    <option value="1">Lecturer</option>
-                    <option value="2">Staff</option>
-                </select>
-                <span asp-validation-for="AccountRole" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountPassword" class="control-label"></label>
-                <input asp-for="AccountPassword" class="form-control" />
-                <span asp-validation-for="AccountPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+}
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

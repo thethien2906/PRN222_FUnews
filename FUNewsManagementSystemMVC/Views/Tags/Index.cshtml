@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessObjects.Entities.Tag>
+﻿@model IEnumerable<Services.DTOs.TagDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,7 +25,7 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.TagName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Note)</td>
-                <td>
+                @* <td>
                     @if (item.NewsArticles != null && item.NewsArticles.Any())
                     {
                         @string.Join(", ", item.NewsArticles.Select(n => n.NewsTitle))
@@ -34,7 +34,7 @@
                     {
                         <span>No Articles</span>
                     }
-                </td>
+                </td> *@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.TagId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.TagId">Details</a> |

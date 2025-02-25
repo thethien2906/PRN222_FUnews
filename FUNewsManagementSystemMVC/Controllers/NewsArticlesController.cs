@@ -4,37 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using BusinessObjects.Entities;
-using DataAccessObjects.AppDbContext;
+using Microsoft.AspNetCore.Http;
 using Services.IService;
-    
+using Services.DTOs;
+using Services.Service;
+
 namespace FUNewsManagementSystemMVC.Controllers
 {
     public class NewsArticlesController : Controller
     {
-        //private readonly FunewsManagementContext _context;
-        private readonly INewsArticleService _contextNewsArticle;
-        private readonly ICategoryService _contextCategory;
-
-        public NewsArticlesController(INewsArticleService contextNewsArticle, ICategoryService contextCategory)
+        private readonly INewsArticleService _newsArticleService;
+        private readonly ICategoryService _categoryService;
+        private readonly ITagService _tagService;
+        public NewsArticlesController(INewsArticleService newsArticleService, ICategoryService categoryService, ITagService tagService)
         {
-            _contextNewsArticle = contextNewsArticle;
-            _contextCategory = contextCategory;
+            _newsArticleService = newsArticleService;
+            _categoryService = categoryService;
+            _tagService = tagService;
         }
-        
 
         // GET: NewsArticles
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             if (HttpContext.Session.GetString("UserId") == null)
             {
-                // Redirect to the login page or display an error message
                 return RedirectToAction("Login", "SystemAccounts");
             }
-            var funewsManagementContext = _contextNewsArticle.GetAllNewsArticles();
-            return View(funewsManagementContext.ToList());
+            var articles = _newsArticleService.GetAllNewsArticles();
+            return View(articles.ToList());
         }
+
         // GET: NewsArticles/History
         public IActionResult History()
         {
@@ -44,18 +43,19 @@ namespace FUNewsManagementSystemMVC.Controllers
             }
 
             var userId = short.Parse(HttpContext.Session.GetString("UserId"));
-            var myArticles = _contextNewsArticle.GetNewsArticleByCreator(userId);
+            var myArticles = _newsArticleService.GetNewsArticleByCreator(userId);
             return View(myArticles.ToList());
         }
+
         // GET: NewsArticles/Details/5
-        public async Task<IActionResult> Details(string id)
+        public IActionResult Details(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var newsArticle = _contextNewsArticle.GetNewsArticleById(id);
+            var newsArticle = _newsArticleService.GetNewsArticleById(id);
             if (newsArticle == null)
             {
                 return NotFound();
@@ -67,75 +67,80 @@ namespace FUNewsManagementSystemMVC.Controllers
         // GET: NewsArticles/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName");
+
+            ViewData["CategoryId"] = new SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName");
+            ViewData["Tags"] = new MultiSelectList(_tagService.GetAllTags(), "TagId", "TagName"); // Pass tags
+
             return View();
         }
 
         // POST: NewsArticles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NewsArticle newsArticle)
+        public IActionResult Create([Bind("NewsTitle,Headline,NewsContent,NewsSource,CategoryId,NewsStatus,TagIds")] NewsArticleDTO newsArticleDto)
         {
             ModelState.Remove("NewsArticleId");
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var lastArticle = _contextNewsArticle.GetAllNewsArticles().OrderByDescending(n => n.NewsArticleId).FirstOrDefault();
+                    var lastArticle = _newsArticleService.GetAllNewsArticles().OrderByDescending(n => n.NewsArticleId).FirstOrDefault();
                     int newId = lastArticle != null ? int.Parse(lastArticle.NewsArticleId) + 1 : 1;
-                    newsArticle.NewsArticleId = newId.ToString();
-
-                    newsArticle.CreatedDate = DateTime.Now;
-
-                    newsArticle.ModifiedDate = DateTime.Now;
+                    newsArticleDto.NewsArticleId = newId.ToString();
+                    newsArticleDto.CreatedDate = DateTime.Now;
+                    newsArticleDto.ModifiedDate = DateTime.Now;
 
                     var userId = HttpContext.Session.GetString("UserId");
+                    newsArticleDto.CreatedById = short.Parse(userId);
+                    newsArticleDto.UpdatedById = short.Parse(userId);
 
-                    newsArticle.CreatedById = short.Parse(userId);
-                    newsArticle.UpdatedById = short.Parse(userId);
-
-                    
-                    _contextNewsArticle.CreateNewsArticle(newsArticle);
+                    _newsArticleService.CreateNewsArticle(newsArticleDto);
 
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception (ex) here
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact support.");
                 }
             }
 
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
-            return View(newsArticle);
+            ViewData["CategoryId"] = new SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", newsArticleDto.CategoryId);
+            ViewData["Tags"] = new MultiSelectList(_tagService.GetAllTags(), "TagId", "TagName", newsArticleDto.TagIds); // Preserve selected tags
+
+            return View(newsArticleDto);
         }
+
         // GET: NewsArticles/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public IActionResult Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var newsArticle = _contextNewsArticle.GetNewsArticleById(id);
+            var newsArticle = _newsArticleService.GetNewsArticleById(id);
             if (newsArticle == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
+
+            ViewData["CategoryId"] = new SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", newsArticle.CategoryId);
+            ViewData["Tags"] = new MultiSelectList(
+        _tagService.GetAllTags(),
+        "TagId",
+        "TagName",
+        newsArticle.Tags.Select(t => t.TagId) // Pre-select existing tags
+    );
+
             return View(newsArticle);
         }
 
         // POST: NewsArticles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("NewsArticleId,NewsTitle,Headline,NewsContent,NewsSource,CategoryId,NewsStatus,UpdatedById,ModifiedDate")] NewsArticle newsArticle)
+        public IActionResult Edit(string id, [Bind("NewsArticleId,NewsTitle,Headline,NewsContent,NewsSource,CategoryId,NewsStatus,TagIds")] NewsArticleDTO newsArticleDto)
         {
-            if (id != newsArticle.NewsArticleId)
+            if (id != newsArticleDto.NewsArticleId)
             {
                 return NotFound();
             }
@@ -144,23 +149,25 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 try
                 {
-                    var existingArticle = _contextNewsArticle.GetNewsArticleById(id); // Get existing article
+                    var existingArticle = _newsArticleService.GetNewsArticleById(id);
                     if (existingArticle == null)
                     {
                         return NotFound();
                     }
-                    newsArticle.CreatedDate = existingArticle.CreatedDate;
-                    newsArticle.CreatedById = existingArticle.CreatedById;
-                    newsArticle.ModifiedDate = DateTime.Now;
-                    var userId = HttpContext.Session.GetString("UserId");
-                    newsArticle.UpdatedById = short.Parse(userId);
 
-                    _contextNewsArticle.UpdateNewsArticle(newsArticle);
+                    newsArticleDto.CreatedDate = existingArticle.CreatedDate;
+                    newsArticleDto.CreatedById = existingArticle.CreatedById;
+                    newsArticleDto.ModifiedDate = DateTime.Now;
+
+                    var userId = HttpContext.Session.GetString("UserId");
+                    newsArticleDto.UpdatedById = short.Parse(userId);
+
+                    _newsArticleService.UpdateNewsArticle(newsArticleDto);
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!NewsArticleExists(newsArticle.NewsArticleId))
+                    if (!NewsArticleExists(newsArticleDto.NewsArticleId))
                     {
                         return NotFound();
                     }
@@ -169,21 +176,23 @@ namespace FUNewsManagementSystemMVC.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_contextCategory.GetCategorys(), "CategoryId", "CategoryName", newsArticle.CategoryId);
-            return View(newsArticle);
+
+            ViewData["CategoryId"] = new SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName", newsArticleDto.CategoryId);
+            ViewData["Tags"] = new MultiSelectList(_tagService.GetAllTags(), "TagId", "TagName"); // Pass tags
+
+            return View(newsArticleDto);
         }
 
         // GET: NewsArticles/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public IActionResult Delete(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var newsArticle = _contextNewsArticle.GetNewsArticleById(id);
+            var newsArticle = _newsArticleService.GetNewsArticleById(id);
             if (newsArticle == null)
             {
                 return NotFound();
@@ -195,40 +204,38 @@ namespace FUNewsManagementSystemMVC.Controllers
         // POST: NewsArticles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public IActionResult DeleteConfirmed(string id)
         {
-            var newsArticle = _contextNewsArticle.GetNewsArticleById(id);
+            var newsArticle = _newsArticleService.GetNewsArticleById(id);
             if (newsArticle != null)
             {
-                _contextNewsArticle.DeleteNewsArticle(newsArticle);
+                _newsArticleService.DeleteNewsArticle(id);
             }
             return RedirectToAction(nameof(Index));
         }
 
         private bool NewsArticleExists(string id)
         {
-            var tmp = _contextNewsArticle.GetNewsArticleById(id);
-            return (tmp != null) ? true : false;
+            return _newsArticleService.GetNewsArticleById(id) != null;
         }
-        
+
         // GET: NewsArticles/Report
         public IActionResult Report(DateTime? startDate, DateTime? endDate)
         {
             if (startDate == null || endDate == null)
             {
                 ViewData["Message"] = "Please select a valid date range.";
-                return View(new List<NewsArticle>());
+                return View(new List<NewsArticleDTO>());
             }
 
             if (endDate < startDate)
             {
                 ViewData["Message"] = "End date must be greater than start date.";
-                return View(new List<NewsArticle>());
+                return View(new List<NewsArticleDTO>());
             }
 
-            var articles = _contextNewsArticle.GetNewsArticlesByPeriod(startDate.Value, endDate.Value);
+            var articles = _newsArticleService.GetNewsArticlesByPeriod(startDate.Value, endDate.Value);
             return View(articles);
         }
     }
 }
-

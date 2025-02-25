@@ -1,4 +1,4 @@
-﻿@model BusinessObjects.Entities.NewsArticle
+﻿@model Services.DTOs.NewsArticleDTO;
 
 @{
     ViewData["Title"] = "Details";
@@ -59,16 +59,16 @@
             @Html.DisplayFor(model => model.ModifiedDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.CategoryDesciption)
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayNameFor(model => model.CreatedByName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy.AccountId)
+            @Html.DisplayFor(model => model.CreatedByName)
         </dd>
     </dl>
 </div>

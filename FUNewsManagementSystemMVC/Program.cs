@@ -14,6 +14,7 @@ builder.Services.AddDbContext<FunewsManagementContext>(options =>
 // Category
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddAntiforgery(options => options.HeaderName = "RequestVerificationToken");
 // NewsArticle
 builder.Services.AddScoped<INewsArticleRepo, NewsArticleRepo>();
 builder.Services.AddScoped<INewsArticleService, NewsArticleService>();

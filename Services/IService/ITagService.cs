@@ -5,15 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects.Entities;
 using DataAccessObjects.Helper;
+using Services.DTOs;
+
+
 namespace Services.IService
 {
     public interface ITagService
     {
-        IEnumerable<Tag> GetAllTags();
-        Tag GetTagById(int id);
-        void AddTag(Tag tag);
-        void UpdateTag(Tag tag);
-        ServiceResponse DeleteTag(Tag tag);
-        IEnumerable<Tag> GetTagsByArticleId(string articleId);
+        IEnumerable<TagDTO> GetAllTags();
+        TagDTO GetTagById(int id);
+        void AddTag(TagDTO tag);
+        void UpdateTag(TagDTO tag);
+        void DeleteTag(TagDTO tag);
+        IEnumerable<TagDTO> GetTagsByArticleId(string articleId);
     }
+
 }

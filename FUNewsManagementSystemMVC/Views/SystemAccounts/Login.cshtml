@@ -1,4 +1,4 @@
-﻿@model BusinessObjects.Entities.SystemAccount
+﻿@model Services.DTOs.SystemAccountDTO
 
 @{
     ViewData["Title"] = "Login";
@@ -90,5 +90,9 @@
         <div class="form-group">
             <input type="submit" value="Login" class="btn btn-primary" />
         </div>
+        
     </form>
+    <div class="mt-auto">
+        <a href="@Url.Action("Index", "Home")">Back To Home</a>
+    </div>
 </div>

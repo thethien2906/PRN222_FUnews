@@ -1,49 +1,74 @@
-﻿@model BusinessObjects.Entities.SystemAccount
+﻿@model Services.DTOs.SystemAccountDTO
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Account";
 }
 
-<h1>Edit</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-header bg-warning text-white text-center">
+                    <h3>Edit Account</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" asp-route-id="@Model?.AccountId" method="post">
+                        @Html.AntiForgeryToken() <!-- Thêm token bảo mật -->
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                        <input type="hidden" asp-for="AccountId" />
 
-<h4>SystemAccount</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="AccountId" />
-            <div class="form-group">
-                <label asp-for="AccountName" class="control-label"></label>
-                <input asp-for="AccountName" class="form-control" />
-                <span asp-validation-for="AccountName" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="AccountName" class="form-label fw-bold"></label>
+                            <input asp-for="AccountName" class="form-control" placeholder="Enter account name" />
+                            <span asp-validation-for="AccountName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AccountEmail" class="form-label fw-bold"></label>
+                            <input asp-for="AccountEmail" type="email" class="form-control" placeholder="Enter email" />
+                            <span asp-validation-for="AccountEmail" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AccountRole" class="form-label fw-bold"></label>
+                            <select asp-for="AccountRole" class="form-select">
+                                <option value="1">Staff</option>
+                                <option value="2">Lecture</option>
+                                
+                            </select>
+                            <span asp-validation-for="AccountRole" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AccountPassword" class="form-label fw-bold"></label>
+                            <input asp-for="AccountPassword" type="password" class="form-control" placeholder="Enter new password (leave blank to keep current password)" />
+                            <span asp-validation-for="AccountPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="AccountEmail" class="control-label"></label>
-                <input asp-for="AccountEmail" class="form-control" />
-                <span asp-validation-for="AccountEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountRole" class="control-label"></label>
-                <input asp-for="AccountRole" class="form-control" />
-                <span asp-validation-for="AccountRole" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AccountPassword" class="control-label"></label>
-                <input asp-for="AccountPassword" class="form-control" />
-                <span asp-validation-for="AccountPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-p9O+08hQdZVnyUcDjNSZc7qB9jkm8p+wkZ9ZbVoXMOh+2ONSLnZYVXdXNc3Y8XYoO6SFt5mONOf+rmDteDyrGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        console.log("Edit account page loaded");
+    </script>
 }

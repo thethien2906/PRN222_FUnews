@@ -9,7 +9,6 @@
       "FUNewsManagementSystemMVC/1.0.0": {
         "dependencies": {
           "BusinessObjects": "1.0.0",
-          "DataAccessObjects": "1.0.0",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.11",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.7",
           "Services": "1.0.0"

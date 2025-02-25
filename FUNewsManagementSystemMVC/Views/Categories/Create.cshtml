@@ -1,0 +1,64 @@
+﻿@model Services.DTOs.CategoryDTO
+
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoryModalLabel">Create Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createCategoryForm">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="CategoryName">Category Name</label>
+                        <input type="text" asp-for="CategoryName" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryDesciption">Description</label>
+                        <textarea asp-for="CategoryDesciption" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ParentCategoryId">Parent Category</label>
+                        <select asp-for="ParentCategoryId" class="form-control" asp-items="ViewBag.ParentCategoryId">
+                            <option value="">None</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="IsActive">Active</label>
+                        <input type="checkbox" asp-for="IsActive" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveCategory">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+    $('#saveCategory').click(function () {
+        $.ajax({
+            url: "@Url.Action("Create", "Categories")",
+            type: "POST",
+            contentType: "application/x-www-form-urlencoded",  // Ensures correct format
+            data: $('#createCategoryForm').serialize(),
+            success: function (response) {
+                if (response.success) {
+                    location.reload();
+                } else {
+                    alert("Validation Errors: " + response.errors.join("\n"));
+                }
+            },
+            error: function (xhr) {
+                alert("Error: " + xhr.responseText);
+            }
+        });
+    });
+    });
+</script>

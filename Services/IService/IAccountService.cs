@@ -1,33 +1,38 @@
-﻿using BusinessObjects.Entities;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BusinessObjects.Entities;
+using DataAccessObjects.Helper;
+using Services.DTOs;
 
 namespace Services.IService
 {
     public interface IAccountService
     {
         // Lấy tất cả tài khoản
-        IEnumerable<SystemAccount> GetAccounts();
+        IEnumerable<SystemAccountDTO> GetAccounts();
 
         // Lấy tài khoản theo ID
-        SystemAccount GetAccountById(int id);
+        SystemAccountDTO GetAccountById(int id);
 
-        // Lưu tài khoản mới
-        void SaveAccount(SystemAccount account);
-
-        // Thêm tài khoản mới (Insert)
-        void InsertAccount(SystemAccount account);
+        // Thêm tài khoản mới
+        void InsertAccount(SystemAccountDTO accountDTO);
 
         // Cập nhật tài khoản
-        void UpdateAccount(SystemAccount account);
+        void UpdateAccount(SystemAccountDTO accountDTO);
+
+        // Lưu tài khoản (có thể dùng để thêm hoặc cập nhật)
+        void SaveAccount(SystemAccountDTO accountDTO);
 
         // Xóa tài khoản
-        void DeleteAccount(SystemAccount account);
+        void DeleteAccount(int id);
 
         // Thay đổi trạng thái của tài khoản
-        void ChangeStatus(SystemAccount account);
+        void ChangeStatus(int id);
 
         // Tìm kiếm tài khoản
-        IEnumerable<SystemAccount> Search(string search);
-
+        IEnumerable<SystemAccountDTO> Search(string search);
     }
 }

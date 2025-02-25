@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BusinessObjects.Entities;
-using DataAccessObjects.AppDbContext;
-using DataAccessObjects.Helpers;
-using static BusinessObjects.Entities.SystemAccount;
 using Services.IService;
-using Microsoft.Extensions.Configuration;
-using System.Configuration;
+using Services.DTOs;
 
 namespace FUNewsManagementSystemMVC.Controllers
 {
@@ -19,11 +9,13 @@ namespace FUNewsManagementSystemMVC.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IConfiguration _configuration;
+
         public SystemAccountsController(IAccountService accountService, IConfiguration configuration)
         {
             _accountService = accountService;
             _configuration = configuration;
         }
+
         public IActionResult Profile()
         {
             var userId = HttpContext.Session.GetString("UserId");
@@ -31,17 +23,14 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 return RedirectToAction("Login", "SystemAccounts");
             }
-
             var account = _accountService.GetAccountById(int.Parse(userId));
             if (account == null)
             {
                 return NotFound();
             }
-
-            return View(account);  // Truyền thông tin tài khoản vào View
+            return View(account);
         }
-        // -------- Phần này Minh Đạt đang bị lỗi, fix sau ------
-        //GET: Profile/Edit
+
         public IActionResult EditProfile()
         {
             var userId = HttpContext.Session.GetString("UserId");
@@ -49,25 +38,21 @@ namespace FUNewsManagementSystemMVC.Controllers
             {
                 return RedirectToAction("Login", "SystemAccounts");
             }
-
             var account = _accountService.GetAccountById(int.Parse(userId));
             if (account == null)
             {
                 return NotFound();
             }
-
-            return View(account); // Truyền thông tin tài khoản vào View
+            return View(account);
         }
 
-        // POST: Profile/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult EditProfile(SystemAccount model)
+        public IActionResult EditProfile(SystemAccountDTO model)
         {
             if (ModelState.IsValid)
             {
                 var userId = HttpContext.Session.GetString("UserId");
-
                 var account = _accountService.GetAccountById(int.Parse(userId));
                 if (account == null)
                 {
@@ -76,221 +61,167 @@ namespace FUNewsManagementSystemMVC.Controllers
                 account.AccountName = model.AccountName;
                 account.AccountEmail = model.AccountEmail;
                 account.AccountPassword = model.AccountPassword;
-
-                _accountService.UpdateAccount(account); // Lưu lại thay đổi
-
-                return RedirectToAction("EditProfile", "SystemAccounts"); // Quay lại trang profile
+                _accountService.UpdateAccount(account);
+                return RedirectToAction("EditProfile", "SystemAccounts");
             }
-            else
-            {
-                // Kiểm tra và log thông tin lỗi nếu ModelState không hợp lệ
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);  // Hoặc log vào file nếu cần
-                }
-
-                return View(model); // Trả lại view với thông báo lỗi nếu có
-            }
+            return View(model);
         }
-        // LOGIN
+
         public IActionResult Login()
         {
-            return View(new SystemAccount());
+            return View(new SystemAccountDTO());
         }
 
         [HttpPost]
-        public IActionResult Login(SystemAccount model)
+        public IActionResult Login(SystemAccountDTO model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
-            // Kiểm tra tài khoản admin từ appsettings.json
             var adminEmail = _configuration["Admin:Account"];
             var adminPassword = _configuration["Admin:Pass"];
-
             if (model.AccountEmail == adminEmail && model.AccountPassword == adminPassword)
             {
-                // Lưu thông tin tài khoản admin vào session và điều hướng đến trang quản trị
                 HttpContext.Session.SetString("UserId", "admin");
                 HttpContext.Session.SetString("UserName", "Admin");
                 HttpContext.Session.SetString("Role", "admin");
-
-                return RedirectToAction("Admin", "Home");  // Định tuyến đến trang Admin
+                return RedirectToAction("Admin", "Home");
             }
-
             var account = _accountService.GetAccounts()
                 .FirstOrDefault(a => a.AccountEmail == model.AccountEmail && a.AccountPassword == model.AccountPassword);
-
             if (account != null)
             {
-                // Lưu thông tin tài khoản vào session
                 HttpContext.Session.SetString("UserId", account.AccountId.ToString());
                 HttpContext.Session.SetString("UserName", account.AccountName);
                 HttpContext.Session.SetString("Role", account.AccountRole.ToString());
-
-                // Điều hướng theo vai trò người dùng
-                if (account.AccountRole == 1)
+                return account.AccountRole switch
                 {
-                    return RedirectToAction("Staff", "Home");
-                }
-                else if (account.AccountRole == 2)
-                {
-                    return RedirectToAction("Lecturer", "Home");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                    1 => RedirectToAction("Staff", "Home"),
+                    2 => RedirectToAction("Lecturer", "Home"),
+                    _ => RedirectToAction("Index", "Home"),
+                };
             }
-            else
-            {
-                ViewBag.Error = "Invalid email or password";
-                return View(model);
-            }
+            ViewBag.Error = "Invalid email or password";
+            return View(model);
         }
 
-        // LOGOUT
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login", "SystemAccounts");
         }
-        // GET: Accounts
+
         public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetString("UserId") == null)
             {
-                // Redirect to the login page or display an error message
                 return RedirectToAction("Login", "SystemAccounts");
             }
-            var accounts = _accountService.GetAccounts().ToList(); // Lấy tất cả tài khoản từ service
+            var accounts = _accountService.GetAccounts().ToList();
             return View(accounts);
         }
 
-        // GET: Accounts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (!id.HasValue || id.Value <= 0)
             {
                 return NotFound();
             }
-
             var account = _accountService.GetAccountById(id.Value);
             if (account == null)
             {
                 return NotFound();
             }
-
             return View(account);
         }
 
-        // GET: Accounts/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Accounts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AccountId,AccountName,AccountEmail,AccountRole,AccountPassword")] SystemAccount account)
+        public async Task<IActionResult> Create([Bind("AccountId,AccountName,AccountEmail,AccountRole,AccountPassword")] SystemAccountDTO account)
         {
             ModelState.Remove("AccountId");
             if (ModelState.IsValid)
             {
                 var lastAccount = _accountService.GetAccounts().OrderByDescending(n => n.AccountId).FirstOrDefault();
                 int newId = lastAccount != null ? lastAccount.AccountId + 1 : 1;
-                account.AccountId = (short)newId; _accountService.SaveAccount(account); // Lưu tài khoản mới
-                return RedirectToAction(nameof(Index)); // Chuyển đến danh sách tài khoản
+                account.AccountId = (short)newId;
+                _accountService.SaveAccount(account);
+                return RedirectToAction(nameof(Index));
             }
             return View(account);
         }
 
-        // GET: Accounts/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            if (id <= 0)
             {
                 return NotFound();
             }
-
-            var account = _accountService.GetAccountById(id.Value);
+            var account = _accountService.GetAccountById(id);
             if (account == null)
             {
                 return NotFound();
             }
-
             return View(account);
         }
 
-        // POST: Accounts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AccountId,AccountName,AccountEmail,AccountRole,AccountPassword")] SystemAccount account)
+        public IActionResult Edit(int id, [Bind("AccountId,AccountName,AccountEmail,AccountRole,AccountPassword")] SystemAccountDTO account)
         {
-            if (id != account.AccountId)
+            if (id != account.AccountId || id <= 0)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _accountService.UpdateAccount(account); // Cập nhật tài khoản
+                    _accountService.UpdateAccount(account);
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!AccountExists(account.AccountId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("", "An error occurred while updating the account.");
                 }
-
-
             }
             return View(account);
         }
-        private bool AccountExists(int id)
+
+        public IActionResult Delete(int id)
         {
-            var tmp = _accountService.GetAccountById(id);
-            return (tmp != null) ? true : false;
-        }
-        // GET: Accounts/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
+            if (id <= 0)
             {
                 return NotFound();
             }
-
-            var account = _accountService.GetAccountById(id.Value);
+            var account = _accountService.GetAccountById(id);
             if (account == null)
             {
                 return NotFound();
             }
-
             return View(account);
         }
 
-        // POST: Accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
             var account = _accountService.GetAccountById(id);
             if (account != null)
             {
-                _accountService.DeleteAccount(account); // Xóa tài khoản
+                _accountService.DeleteAccount(id); // Sửa lại để truyền id
             }
-            return RedirectToAction(nameof(Index)); // Quay lại danh sách
+            return RedirectToAction(nameof(Index));
         }
     }
 }

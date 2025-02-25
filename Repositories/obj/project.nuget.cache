@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Xm53NVjHB7opgG4qOZ6E8ktRB3ZDB1xCKwDR+ccbyMLli1Ytv3/764lCvTkuuvJhnT2cvQd/tE97Qa35yxSpBA==",
+  "dgSpecHash": "3hpVXKOUVX+x+9iQ9/jEm5BnwgEsFqSeVcNfXBWSm68Na0jBMtyxrpAfkG3QDLVlVjek/XEzDwm8yB5NpRV49Q==",
   "success": true,
-  "projectFilePath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\Repositories\\Repositories.csproj",
+  "projectFilePath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\IdeaPad\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\IdeaPad\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

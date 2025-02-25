@@ -8,21 +8,77 @@ using Repositories.IRepository;
 using Repositories.Repository;
 using Services.IService;
 using DataAccessObjects.Helper;
+using Services.DTOs;
 
 namespace Services.Service
 {
     public class TagService : ITagService
     {
         private readonly ITagRepo _tagRepo;
-        public TagService(ITagRepo tagService)
+        public TagService(ITagRepo tagRepo)
         {
-            _tagRepo = tagService;
+            _tagRepo = tagRepo;
         }
-        public IEnumerable<Tag> GetAllTags() => _tagRepo.GetAll();
-        public Tag GetTagById(int id) => _tagRepo.Get(id);
-        public void AddTag(Tag tag) => _tagRepo.Add(tag);
-        public void UpdateTag(Tag tag) => _tagRepo.Update(tag);
-        public ServiceResponse DeleteTag(Tag tag) => _tagRepo.Delete(tag);
-        public IEnumerable<Tag> GetTagsByArticleId(string id) => _tagRepo.GetTagsByArticleId(id);
+
+        public IEnumerable<TagDTO> GetAllTags() =>
+            _tagRepo.GetAll().Select(tag => new TagDTO
+            {
+                TagId = tag.TagId,
+                TagName = tag.TagName,
+                Note = tag.Note
+            });
+
+        public TagDTO GetTagById(int id)
+        {
+            var tag = _tagRepo.Get(id);
+            return tag != null ? new TagDTO
+            {
+                TagId = tag.TagId,
+                TagName = tag.TagName,
+                Note = tag.Note
+            } : null;
+        }
+
+        public void AddTag(TagDTO tagDTO)
+        {
+            var tag = new Tag
+            {
+                TagId = tagDTO.TagId,
+                TagName = tagDTO.TagName,
+                Note = tagDTO.Note
+            };
+            _tagRepo.Add(tag);
+        }
+
+        public void UpdateTag(TagDTO tagDTO)
+        {
+            var tag = new Tag
+            {
+                TagId = tagDTO.TagId,
+                TagName = tagDTO.TagName,
+                Note = tagDTO.Note
+            };
+            _tagRepo.Update(tag);
+        }
+
+        public void DeleteTag(TagDTO tagDTO)
+        {
+            var tag = new Tag
+            {
+                TagId = tagDTO.TagId,
+                TagName = tagDTO.TagName,
+                Note = tagDTO.Note
+            };
+            _tagRepo.Delete(tag);
+        }
+
+        public IEnumerable<TagDTO> GetTagsByArticleId(string articleId) =>
+            _tagRepo.GetTagsByArticleId(articleId).Select(tag => new TagDTO
+            {
+                TagId = tag.TagId,
+                TagName = tag.TagName,
+                Note = tag.Note
+            });
     }
+
 }

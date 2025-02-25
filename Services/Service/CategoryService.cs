@@ -1,60 +1,119 @@
-﻿using BusinessObjects.Entities;
-using Repositories.IRepository;
+﻿using Repositories.IRepository;
 using Services.IService;
-using System;
+using Services.DTOs;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Service
 {
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepo _categoryRepo;
-        public CategoryService(ICategoryRepo categoryService)
-        {
-            _categoryRepo = categoryService;
 
+        public CategoryService(ICategoryRepo categoryRepo)
+        {
+            _categoryRepo = categoryRepo;
         }
 
-        public void ChangeStatus(Category category) => _categoryRepo.ChangeStatus(category);
-
-        public void DeleteCategory(Category category)
+        public IEnumerable<CategoryDTO> GetCategories()
         {
-            _categoryRepo.DeleteCategory(category);
+            return _categoryRepo.GetCategories().Select(c => new CategoryDTO
+            {
+                CategoryId = c.CategoryId,
+                CategoryName = c.CategoryName,
+                CategoryDesciption = c.CategoryDesciption,
+                ParentCategoryId = c.ParentCategoryId,
+                IsActive = c.IsActive,
+                ParentCategoryName = c.ParentCategory?.CategoryName
+            }).ToList();
         }
 
-        public Category GetCategoryByID(int id)
+        public CategoryDTO GetCategoryById(int id)
         {
-            return _categoryRepo.GetCategoryByID(id);
+            var category = _categoryRepo.GetCategoryByID(id);
+            if (category == null) return null;
+
+            return new CategoryDTO
+            {
+                CategoryId = category.CategoryId,
+                CategoryName = category.CategoryName,
+                CategoryDesciption = category.CategoryDesciption,
+                ParentCategoryId = category.ParentCategoryId,
+                IsActive = category.IsActive,
+                ParentCategoryName = category.ParentCategory?.CategoryName
+            };
         }
 
-        public IEnumerable<Category> GetCategorys() => _categoryRepo.GetCategorys();
-
-        public void InsertCategory(Category category)
+        public void InsertCategory(CategoryDTO categoryDTO)
         {
+            var category = new BusinessObjects.Entities.Category
+            {
+                CategoryName = categoryDTO.CategoryName,
+                CategoryDesciption = categoryDTO.CategoryDesciption,
+                ParentCategoryId = categoryDTO.ParentCategoryId,
+                IsActive = categoryDTO.IsActive
+            };
+
             _categoryRepo.InsertCategory(category);
         }
 
-        public void SaveCategory(Category category)
+        public void UpdateCategory(CategoryDTO categoryDTO)
         {
-            if (category.CategoryId == 0)
+            var category = _categoryRepo.GetCategoryByID(categoryDTO.CategoryId);
+            if (category != null)
             {
-                _categoryRepo.InsertCategory(category);
-            }
-            else
-            {
+                category.CategoryName = categoryDTO.CategoryName;
+                category.CategoryDesciption = categoryDTO.CategoryDesciption;
+                category.ParentCategoryId = categoryDTO.ParentCategoryId;
+                category.IsActive = categoryDTO.IsActive;
+
                 _categoryRepo.UpdateCategory(category);
             }
         }
 
-
-        public IEnumerable<Category> Search(string search) => _categoryRepo.Search(search);
-
-        public void UpdateCategory(Category category)
+        public void SaveCategory(CategoryDTO categoryDTO)
         {
-            _categoryRepo.UpdateCategory(category);
+            if (categoryDTO.CategoryId <= 0)
+            {
+                InsertCategory(categoryDTO);
+            }
+            else
+            {
+                UpdateCategory(categoryDTO);
+            }
+        }
+
+
+        public void DeleteCategory(int id)
+        {
+            var category = _categoryRepo.GetCategoryByID(id);
+            if (category != null)
+            {
+                _categoryRepo.DeleteCategory(category);
+            }
+        }
+
+        public void ChangeStatus(int id)
+        {
+            var category = _categoryRepo.GetCategoryByID(id);
+            if (category != null)
+            {
+                category.IsActive = !category.IsActive;
+                _categoryRepo.UpdateCategory(category);
+            }
+        }
+
+        public IEnumerable<CategoryDTO> Search(string search)
+        {
+            return _categoryRepo.Search(search).Select(c => new CategoryDTO
+            {
+                CategoryId = c.CategoryId,
+                CategoryName = c.CategoryName,
+                CategoryDesciption = c.CategoryDesciption,
+                ParentCategoryId = c.ParentCategoryId,
+                IsActive = c.IsActive,
+                ParentCategoryName = c.ParentCategory?.CategoryName
+            }).ToList();
         }
     }
 }
