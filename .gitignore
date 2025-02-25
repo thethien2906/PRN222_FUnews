@@ -1,5 +1,4 @@
-FUNewsManagementSystemMVC/obj/Debug/net8.0/project.razor.vs.bin
-appsettings.json
+# Build artifacts
 bin/
 **/bin/
 [Bb]in/
@@ -16,11 +15,16 @@ FUNewsManagementSystemMVC/bin/Debug/net8.0/BusinessObjects.dll
 FUNewsManagementSystemMVC/bin/Debug/net8.0/BusinessObjects.pdb
 FUNewsManagementSystemMVC/bin/Debug/net8.0/DataAccessObjects.dll
 FUNewsManagementSystemMVC/bin/Debug/net8.0/DataAccessObjects.pdb
-**/bin/
-**/obj/
+
+# User-specific files
 *.user
 *.suo
+
+# Specific Debug/Release artifacts
 */**/bin/Debug
 */**/bin/Release
 */**/obj/Debug
 */**/obj/Release
+
+# Visual Studio files
+.vs/
