@@ -4,56 +4,124 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="news-details-heading">Details</h1>
 
-<div>
-    <h4>NewsArticle</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+<div class="news-details-container">
+    <h4 class="news-details-subheading">NewsArticle</h4>
+    <hr class="news-details-divider" />
+    <dl class="news-details-description row">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NewsTitle)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class=" col-sm-10">
             @Html.DisplayFor(model => model.NewsTitle)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class=" col-sm-2">
             @Html.DisplayNameFor(model => model.Headline)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class=" col-sm-10">
             @Html.DisplayFor(model => model.Headline)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class=" col-sm-2">
             @Html.DisplayNameFor(model => model.CreatedDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class=" col-sm-10">
             @Html.DisplayFor(model => model.CreatedDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class=" col-sm-2">
             @Html.DisplayNameFor(model => model.NewsContent)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class=" col-sm-10">
             @Html.DisplayFor(model => model.NewsContent)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class=" col-sm-2">
             @Html.DisplayNameFor(model => model.NewsSource)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class=" col-sm-10">
             @Html.DisplayFor(model => model.NewsSource)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class=" col-sm-2">
             @Html.DisplayNameFor(model => model.ModifiedDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class=" col-sm-10">
             @Html.DisplayFor(model => model.ModifiedDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class=" col-sm-2">
             @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class=" col-sm-10">
             @Html.DisplayFor(model => model.CategoryName)
         </dd>
     </dl>
 </div>
-<div>
+
+<div class="news-details-back-link">
     <a asp-action="Index">Back to News</a>
 </div>
+
+<style>
+    /* Phần tiêu đề chính */
+    .news-details-heading {
+        font-size: 2.5rem;
+        color: #343a40;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+
+    /* Tiêu đề phụ (h4) */
+    .news-details-subheading {
+        font-size: 1.75rem;
+        color: #007bff;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    /* Tạo một dòng ngăn cách đẹp (hr) */
+    .news-details-divider {
+        border: 0;
+        border-top: 2px solid #007bff;
+        margin-bottom: 30px;
+    }
+
+    /* Định dạng cho các mục thông tin */
+    .news-details-description {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+
+    /* Các định dạng cho <dt> */
+    .news-details-label {
+        font-weight: bold;
+        color: #6c757d;
+        min-width: 200px; /* Đặt độ rộng tối thiểu cho nhãn */
+        margin-bottom: 10px;
+    }
+
+    /* Các định dạng cho <dd> */
+    .news-details-value {
+        color: #495057;
+        flex: 1;
+        margin-bottom: 10px;
+    }
+
+    /* Dòng chữ "Back to News" */
+    .news-details-back-link a {
+        font-size: 1rem;
+        color: #007bff;
+        text-decoration: none;
+        padding: 8px 16px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        border: 1px solid #007bff;
+        transition: all 0.3s ease;
+    }
+
+        .news-details-back-link a:hover {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+</style>
