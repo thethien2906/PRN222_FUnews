@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Services.DTOs.NewsArticleDTO>
 
-@{
-    ViewData["Title"] = "News Articles";
-}
+@* @{ *@
+@*     ViewData["Title"] = "News Articles"; *@
+@* } *@
 
 <div class="container mt-4">
     <h2 class="mb-4">News Articles</h2>
@@ -72,9 +72,9 @@
                     </td>
 
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-warning">Edit</a>
-                        <a asp-action="Details" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-info">Details</a>
-                        <a asp-action="Delete" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-danger">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-warning" style="width: 100px; text-align: center; margin-bottom: 5px">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-info" style="width: 100px; text-align: center ; margin-bottom: 5px">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-danger" style="width: 100px; text-align: center">Delete</a>
                     </td>
                 </tr>
             }

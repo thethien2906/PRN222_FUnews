@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Services.IService;
 using Services.DTOs;
 using Services.Service;
+using BusinessObjects.Entities;
 
 namespace FUNewsManagementSystemMVC.Controllers
 {
@@ -222,7 +223,7 @@ namespace FUNewsManagementSystemMVC.Controllers
         // GET: NewsArticles/Report
         public IActionResult Report(DateTime? startDate, DateTime? endDate)
         {
-            if (startDate == null || endDate == null)
+            if (!startDate.HasValue || !endDate.HasValue)
             {
                 ViewData["Message"] = "Please select a valid date range.";
                 return View(new List<NewsArticleDTO>());
@@ -234,8 +235,10 @@ namespace FUNewsManagementSystemMVC.Controllers
                 return View(new List<NewsArticleDTO>());
             }
 
-            var articles = _newsArticleService.GetNewsArticlesByPeriod(startDate.Value, endDate.Value);
+            var articles = _newsArticleService.GetNewsArticlesByPeriod(startDate.Value, endDate.Value).ToList(); // Convert to List
             return View(articles);
         }
+
+
     }
 }

@@ -40,8 +40,121 @@
         </div>
     </div>
 </div>
+<style>
+    /* Modal Styling */
+    .modal-content {
+        border-radius: 10px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
 
+    /* Header Styling */
+    .modal-header {
+        background-color: #007bff;
+        color: #fff;
+        border-bottom: none;
+        padding: 20px;
+    }
 
+        .modal-header .close {
+            color: #fff;
+            opacity: 1;
+        }
+
+            .modal-header .close:hover {
+                opacity: 0.7;
+            }
+
+    /* Modal Body */
+    .modal-body {
+        padding: 20px;
+        max-height: 400px; /* Tăng chiều cao cho modal body */
+        overflow-y: auto; /* Cho phép cuộn khi nội dung quá dài */
+    }
+
+        .modal-body .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .modal-body label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .modal-body .form-control {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 5px;
+            transition: border 0.3s ease;
+        }
+
+            /* Input focus effect */
+            .modal-body .form-control:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                outline: none;
+            }
+
+        /* Textarea Styling for Description */
+        .modal-body textarea {
+            height: 120px; /* Hạn chế chiều cao của textarea */
+            resize: vertical; /* Cho phép người dùng thay đổi chiều cao */
+        }
+
+        /* Parent Category Dropdown */
+        .modal-body select.form-control {
+            max-width: 100%; /* Đảm bảo chiều rộng của dropdown luôn đầy */
+        }
+
+        /* Checkbox Styling */
+        .modal-body input[type="checkbox"] {
+            margin-top: 10px;
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+    /* Modal Footer */
+    .modal-footer {
+        padding: 15px;
+        text-align: right;
+        background-color: #f8f9fa;
+        border-top: none;
+    }
+
+        /* Adjust button width and alignment */
+        .modal-footer .btn {
+            border-radius: 5px;
+            font-size: 1rem;
+            padding: 8px 20px; /* Giảm độ dài của nút */
+            width: auto; /* Chiều rộng tự động để tránh nút quá dài */
+            margin-left: 10px; /* Khoảng cách giữa nút Close và Update */
+        }
+
+        .modal-footer .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .modal-footer .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+        .modal-footer .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .modal-footer .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+    }
+</style>
 <script>
     $(document).ready(function () {
     $('#updateCategory').click(function () {

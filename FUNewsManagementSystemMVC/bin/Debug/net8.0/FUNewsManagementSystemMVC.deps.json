@@ -2067,7 +2067,10 @@
           "Microsoft.Extensions.Configuration.Json": "9.0.2"
         },
         "runtime": {
-          "BusinessObjects.dll": {}
+          "BusinessObjects.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "DataAccessObjects/1.0.0": {
@@ -2078,7 +2081,10 @@
           "Microsoft.Extensions.Configuration.Json": "9.0.2"
         },
         "runtime": {
-          "DataAccessObjects.dll": {}
+          "DataAccessObjects.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Repositories/1.0.0": {
@@ -2089,7 +2095,10 @@
           "Microsoft.Extensions.Configuration.Json": "9.0.2"
         },
         "runtime": {
-          "Repositories.dll": {}
+          "Repositories.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Services/1.0.0": {
@@ -2100,7 +2109,10 @@
           "Repositories": "1.0.0"
         },
         "runtime": {
-          "Services.dll": {}
+          "Services.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
