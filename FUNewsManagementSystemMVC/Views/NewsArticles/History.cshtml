@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessObjects.Entities.NewsArticle>
+﻿@model IEnumerable<Services.DTOs.NewsArticleDTO>
 @{
     ViewData["Title"] = "My Articles";
 }
@@ -63,7 +63,7 @@
                             }
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Category.CategoryDesciption)
+                            @Html.DisplayFor(modelItem => item.CategoryName)
                         </td>
                         <td>
                             <div class="btn-group">

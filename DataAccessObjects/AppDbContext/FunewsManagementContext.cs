@@ -93,11 +93,11 @@ public partial class FunewsManagementContext : DbContext
                     "NewsTag",
                     r => r.HasOne<Tag>().WithMany()
                         .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_NewsTag_Tag"),
                     l => l.HasOne<NewsArticle>().WithMany()
                         .HasForeignKey("NewsArticleId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_NewsTag_NewsArticle"),
                     j =>
                     {

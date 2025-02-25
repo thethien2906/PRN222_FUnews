@@ -15,5 +15,7 @@ namespace Repositories.IRepository
         void Update(Tag tag);
         void Delete(Tag tag);
         IEnumerable<Tag> GetTagsByArticleId(string articleId);
+
+        IEnumerable<Tag> GetTagsByIds(IEnumerable<int> tagIds);
     }
 }

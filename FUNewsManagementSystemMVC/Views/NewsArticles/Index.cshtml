@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BusinessObjects.Entities.NewsArticle>
+﻿@model IEnumerable<Services.DTOs.NewsArticleDTO>
 
 @{
     ViewData["Title"] = "News Articles";
@@ -24,6 +24,7 @@
                 <th>Source</th>
                 <th>Status</th>
                 <th>Category</th>
+				<th>Tags</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -57,8 +58,19 @@
                         }
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                        @Html.DisplayFor(modelItem => item.CategoryName)
                     </td>
+                    <td>
+                        @if (item.Tags != null && item.Tags.Any())
+                        {
+                            @string.Join(", ", item.Tags.Select(tag => tag.TagName))
+                        }
+                        else
+                        {
+                            <em>No Tags</em>
+                        }
+                    </td>
+
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-warning">Edit</a>
                         <a asp-action="Details" asp-route-id="@item.NewsArticleId" class="btn btn-sm btn-info">Details</a>

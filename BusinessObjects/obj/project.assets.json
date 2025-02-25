@@ -5032,11 +5032,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
+      "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
       "projectName": "BusinessObjects",
-      "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
+      "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
       "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
-      "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\FUNewsManagement\\PRN222_FUnews\\BusinessObjects\\obj\\",
+      "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",

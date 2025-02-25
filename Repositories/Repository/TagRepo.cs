@@ -18,5 +18,9 @@ namespace Repositories.Repository
         public void Update(Tag tag) => TagManager.Instance.Update(tag);
         public void Delete(Tag tag) => TagManager.Instance.Delete(tag);
         public IEnumerable<Tag> GetTagsByArticleId(string id) => TagManager.Instance.GetTagsByNewsArticle(id);
+
+        //interface IEnumerable<Tag> GetTagsByIds(IEnumerable<int> tagIds);
+        public IEnumerable<Tag> GetTagsByIds(IEnumerable<int> tagIds) => TagManager.Instance.GetTagsByIds((List<int>)tagIds);
+
     }
 }
