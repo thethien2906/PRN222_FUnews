@@ -62,6 +62,7 @@ using Microsoft.EntityFrameworkCore;
                 try
                 {
                     using var _context = new FunewsManagementContext();
+
                     _context.Tags.Add(tag);
                     _context.SaveChanges();
                 }
@@ -137,6 +138,24 @@ using Microsoft.EntityFrameworkCore;
                 }
                 return tags;
             }
+        // get tags by ids
+            public IEnumerable<Tag> GetTagsByIds(List<int> tagIds)
+        {
+            List<Tag> tags = new List<Tag>();
+            try
+            {
+                using var _context = new FunewsManagementContext();
+                tags = _context.Tags
+                    .Include(t => t.NewsArticles)
+                    .Where(t => tagIds.Contains(t.TagId))
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return tags;
+        }
             public void Delete(Tag tag)
         {
             try

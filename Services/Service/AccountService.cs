@@ -23,6 +23,7 @@ namespace Services
                 AccountName = account.AccountName,
                 AccountEmail = account.AccountEmail,
                 AccountRole = account.AccountRole,
+                AccountPassword = account.AccountPassword
           
             });
 

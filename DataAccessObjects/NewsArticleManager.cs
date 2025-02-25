@@ -70,6 +70,10 @@ namespace DataAccessObjects
             try
             {
                 using var _context = new FunewsManagementContext();
+                foreach (var tag in article.Tags)
+                {
+                    _context.Tags.Attach(tag);  // Prevent duplicate insertion
+                }
                 _context.NewsArticles.Add(article);
                 _context.SaveChanges();
             }
@@ -80,33 +84,64 @@ namespace DataAccessObjects
         }
         public void Update(NewsArticle article)
         {
-            NewsArticle existingArticle = GetNewsArticleById(article.NewsArticleId);
+            var existingArticle = GetNewsArticleById(article.NewsArticleId);
+            if (existingArticle == null)
+            {
+                throw new Exception("The news article does not exist");
+            }
+
             try
             {
-                if (existingArticle != null)
+                using var _context = new FunewsManagementContext();
+
+                // Attach the article to track changes
+                _context.NewsArticles.Attach(existingArticle);
+
+                // Update scalar fields
+                existingArticle.NewsTitle = article.NewsTitle;
+                existingArticle.Headline = article.Headline;
+                existingArticle.NewsContent = article.NewsContent;
+                existingArticle.NewsSource = article.NewsSource;
+                existingArticle.CategoryId = article.CategoryId;
+                existingArticle.NewsStatus = article.NewsStatus;
+                existingArticle.ModifiedDate = article.ModifiedDate;
+                existingArticle.UpdatedById = article.UpdatedById;
+
+                // Clear existing tags
+                existingArticle.Tags.Clear();
+
+                // Reassign tags by fetching them from the context (tracked entities)
+                foreach (var tag in article.Tags)
                 {
-                    using var _context = new FunewsManagementContext();
-                    _context.Entry(article).State = EntityState.Modified;
-                    _context.SaveChanges();
+                    var trackedTag = _context.Tags.Find(tag.TagId);  // Safely retrieve the tracked tag
+                    if (trackedTag != null)
+                    {
+                        existingArticle.Tags.Add(trackedTag);  // Add the tracked tag to the article
+                    }
                 }
-                else
-                {
-                    throw new Exception("The news article does not exist");
-                }
+
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+
         public void Remove(NewsArticle article)
         {
             try
             {
                 using var _context = new FunewsManagementContext();
                 var existingArticle = _context.NewsArticles.SingleOrDefault(a => a.NewsArticleId == article.NewsArticleId);
+
                 if (existingArticle != null)
                 {
+                    // Remove related entries in NewsTag
+                    _context.Database.ExecuteSqlRaw(
+                        "DELETE FROM NewsTag WHERE NewsArticleId = {0}", existingArticle.NewsArticleId);
+
                     _context.NewsArticles.Remove(existingArticle);
                     _context.SaveChanges();
                 }
@@ -120,6 +155,7 @@ namespace DataAccessObjects
                 throw new Exception("Error while deleting news article. Check inner exception for details.", ex);
             }
         }
+
         public IEnumerable<NewsArticle> Search(string search)
         {
             List<NewsArticle> articles = new List<NewsArticle>();

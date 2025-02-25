@@ -1,6 +1,7 @@
 using FUNewsManagementSystemMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.IService;
+using Services.Service;
 using System.Diagnostics;
 
 namespace FUNewsManagementSystemMVC.Controllers
@@ -20,8 +21,8 @@ namespace FUNewsManagementSystemMVC.Controllers
         }
         public IActionResult Index()
         {
-            var activeNewsArticles = _contextNewsArticle.GetActiveNewsArticles();
-            return View(activeNewsArticles.ToList());
+            var articles = _contextNewsArticle.GetAllNewsArticles();
+            return View(articles.ToList());
         }
 
         public IActionResult Privacy()
@@ -37,9 +38,9 @@ namespace FUNewsManagementSystemMVC.Controllers
             }
 
             ViewBag.UserName = userName;
-            var activeNewsArticles = _contextNewsArticle.GetActiveNewsArticles();
+            var articles = _contextNewsArticle.GetAllNewsArticles();
 
-            return View(activeNewsArticles.ToList());
+            return View(articles.ToList());
         }
 
         public IActionResult Staff()

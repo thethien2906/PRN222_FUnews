@@ -4,20 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessObjects.Entities;
-
+using Services.DTOs;
 
 namespace Services.IService
 {
     public interface INewsArticleService
     {
-        IEnumerable<NewsArticle> GetAllNewsArticles();
-        NewsArticle GetNewsArticleById(string id);
-        void CreateNewsArticle(NewsArticle newsArticle);
-        void UpdateNewsArticle(NewsArticle newsArticle);
-        void DeleteNewsArticle(NewsArticle newsArticle);
-        IEnumerable <NewsArticle> SearchNewsArticle(string search);
-        IEnumerable<NewsArticle> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate);
-        IEnumerable<NewsArticle> GetNewsArticleByCreator(short creatorId);
-        IEnumerable<NewsArticle> GetActiveNewsArticles();
+        IEnumerable<NewsArticleDTO> GetAllNewsArticles();
+        NewsArticleDTO GetNewsArticleById(string id);
+        void CreateNewsArticle(NewsArticleDTO newsArticle);
+        void UpdateNewsArticle(NewsArticleDTO newsArticle);
+        void DeleteNewsArticle(string newsArticleId);
+        IEnumerable<NewsArticleDTO> SearchNewsArticle(string search);
+        IEnumerable<NewsArticleDTO> GetNewsArticlesByPeriod(DateTime startDate, DateTime endDate);
+        IEnumerable<NewsArticleDTO> GetNewsArticleByCreator(short creatorId);
+        IEnumerable<NewsArticleDTO> GetActiveNewsArticles();
     }
+
 }
