@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj": {}
+    "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {}
   },
   "projects": {
-    "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj": {
+    "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj",
+        "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
         "projectName": "BusinessObjects",
-        "projectPath": "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj",
-        "packagesPath": "C:\\Users\\MINH DAT\\.nuget\\packages\\",
-        "outputPath": "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\obj\\",
+        "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj",
+        "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
+        "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\MINH DAT\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,8 +39,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -87,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

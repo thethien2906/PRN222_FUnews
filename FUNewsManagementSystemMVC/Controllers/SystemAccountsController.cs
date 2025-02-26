@@ -97,7 +97,7 @@ namespace FUNewsManagementSystemMVC.Controllers
                 HttpContext.Session.SetString("Role", account.AccountRole.ToString());
                 return account.AccountRole switch
                 {
-                    3 => RedirectToAction("Staff", "Home"),
+                    1 => RedirectToAction("Staff", "Home"),
                     2 => RedirectToAction("Lecturer", "Home"),
                     _ => RedirectToAction("Index", "Home"),
                 };
