@@ -5115,24 +5115,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MINH DAT\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\IdeaPad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WorkSpacae .Net\\assignment1\\DataAccessObjects\\DataAccessObjects.csproj",
+      "projectUniqueName": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj",
       "projectName": "DataAccessObjects",
-      "projectPath": "D:\\WorkSpacae .Net\\assignment1\\DataAccessObjects\\DataAccessObjects.csproj",
-      "packagesPath": "C:\\Users\\MINH DAT\\.nuget\\packages\\",
-      "outputPath": "D:\\WorkSpacae .Net\\assignment1\\DataAccessObjects\\obj\\",
+      "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\DataAccessObjects\\DataAccessObjects.csproj",
+      "packagesPath": "C:\\Users\\IdeaPad\\.nuget\\packages\\",
+      "outputPath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\DataAccessObjects\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\MINH DAT\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\IdeaPad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5146,8 +5141,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj": {
-              "projectPath": "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj"
+            "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj": {
+              "projectPath": "C:\\FPT\\PRN222\\New folder\\New folder\\PRN222_FUnews\\BusinessObjects\\BusinessObjects.csproj"
             }
           }
         }
@@ -5161,8 +5156,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -5209,7 +5203,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
