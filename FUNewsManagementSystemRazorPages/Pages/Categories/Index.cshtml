@@ -1,0 +1,398 @@
+﻿@page
+@model FUNewsManagementSystemRazorPages.Pages.Categories.IndexModel
+@using Services.DTOs
+@{
+    ViewData["Title"] = "Category Management";
+}
+
+<h2>Category Management</h2>
+
+<!-- Display Success Message -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<!-- Display Error Message -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<!-- Search Bar -->
+<form method="get" class="search-bar">
+    <input type="text" name="search" placeholder="Search Categories..." value="@Model.SearchTerm" />
+    <button type="submit" class="search-button">Search</button>
+</form>
+
+<!-- Create Button -->
+<button class="create-button" onclick="openModal('createCategoryModal')">Create Category</button>
+
+<!-- Categories Table -->
+<table class="categories-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Parent Category</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model.Categories)
+        {
+            <tr>
+                <td>@category.CategoryName</td>
+                <td>@category.CategoryDesciption</td>
+                <td>@category.ParentCategoryName</td>
+                <td><span class="status @(category.IsActive ? "active" : "inactive")">@(category.IsActive ? "Active" : "Inactive")</span></td>
+                <td>
+                    <button class="edit-button" onclick="openEditModal(@category.CategoryId)">Edit</button>
+                    <button class="delete-button" onclick="confirmDelete(@category.CategoryId)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/js/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/site.js"></script>
+
+
+<!-- Create Category Modal -->
+<div id="createCategoryModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('createCategoryModal')">&times;</span>
+        <h3>Create Category</h3>
+        <form method="post" asp-page="Create">
+            <label>Name:</label>
+            <input type="text" name="Category.CategoryName" required />
+            <label>Description:</label>
+            <input type="text" name="Category.CategoryDesciption" />
+            <label>Parent Category:</label>
+            <select name="Category.ParentCategoryId">
+                <option value="">-- Select Parent Category --</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.CategoryId">@category.CategoryName</option>
+                }
+            </select>
+            <button type="submit" class="save-button">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Edit Category Modal (Dynamic) -->
+<div id="editCategoryModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('editCategoryModal')">&times;</span>
+        <h3>Edit Category</h3>
+        <form id="editCategoryForm" method="post" asp-page="Edit">
+            <input type="hidden" name="Category.CategoryId" id="editCategoryId" />
+            <label>Name:</label>
+            <input type="text" name="Category.CategoryName" id="editCategoryName" required />
+            <label>Description:</label>
+            <input type="text" name="Category.CategoryDesciption" id="editCategoryDescription" />
+            <label>Parent Category:</label>
+            <select name="Category.ParentCategoryId" id="editParentCategoryId">
+                <option value="">-- Select Parent Category --</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.CategoryId">@category.CategoryName</option>
+                }
+            </select>
+            <button type="submit" class="save-button">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteConfirmModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('deleteConfirmModal')">&times;</span>
+        <h3>Delete Category</h3>
+        <p id="deleteWarning"></p>
+        <form id="deleteCategoryForm" method="post" asp-page="Delete">
+            <input type="hidden" name="id" id="deleteCategoryId" />
+            <button type="submit" id="confirmDeleteBtn" class="delete-confirm-button">Yes, Delete</button>
+            <button type="button" onclick="closeModal('deleteConfirmModal')" class="cancel-button">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openModal(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function openEditModal(id) {
+        fetch(`/Categories/Index?handler=Edit&id=${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("editCategoryId").value = data.categoryId;
+                    document.getElementById("editCategoryName").value = data.categoryName;
+                    document.getElementById("editCategoryDescription").value = data.categoryDescription;
+                    document.getElementById("editParentCategoryId").value = data.parentCategoryId;
+                    openModal('editCategoryModal');
+                } else {
+                    alert(data.message || "Failed to load category data.");
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching category data:', error);
+                alert("An error occurred while fetching category data.");
+            });
+    }
+
+    function confirmDelete(id) {
+        document.getElementById("deleteCategoryId").value = id;
+        openModal('deleteConfirmModal');
+    }
+</script>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    /* Search Bar */
+    .search-bar {
+        margin-bottom: 20px;
+    }
+
+        .search-bar input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+    .search-button {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+    /* Create Button */
+    .create-button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+        .create-button:hover {
+            background-color: #218838;
+        }
+
+    /* Categories Table */
+    .categories-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        .categories-table th,
+        .categories-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .categories-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .categories-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .categories-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    /* Status Badges */
+    .status {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+        .status.active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status.inactive {
+            background-color: #dc3545;
+            color: white;
+        }
+
+    /* Action Buttons */
+    .edit-button,
+    .delete-button {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .edit-button {
+        background-color: #ffc107;
+        color: black;
+    }
+
+        .edit-button:hover {
+            background-color: #e0a800;
+        }
+
+    .delete-button {
+        background-color: #dc3545;
+        color: white;
+    }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+    /* Modals */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal h3 {
+        margin-top: 0;
+    }
+
+    .close {
+        float: right;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+        .close:hover {
+            color: #333;
+        }
+
+    /* Form Styles */
+    .modal-content label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .save-button,
+    .delete-confirm-button,
+    .cancel-button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .save-button {
+        background-color: #28a745;
+        color: white;
+    }
+
+        .save-button:hover {
+            background-color: #218838;
+        }
+
+    .delete-confirm-button {
+        background-color: #dc3545;
+        color: white;
+    }
+
+        .delete-confirm-button:hover {
+            background-color: #c82333;
+        }
+
+    .cancel-button {
+        background-color: #6c757d;
+        color: white;
+    }
+
+        .cancel-button:hover {
+            background-color: #5a6268;
+        }
+
+    /* Alerts */
+    .alert {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>

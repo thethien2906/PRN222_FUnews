@@ -89,7 +89,14 @@ namespace Services.Service
             var category = _categoryRepo.GetCategoryByID(id);
             if (category != null)
             {
-                _categoryRepo.DeleteCategory(category);
+                try
+                {
+                    _categoryRepo.DeleteCategory(category);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error deleting category. Check related entities.", ex);
+                }
             }
         }
 
