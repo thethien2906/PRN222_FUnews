@@ -1,0 +1,17 @@
+﻿@page
+@model FUNewsManagementSystemRazorPages.Pages.Categories.DeleteModel
+
+<h3>Are you sure you want to delete this category?</h3>
+
+@if (Model.Category != null)
+{
+    <p>@Model.Category.CategoryName</p>
+    <form method="post">
+        <button type="submit">Delete</button>
+        <a href="Index">Cancel</a>
+    </form>
+}
+else
+{
+    <p>This category is linked to news articles and cannot be deleted.</p>
+}

@@ -1,0 +1,35 @@
+﻿@page
+@model FUNewsManagementSystemRazorPages.Pages.Categories.CreateModel
+
+<div id="createCategoryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Category</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createCategoryForm" method="post">
+                    <div class="form-group">
+                        <label for="CategoryName">Name:</label>
+                        <input type="text" class="form-control" asp-for="Category.CategoryName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="CategoryDesciption">Description:</label>
+                        <input type="text" class="form-control" asp-for="Category.CategoryDesciption" />
+                    </div>
+                    <div class="form-group">
+                        <label for="ParentCategoryId">Parent Category:</label>
+                        <select class="form-control" asp-for="Category.ParentCategoryId" asp-items="ViewBag.ParentCategoryId">
+                            <option value="">-- Select Parent Category --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
