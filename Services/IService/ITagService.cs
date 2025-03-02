@@ -7,7 +7,6 @@ using BusinessObjects.Entities;
 using DataAccessObjects.Helper;
 using Services.DTOs;
 
-
 namespace Services.IService
 {
     public interface ITagService
@@ -19,5 +18,4 @@ namespace Services.IService
         void DeleteTag(TagDTO tag);
         IEnumerable<TagDTO> GetTagsByArticleId(string articleId);
     }
-
 }
