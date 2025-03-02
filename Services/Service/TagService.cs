@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessObjects.Entities;
+﻿using BusinessObjects.Entities;
 using Repositories.IRepository;
-using Repositories.Repository;
 using Services.IService;
-using DataAccessObjects.Helper;
 using Services.DTOs;
 
 namespace Services.Service
@@ -15,6 +8,7 @@ namespace Services.Service
     public class TagService : ITagService
     {
         private readonly ITagRepo _tagRepo;
+
         public TagService(ITagRepo tagRepo)
         {
             _tagRepo = tagRepo;
@@ -43,7 +37,7 @@ namespace Services.Service
         {
             var tag = new Tag
             {
-                TagId = tagDTO.TagId,
+                // Không gán TagId vì nó thường do DB tự sinh
                 TagName = tagDTO.TagName,
                 Note = tagDTO.Note
             };
@@ -52,24 +46,22 @@ namespace Services.Service
 
         public void UpdateTag(TagDTO tagDTO)
         {
-            var tag = new Tag
+            var tag = _tagRepo.Get(tagDTO.TagId); // Lấy đối tượng hiện có
+            if (tag != null)
             {
-                TagId = tagDTO.TagId,
-                TagName = tagDTO.TagName,
-                Note = tagDTO.Note
-            };
-            _tagRepo.Update(tag);
+                tag.TagName = tagDTO.TagName;
+                tag.Note = tagDTO.Note;
+                _tagRepo.Update(tag);
+            }
         }
 
         public void DeleteTag(TagDTO tagDTO)
         {
-            var tag = new Tag
+            var tag = _tagRepo.Get(tagDTO.TagId); // Lấy đối tượng hiện có
+            if (tag != null)
             {
-                TagId = tagDTO.TagId,
-                TagName = tagDTO.TagName,
-                Note = tagDTO.Note
-            };
-            _tagRepo.Delete(tag);
+                _tagRepo.Delete(tag);
+            }
         }
 
         public IEnumerable<TagDTO> GetTagsByArticleId(string articleId) =>
@@ -77,8 +69,7 @@ namespace Services.Service
             {
                 TagId = tag.TagId,
                 TagName = tag.TagName,
-                Note = tag.Note
+                Note = tag.Note // Sửa lỗi từ tagDTO.Note thành tag.Note
             });
     }
-
 }

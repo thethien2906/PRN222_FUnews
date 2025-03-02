@@ -1,0 +1,124 @@
+﻿@page "{id:int}"
+@model FUNewsManagementSystemRazorPages.Pages.Tags.DetailsModel
+
+@{
+    ViewData["Title"] = "Tag Details";
+}
+
+<div class="details-tag-container">
+    <h1 class="details-tag-title">Tag Details</h1>
+    <hr class="details-tag-divider" />
+
+    <div class="tag-details">
+        <h4 class="tag-details-title">Tag Information</h4>
+        <dl class="tag-details-list">
+            <dt>Tag Name</dt>
+            <dd>@Html.DisplayFor(model => model.Tag.TagName)</dd>
+
+            <dt>Note</dt>
+            <dd>@Html.DisplayFor(model => model.Tag.Note)</dd>
+        </dl>
+    </div>
+
+    <div class="details-actions">
+        <a asp-page="Edit" asp-route-id="@Model?.Tag.TagId" class="edit-link">Edit</a>
+        <a asp-page="Index" class="back-link">Back to List</a>
+    </div>
+</div>
+
+<style>
+    /* Container */
+    .details-tag-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f9fafb;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    .details-tag-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Divider */
+    .details-tag-divider {
+        border: 0;
+        height: 1px;
+        background: #e0e0e0;
+        margin: 20px 0;
+    }
+
+    /* Tag Details */
+    .tag-details {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .tag-details-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .tag-details-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    dt {
+        font-weight: 600;
+        color: #555;
+    }
+
+    dd {
+        color: #777;
+        margin-left: 0;
+    }
+
+    /* Details Actions */
+    .details-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    .edit-link, .back-link {
+        padding: 12px 24px;
+        background: #6b46c1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .edit-link:hover, .back-link:hover {
+            background: #553c9a;
+            transform: translateY(-2px);
+        }
+
+    .back-link {
+        background: #fff;
+        color: #6b46c1;
+        border: 1px solid #6b46c1;
+    }
+
+        .back-link:hover {
+            background: #6b46c1;
+            color: #fff;
+        }
+</style>

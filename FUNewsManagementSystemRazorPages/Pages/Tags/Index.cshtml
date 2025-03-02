@@ -1,0 +1,178 @@
+﻿@page
+@model FUNewsManagementSystemRazorPages.Pages.Tags.IndexModel
+
+@{
+    ViewData["Title"] = "Tags";
+}
+
+<div class="tags-index-container">
+    <h1 class="tags-index-title">Tags</h1>
+    <hr class="tags-index-divider" />
+
+    <div class="tags-actions">
+        <a asp-page="Create" class="create-link">Create New Tag</a>
+    </div>
+
+    <table class="tags-table">
+        <thead>
+            <tr>
+                <th>Tag Name</th>
+                <th>Note</th>
+                <th class="actions-header">Actions</th> <!-- Thêm class cho cột Actions -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Tags)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.TagName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                    <td class="actions">
+                        <a asp-page="Edit" asp-route-id="@item.TagId" class="edit-link">Edit</a>
+                        <a asp-page="Details" asp-route-id="@item.TagId" class="details-link">Details</a>
+                        <a asp-page="Delete" asp-route-id="@item.TagId" class="delete-link">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Container */
+    .tags-index-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f9fafb;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    .tags-index-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Divider */
+    .tags-index-divider {
+        border: 0;
+        height: 1px;
+        background: #e0e0e0;
+        margin: 20px 0;
+    }
+
+    /* Create Link */
+    .tags-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    .create-link {
+        padding: 12px 24px;
+        background: #6b46c1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .create-link:hover {
+            background: #553c9a;
+            transform: translateY(-2px);
+        }
+
+    /* Table */
+    .tags-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .tags-table thead {
+            background: #6b46c1;
+            color: #fff;
+        }
+
+        .tags-table th {
+            padding: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .tags-table tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+            transition: background 0.3s ease;
+        }
+
+            .tags-table tbody tr:hover {
+                background: #f5f5f5;
+            }
+
+        .tags-table td {
+            padding: 16px;
+            font-size: 14px;
+            color: #555;
+        }
+
+    /* Actions Header */
+    .actions-header {
+        text-align: right; /* Căn phải tiêu đề cột Actions */
+    }
+
+    /* Actions */
+    .actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end; /* Căn phải nội dung cột Actions */
+    }
+
+    .edit-link, .details-link, .delete-link {
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .edit-link {
+        background: #6b46c1;
+        color: #fff;
+    }
+
+        .edit-link:hover {
+            background: #553c9a;
+        }
+
+    .details-link {
+        background: #10b981;
+        color: #fff;
+    }
+
+        .details-link:hover {
+            background: #0d9f6e;
+        }
+
+    .delete-link {
+        background: #dc2626;
+        color: #fff;
+    }
+
+        .delete-link:hover {
+            background: #b91c1c;
+        }
+</style>

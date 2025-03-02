@@ -1,0 +1,153 @@
+﻿@page
+@model FUNewsManagementSystemRazorPages.Pages.Tags.CreateModel
+
+@{
+    ViewData["Title"] = "Create Tag";
+}
+
+<div class="create-tag-container">
+    <h1 class="create-tag-title">Create New Tag</h1>
+    <hr class="create-tag-divider" />
+
+    <div class="create-tag-form">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+            <input type="hidden" asp-for="Tag.TagId" />
+
+            <div class="form-field">
+                <label asp-for="Tag.TagName" class="form-label">Tag Name</label>
+                <input asp-for="Tag.TagName" class="form-input" placeholder="Enter tag name" />
+                <span asp-validation-for="Tag.TagName" class="validation-message"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Tag.Note" class="form-label">Note</label>
+                <input asp-for="Tag.Note" class="form-input" placeholder="Enter a note (optional)" />
+                <span asp-validation-for="Tag.Note" class="validation-message"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-button">Create Tag</button>
+                <a asp-page="Index" class="back-link">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Container */
+    .create-tag-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f9fafb;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    .create-tag-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Divider */
+    .create-tag-divider {
+        border: 0;
+        height: 1px;
+        background: #e0e0e0;
+        margin: 20px 0;
+    }
+
+    /* Form */
+    .create-tag-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* Form Fields */
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-input {
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .form-input:focus {
+            border-color: #6b46c1;
+            box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+            outline: none;
+        }
+
+    /* Validation Messages */
+    .validation-summary {
+        color: #dc2626;
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .validation-message {
+        color: #dc2626;
+        font-size: 12px;
+    }
+
+    /* Form Actions */
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .submit-button {
+        padding: 12px 24px;
+        background: #6b46c1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .submit-button:hover {
+            background: #553c9a;
+            transform: translateY(-2px);
+        }
+
+    .back-link {
+        padding: 12px 24px;
+        background: #fff;
+        color: #6b46c1;
+        border: 1px solid #6b46c1;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+        .back-link:hover {
+            background: #6b46c1;
+            color: #fff;
+        }
+</style>
