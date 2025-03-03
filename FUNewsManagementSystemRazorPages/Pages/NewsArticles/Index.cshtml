@@ -1,0 +1,313 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "News Articles";
+}
+
+<h2>News Articles</h2>
+
+<!-- Search Bar -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search articles...">
+            <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </div>
+    </div>
+    <div class="col-md-6 text-end">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Create New Article</button>
+    </div>
+</div>
+
+<!-- Articles Table -->
+<div class="table-responsive">
+    <table class="table table-bordered" id="articlesTable">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Headline</th>
+                <th>Created Date <i class="bi bi-arrow-down-up sort-icon" data-sort="date"></i></th>
+                <th>Category</th>
+                <th>Tags</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var article in Model.NewsArticles)
+            {
+                <tr class="article-row" data-created-date="@(article.CreatedDate?.ToString("yyyy-MM-dd"))">
+                    <td>@article.NewsTitle</td>
+                    <td>@article.Headline</td>
+                    <td>@article.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                    <td>@article.CategoryName</td>
+                    <td>
+                        @if (article.Tags != null && article.Tags.Any())
+                        {
+                            @string.Join(", ", article.Tags.Select(tag => tag.TagName))
+                        }
+                        else
+                        {
+                            <em>No Tags</em>
+                        }
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editModal" 
+                                data-article-id="@article.NewsArticleId">Edit</button>
+                        <a asp-page="Details" asp-route-id="@article.NewsArticleId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-page="Delete" asp-route-id="@article.NewsArticleId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Create News Article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Create">
+                    <div class="mb-3">
+                        <label for="newsTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="newsTitle" asp-for="NewArticle.NewsTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="headline" class="form-label">Headline</label>
+                        <input type="text" class="form-control" id="headline" asp-for="NewArticle.Headline" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newsContent" class="form-label">Content</label>
+                        <input type="text" class="form-control" id="newsContent" asp-for="NewArticle.NewsContent" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newsSource" class="form-label">Source</label>
+                        <input type="text" class="form-control" id="newsSource" asp-for="NewArticle.NewsSource" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryId" class="form-label">Category</label>
+                        <select class="form-control" id="categoryId" asp-for="NewArticle.CategoryId" asp-items="Model.Categories"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags</label>
+                        <select class="form-control" id="tags" asp-for="NewArticle.TagIds" asp-items="Model.Tags" multiple></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewArticle.NewsStatus" class="control-label"></label>
+                        <select asp-for="NewArticle.NewsStatus" class="form-control">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                        <span asp-validation-for="NewArticle.NewsStatus" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit News Article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Edit">
+                    <input type="hidden" asp-for="EditArticle.NewsArticleId" id="edit-id">
+                    <div class="mb-3">
+                        <label for="edit-title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="edit-title" asp-for="EditArticle.NewsTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-headline" class="form-label">Headline</label>
+                        <input type="text" class="form-control" id="edit-headline" asp-for="EditArticle.Headline" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-content" class="form-label">Content</label>
+                        <input type="text" class="form-control" id="edit-content" asp-for="EditArticle.NewsContent" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-source" class="form-label">Source</label>
+                        <input type="text" class="form-control" id="edit-source" asp-for="EditArticle.NewsSource" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-category" class="form-label">Category</label>
+                        <select class="form-control" id="edit-category" asp-for="EditArticle.CategoryId" asp-items="Model.Categories"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-tags" class="form-label">Tags</label>
+                        <select class="form-control" id="edit-tags" asp-for="EditArticle.TagIds" asp-items="Model.Tags" multiple></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-status" class="control-label">Status</label>
+                        <select id="edit-status" asp-for="EditArticle.NewsStatus" class="form-control">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                        <span asp-validation-for="EditArticle.NewsStatus" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sort articles by date (newest first) on page load
+            sortArticlesByDate(true);
+            
+            // Setup search functionality
+            setupSearch();
+            
+            // Setup sorting
+            setupSorting();
+        });
+
+        // Variables for display
+        let sortNewestFirst = true;
+        
+        // Function to sort articles by date
+        function sortArticlesByDate(newestFirst) {
+            const tbody = document.querySelector('#articlesTable tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr.article-row'));
+            
+            rows.sort((a, b) => {
+                const dateA = new Date(a.dataset.createdDate || '1900-01-01');
+                const dateB = new Date(b.dataset.createdDate || '1900-01-01');
+                
+                return newestFirst ? dateB - dateA : dateA - dateB;
+            });
+            
+            // Clear and re-append rows in sorted order
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        
+        // Function to set up search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            
+            // Search on button click
+            searchButton.addEventListener('click', performSearch);
+            
+            // Search on Enter key
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        }
+        
+        // Function to perform search
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#articlesTable tbody tr.article-row');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (searchTerm === '' || text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        // Function to set up sorting
+        function setupSorting() {
+            const sortIcon = document.querySelector('.sort-icon[data-sort="date"]');
+            
+            sortIcon.addEventListener('click', () => {
+                sortNewestFirst = !sortNewestFirst;
+                sortArticlesByDate(sortNewestFirst);
+                
+                // Update sort icon
+                if (sortNewestFirst) {
+                    sortIcon.classList.remove('bi-arrow-down');
+                    sortIcon.classList.add('bi-arrow-up');
+                } else {
+                    sortIcon.classList.remove('bi-arrow-up');
+                    sortIcon.classList.add('bi-arrow-down');
+                }
+            });
+            
+            // Set initial sort icon
+            sortIcon.classList.remove('bi-arrow-down-up');
+            sortIcon.classList.add('bi-arrow-up');
+        }
+        
+        // Function to populate edit modal
+        document.querySelectorAll('button[data-bs-target="#editModal"]').forEach(button => {
+            button.addEventListener('click', function() {
+                const articleId = this.getAttribute('data-article-id');
+                
+                // Fetch article data
+                fetch(`?handler=ArticleData&id=${articleId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the edit form
+                        document.getElementById('edit-id').value = data.newsArticleId;
+                        document.getElementById('edit-title').value = data.newsTitle;
+                        document.getElementById('edit-headline').value = data.headline;
+                        document.getElementById('edit-content').value = data.newsContent;
+                        document.getElementById('edit-source').value = data.newsSource;
+                        document.getElementById('edit-category').value = data.categoryId;
+                        document.getElementById('edit-status').value = data.newsStatus.toString();
+                        
+                        // Handle tags (may require additional logic depending on your multiselect component)
+                        const tagSelect = document.getElementById('edit-tags');
+                        if (data.tagIds && tagSelect.options) {
+                            for (let i = 0; i < tagSelect.options.length; i++) {
+                                tagSelect.options[i].selected = data.tagIds.includes(parseInt(tagSelect.options[i].value));
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error fetching article data:', error));
+            });
+        });
+    </script>
+}
+
+<style>
+    
+    /* Cursor for sortable columns */
+    .sort-icon {
+        cursor: pointer;
+    }
+    
+    /* Make sure table header is sticky if needed */
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 1;
+    }
+</style>

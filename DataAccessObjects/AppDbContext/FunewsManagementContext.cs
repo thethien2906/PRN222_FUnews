@@ -35,6 +35,10 @@ public partial class FunewsManagementContext : DbContext
 
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("FUNewsManagement"));
         }
+        optionsBuilder.EnableSensitiveDataLogging();
+
+
+
     }
     private string GetConnectionString()
     {

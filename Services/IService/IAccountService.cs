@@ -34,5 +34,7 @@ namespace Services.IService
 
         // Tìm kiếm tài khoản
         IEnumerable<SystemAccountDTO> Search(string search);
+
+        string GetAccountNameById(int id);
     }
 }

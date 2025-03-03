@@ -114,7 +114,13 @@ namespace Services
             if (account == null) throw new KeyNotFoundException($"Account with ID {id} not found.");
             _accountRepo.ChangeStatus(account);
         }
-
+        public string GetAccountNameById(int id)
+        {
+            if (id <= 0) throw new ArgumentException("ID must be greater than zero.", nameof(id));
+            var account = _accountRepo.GetAccountById(id);
+            if (account == null) throw new KeyNotFoundException($"Account with ID {id} not found.");
+            return account.AccountName;
+        }
         public IEnumerable<SystemAccountDTO> Search(string search) =>
             _accountRepo.Search(search).Select(account => new SystemAccountDTO
             {
