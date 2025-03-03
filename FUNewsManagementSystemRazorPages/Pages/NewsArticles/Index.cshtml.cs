@@ -31,16 +31,42 @@ public class IndexModel : PageModel
     public NewsArticleDTO NewArticle { get; set; }
     [BindProperty]
     public NewsArticleDTO EditArticle { get; set; }
-    public void OnGet()
+
+    // Pagination properties
+    public int PageSize { get; set; } = 5; // Number of items per page
+    public int CurrentPage { get; set; } = 1;
+    public int TotalItems { get; set; }
+    public int TotalPages { get; set; }
+
+    public void OnGet(int pageNumber = 1)
     {
-        NewsArticles = _newsArticleService.GetAllNewsArticles();
+        // Ensure page number is valid
+        CurrentPage = pageNumber > 0 ? pageNumber : 1;
+
+        // Get all articles for counting
+        var allArticles = _newsArticleService.GetAllNewsArticles().ToList();
+        TotalItems = allArticles.Count;
+        TotalPages = (int)Math.Ceiling(TotalItems / (double)PageSize);
+
+        // Sort by newest date first
+        allArticles = allArticles
+            .OrderByDescending(a => a.CreatedDate)
+            .ToList();
+
+        // Apply pagination
+        NewsArticles = allArticles
+            .Skip((CurrentPage - 1) * PageSize)
+            .Take(PageSize)
+            .ToList();
+
         Categories = new SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName");
         Tags = new MultiSelectList(_tagService.GetAllTags(), "TagId", "TagName");
-
     }
 
     public IActionResult OnPost()
     {
+        ModelState.Remove("NewsArticleId");
+        ModelState.Remove("Headline");
         ModelState.Remove("NewArticle.NewsArticleId");
         if (!ModelState.IsValid)
         {
@@ -63,7 +89,9 @@ public class IndexModel : PageModel
         var lastArticle = _newsArticleService.GetAllNewsArticles()
             .AsEnumerable() // Switch to client-side evaluation
             .OrderByDescending(n => int.Parse(n.NewsArticleId))
-            .FirstOrDefault(); int newId = lastArticle != null ? int.Parse(lastArticle.NewsArticleId) + 1 : 1;
+            .FirstOrDefault();
+
+        int newId = lastArticle != null ? int.Parse(lastArticle.NewsArticleId) + 1 : 1;
         NewArticle.NewsArticleId = newId.ToString();
         NewArticle.CreatedDate = DateTime.Now;
         NewArticle.ModifiedDate = DateTime.Now;
@@ -80,6 +108,7 @@ public class IndexModel : PageModel
 
         return RedirectToPage();
     }
+
     public IActionResult OnGetArticleData(string id)
     {
         var article = _newsArticleService.GetNewsArticleById(id);

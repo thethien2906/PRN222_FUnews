@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{7C78B227-094C-4473-876F-49D6CB998D49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FUNewsManagementSystemRazorPages", "FUNewsManagementSystemRazorPages\FUNewsManagementSystemRazorPages.csproj", "{DBA370EF-6A7D-4E6E-B24C-F53C1BF002EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FUNewsManagementSystemRazorPages", "FUNewsManagementSystemRazorPages\FUNewsManagementSystemRazorPages.csproj", "{DBA370EF-6A7D-4E6E-B24C-F53C1BF002EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

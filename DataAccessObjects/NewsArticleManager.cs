@@ -207,6 +207,7 @@ namespace DataAccessObjects
                 articles = _context.NewsArticles
                     .Where(a => a.NewsStatus == true)
                     .Include(a => a.Category)
+                    .Include(a => a.Tags)
                     .OrderByDescending(a => a.CreatedDate)
                     .ToList();
             }
