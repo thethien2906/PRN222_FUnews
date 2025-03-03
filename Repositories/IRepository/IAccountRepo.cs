@@ -12,5 +12,6 @@ namespace Repositories.IRepository
         void InsertAccount(SystemAccount account);
         IEnumerable<SystemAccount> Search(string search);
         void UpdateAccount(SystemAccount account);
+        string GetNameById(int id);
     }
 }

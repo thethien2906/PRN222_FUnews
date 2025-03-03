@@ -1,0 +1,68 @@
+﻿@page
+@model DetailsModel
+@{
+    ViewData["Title"] = "Article Details";
+}
+
+<div class="container">
+    <h2>Article Details</h2>
+
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">@Model.NewsArticle.NewsTitle</h3>
+            <span class="badge @(Model.NewsArticle.NewsStatus == true ? "bg-success" : "bg-danger")">
+                @(Model.NewsArticle.NewsStatus == true ? "Active" : "Inactive")
+            </span>
+        </div>
+        <div class="card-body">
+            <h4 class="card-subtitle mb-3 text-muted">@Model.NewsArticle.Headline</h4>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Category:</strong> @Model.NewsArticle.CategoryName</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Source:</strong> @Model.NewsArticle.NewsSource</p>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h5>Content</h5>
+                <div class="p-3 bg-light rounded">
+                    @Model.NewsArticle.NewsContent
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h5>Tags</h5>
+                <div>
+                    @if (Model.NewsArticle.Tags != null && Model.NewsArticle.Tags.Any())
+                    {
+                        @foreach (var tag in Model.NewsArticle.Tags)
+                        {
+                            <span class="badge bg-info me-2">@tag.TagName</span>
+                        }
+                    }
+                    else
+                    {
+                        <em>No Tags</em>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Created Date:</strong> @Model.NewsArticle.CreatedDate?.ToString("yyyy-MM-dd HH:mm")</p>
+                    <p><strong>Created By:</strong> @Model.NewsArticle.CreatedByName</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Modified Date:</strong> @Model.NewsArticle.ModifiedDate?.ToString("yyyy-MM-dd HH:mm")</p>
+                    <p><strong>Updated By:</strong> @Model.NewsArticle.CreatedByName</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a asp-page="Index" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+</div>

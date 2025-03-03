@@ -144,5 +144,21 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+        //get account name by accountId
+        public string GetAccountNameById(int id)
+        {
+            try
+            {
+                using var _context = new FunewsManagementContext();
+                return _context.SystemAccounts
+                    .Where(a => a.AccountId == id)
+                    .Select(a => a.AccountName)
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
