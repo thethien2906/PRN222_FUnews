@@ -9,7 +9,7 @@ using Services.DTOs;
 using Services.IService;
 using BusinessObjects.Entities;
 
-namespace FUNewsManagementSystemRazorPages.Pages
+namespace FUNewsManagementSystemRazorPages.Pages.Lecturer
 {
     public class IndexModel : PageModel
     {

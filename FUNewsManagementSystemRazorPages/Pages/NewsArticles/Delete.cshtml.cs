@@ -1,63 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using BusinessObjects.Entities;
-using DataAccessObjects.AppDbContext;
+using Services.DTOs;
+using Services.IService;
 
 namespace FUNewsManagementSystemRazorPages.Pages.NewsArticles
 {
     public class DeleteModel : PageModel
     {
-        private readonly DataAccessObjects.AppDbContext.FunewsManagementContext _context;
+        private readonly INewsArticleService _newsArticleService;
 
-        public DeleteModel(DataAccessObjects.AppDbContext.FunewsManagementContext context)
+        public DeleteModel(INewsArticleService newsArticleService)
         {
-            _context = context;
+            _newsArticleService = newsArticleService;
         }
 
         [BindProperty]
-        public NewsArticle NewsArticle { get; set; } = default!;
+        public NewsArticleDTO NewsArticle { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public IActionResult OnGet(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return NotFound();
             }
 
-            var newsarticle = await _context.NewsArticles.FirstOrDefaultAsync(m => m.NewsArticleId == id);
-
-            if (newsarticle == null)
+            NewsArticle = _newsArticleService.GetNewsArticleById(id);
+            if (NewsArticle == null)
             {
                 return NotFound();
             }
-            else
-            {
-                NewsArticle = newsarticle;
-            }
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public IActionResult OnPost()
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(NewsArticle.NewsArticleId))
+            {
+                return BadRequest();
+            }
+
+            var existingArticle = _newsArticleService.GetNewsArticleById(NewsArticle.NewsArticleId);
+            if (existingArticle == null)
             {
                 return NotFound();
             }
 
-            var newsarticle = await _context.NewsArticles.FindAsync(id);
-            if (newsarticle != null)
-            {
-                NewsArticle = newsarticle;
-                _context.NewsArticles.Remove(NewsArticle);
-                await _context.SaveChangesAsync();
-            }
+            _newsArticleService.DeleteNewsArticle(NewsArticle.NewsArticleId);
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
         }
     }
 }
