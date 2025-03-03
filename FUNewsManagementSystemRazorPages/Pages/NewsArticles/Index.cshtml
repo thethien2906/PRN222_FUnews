@@ -1,0 +1,205 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "News Articles";
+}
+
+<h2>News Articles</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Headline</th>
+            <th>Created Date</th>
+            <th>Category</th>
+            <th>Tags</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model.NewsArticles)
+        {
+            <tr>
+                <td>@article.NewsTitle</td>
+                <td>@article.Headline</td>
+                <td>@article.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                <td>@article.CategoryName</td>
+                <td>
+                    @if (article.Tags != null && article.Tags.Any())
+                    {
+                        @string.Join(", ", article.Tags.Select(tag => tag.TagName))
+                    }
+                    else
+                    {
+                        <em>No Tags</em>
+                    }
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#editModal" 
+                            data-article-id="@article.NewsArticleId">Edit</button>
+                    <a asp-page="Details" asp-route-id="@article.NewsArticleId" class="btn btn-info">Details</a>
+                    <a asp-page="Delete" asp-route-id="@article.NewsArticleId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Create New Article</button>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Create News Article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-page-handler="Create">
+                    <div class="mb-3">
+                        <label for="newsTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="newsTitle" asp-for="NewArticle.NewsTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="headline" class="form-label">Headline</label>
+                        <input type="text" class="form-control" id="headline" asp-for="NewArticle.Headline" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newsContent" class="form-label">Content</label>
+                        <input type="text" class="form-control" id="newsContent" asp-for="NewArticle.NewsContent" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newsSource" class="form-label">Source</label>
+                        <input type="text" class="form-control" id="newsSource" asp-for="NewArticle.NewsSource" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryId" class="form-label">Category</label>
+                        <select class="form-control" id="categoryId" asp-for="NewArticle.CategoryId" asp-items="Model.Categories"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label">Tags</label>
+                        <select class="form-control" id="tags" asp-for="NewArticle.TagIds" asp-items="Model.Tags" multiple></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewArticle.NewsStatus" class="control-label"></label>
+                        <select asp-for="NewArticle.NewsStatus" class="form-control">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                        <span asp-validation-for="NewArticle.NewsStatus" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit News Article</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Display validation summary -->
+                <div asp-validation-summary="All" class="text-danger"></div>
+                
+                <form method="post" asp-page-handler="Edit">
+                    <input type="hidden" id="edit-newsArticleId" name="EditArticle.NewsArticleId" />
+                    <div class="mb-3">
+                        <label for="edit-newsTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="edit-newsTitle" name="EditArticle.NewsTitle" required>
+                        <span asp-validation-for="EditArticle.NewsTitle" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-headline" class="form-label">Headline</label>
+                        <input type="text" class="form-control" id="edit-headline" name="EditArticle.Headline" required>
+                        <span asp-validation-for="EditArticle.Headline" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-newsContent" class="form-label">Content</label>
+                        <input type="text" class="form-control" id="edit-newsContent" name="EditArticle.NewsContent" required>
+                        <span asp-validation-for="EditArticle.NewsContent" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-newsSource" class="form-label">Source</label>
+                        <input type="text" class="form-control" id="edit-newsSource" name="EditArticle.NewsSource" required>
+                        <span asp-validation-for="EditArticle.NewsSource" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-categoryId" class="form-label">Category</label>
+                        <select class="form-control" id="edit-categoryId" name="EditArticle.CategoryId" asp-items="Model.Categories"></select>
+                        <span asp-validation-for="EditArticle.CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-tags" class="form-label">Tags</label>
+                        <select class="form-control" id="edit-tags" name="EditArticle.TagIds" asp-items="Model.Tags" multiple></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-newsStatus" class="control-label">Status</label>
+                        <select id="edit-newsStatus" name="EditArticle.NewsStatus" class="form-control">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                        <span asp-validation-for="EditArticle.NewsStatus" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Handle Edit button click
+            $('#editModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var articleId = button.data('article-id'); // Extract info from data-* attributes
+                
+                // Make an AJAX request to get article data
+                $.ajax({
+                    url: '?handler=ArticleData',
+                    type: 'GET',
+                    data: { id: articleId },
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    headers: {
+                        RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function (data) {
+                        // Populate the form with article data
+                        $('#edit-newsArticleId').val(data.newsArticleId);
+                        $('#edit-newsTitle').val(data.newsTitle);
+                        $('#edit-headline').val(data.headline);
+                        $('#edit-newsContent').val(data.newsContent);
+                        $('#edit-newsSource').val(data.newsSource);
+                        $('#edit-categoryId').val(data.categoryId);
+                        
+                        // Handle the tags (multiselect)
+                        if (data.tagIds && data.tagIds.length > 0) {
+                            $('#edit-tags').val(data.tagIds);
+                        } else {
+                            $('#edit-tags').val([]);
+                        }
+                        
+                        // Set the news status
+                        $('#edit-newsStatus').val(data.newsStatus.toString().toLowerCase());
+                    },
+                    error: function (error) {
+                        console.error("Error fetching article data:", error);
+                        alert("Failed to load article data. Please try again.");
+                    }
+                });
+            });
+        });
+    </script>
+    }

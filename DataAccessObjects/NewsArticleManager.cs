@@ -70,10 +70,16 @@ namespace DataAccessObjects
             try
             {
                 using var _context = new FunewsManagementContext();
+
+                // Prevent multiple tracking instances
+                _context.ChangeTracker.Clear();
+
+                // Attach existing tags (ensure they are not re-tracked)
                 foreach (var tag in article.Tags)
                 {
-                    _context.Tags.Attach(tag);  // Prevent duplicate insertion
+                    _context.Tags.Attach(tag);
                 }
+
                 _context.NewsArticles.Add(article);
                 _context.SaveChanges();
             }
@@ -82,6 +88,7 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
         public void Update(NewsArticle article)
         {
             var existingArticle = GetNewsArticleById(article.NewsArticleId);
