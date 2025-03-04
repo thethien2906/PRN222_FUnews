@@ -118,3 +118,23 @@ C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\Repositories\obj\Debug\net8.0\
 C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.pdb
 C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\Repositories\obj\Debug\net8.0\Repositories.genruntimeconfig.cache
 C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\Repositories\obj\Debug\net8.0\ref\Repositories.dll
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\Repositories.deps.json
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\Repositories.runtimeconfig.json
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\Repositories.dll
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\Repositories.pdb
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\BusinessObjects.dll
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\DataAccessObjects.dll
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\BusinessObjects.pdb
+C:\Users\Admin\source\repos\Prn222\Repositories\bin\Debug\net8.0\DataAccessObjects.pdb
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.AssemblyInfo.cs
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.sourcelink.json
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.csproj.CopyComplete
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.dll
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\refint\Repositories.dll
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.pdb
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\Repositories.genruntimeconfig.cache
+C:\Users\Admin\source\repos\Prn222\Repositories\obj\Debug\net8.0\ref\Repositories.dll
