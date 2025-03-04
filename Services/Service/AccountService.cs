@@ -4,6 +4,7 @@ using Services.IService;
 using Services.DTOs;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services
 {
@@ -101,19 +102,28 @@ namespace Services
 
         public void DeleteAccount(int id)
         {
-            if (id <= 0) throw new ArgumentException("ID must be greater than zero.", nameof(id));
-            var account = _accountRepo.GetAccountById(id);
-            if (account == null) throw new KeyNotFoundException($"Account with ID {id} not found.");
-            _accountRepo.DeleteAccount(account);
+            if (id <= 0)
+                throw new ArgumentException("ID must be greater than zero.", nameof(id));
+
+            try
+            {
+                var account = _accountRepo.GetAccountById(id);
+                if (account == null)
+                    throw new KeyNotFoundException($"Account with ID {id} not found.");
+
+                _accountRepo.DeleteAccount(account);
+            }
+            catch (DbUpdateException ex) // Xử lý lỗi database như vi phạm ràng buộc khóa ngoại
+            {
+                throw new InvalidOperationException($"Error deleting account with ID {id}. It might be linked to other records.", ex);
+            }
+            catch (Exception ex) // Bắt các lỗi khác
+            {
+                throw new Exception($"Unexpected error occurred while deleting account {id}: {ex.Message}", ex);
+            }
         }
 
-        public void ChangeStatus(int id)
-        {
-            if (id <= 0) throw new ArgumentException("ID must be greater than zero.", nameof(id));
-            var account = _accountRepo.GetAccountById(id);
-            if (account == null) throw new KeyNotFoundException($"Account with ID {id} not found.");
-            _accountRepo.ChangeStatus(account);
-        }
+
         public string GetAccountNameById(int id)
         {
             if (id <= 0) throw new ArgumentException("ID must be greater than zero.", nameof(id));

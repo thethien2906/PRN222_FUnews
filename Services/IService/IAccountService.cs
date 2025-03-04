@@ -29,8 +29,6 @@ namespace Services.IService
         // Xóa tài khoản
         void DeleteAccount(int id);
 
-        // Thay đổi trạng thái của tài khoản
-        void ChangeStatus(int id);
 
         // Tìm kiếm tài khoản
         IEnumerable<SystemAccountDTO> Search(string search);

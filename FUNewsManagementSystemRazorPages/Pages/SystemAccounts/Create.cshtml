@@ -1,0 +1,179 @@
+﻿@page
+@model FUNewsManagementSystemRazorPages.Pages.SystemAccounts.CreateModel
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<style>
+    /* Container */
+    .create-account-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 24px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    .create-account-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #2d2d2d;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    /* Divider */
+    .create-account-divider {
+        border: 0;
+        height: 2px;
+        background: #e0e0e0;
+        margin: 20px 0;
+    }
+
+    /* Form */
+    .create-account-form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    /* Form Fields */
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-input {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+    }
+
+        .form-input:focus {
+            border-color: #6b46c1;
+            box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+            outline: none;
+            transform: scale(1.02);
+        }
+
+    /* Validation Messages */
+    .validation-summary {
+        color: #dc2626;
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .validation-message {
+        color: #dc2626;
+        font-size: 12px;
+    }
+
+    /* Form Actions */
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .submit-button {
+        padding: 12px 24px;
+        background: #6b46c1;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .submit-button:hover {
+            background: #553c9a;
+            transform: translateY(-2px);
+        }
+
+    .back-link {
+        padding: 12px 24px;
+        background: #fff;
+        color: #6b46c1;
+        border: 2px solid #6b46c1;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .back-link:hover {
+            background: #6b46c1;
+            color: #fff;
+        }
+</style>
+
+<div class="create-account-container">
+    <h1 class="create-account-title">Create New Account</h1>
+    <hr class="create-account-divider" />
+
+    <div class="create-account-form">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="form-field">
+                <label asp-for="SystemAccount.AccountName" class="form-label">Account Name</label>
+                <input asp-for="SystemAccount.AccountName" class="form-input" placeholder="Enter full name" />
+                <span asp-validation-for="SystemAccount.AccountName" class="validation-message"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="SystemAccount.AccountEmail" class="form-label">Email</label>
+                <input asp-for="SystemAccount.AccountEmail" class="form-input" placeholder="Enter email address" />
+                <span asp-validation-for="SystemAccount.AccountEmail" class="validation-message"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="SystemAccount.AccountRole" class="form-label">Role</label>
+                <select asp-for="SystemAccount.AccountRole" class="form-input">
+                    <option value="" disabled selected>-- Select Role --</option>
+                    <option value="1">Staff</option>
+                    <option value="2">Lecturer</option>
+                </select>
+                <span asp-validation-for="SystemAccount.AccountRole" class="validation-message"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="SystemAccount.AccountPassword" class="form-label">Password</label>
+                <input asp-for="SystemAccount.AccountPassword" type="password" class="form-input" placeholder="Enter password" />
+                <span asp-validation-for="SystemAccount.AccountPassword" class="validation-message"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                <a asp-page="/SystemAccounts/Index" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>

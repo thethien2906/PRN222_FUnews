@@ -1,0 +1,184 @@
+﻿@page "{id:int}"
+@model FUNewsManagementSystemRazorPages.Pages.SystemAccounts.EditModel
+@{
+    ViewData["Title"] = "Edit Account";
+}
+
+<div class="edit-account-container">
+    <h1 class="edit-account-title">Edit Account</h1>
+    <hr class="edit-account-divider" />
+
+    <div class="edit-account-form">
+        <form method="post">
+            @Html.AntiForgeryToken() <!-- Thêm token bảo mật -->
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+            <input type="hidden" asp-for="Account.AccountId" />
+
+            <div class="form-field">
+                <label asp-for="Account.AccountName" class="form-label">Account Name</label>
+                <input asp-for="Account.AccountName" class="form-input" placeholder="Enter account name" />
+                <span asp-validation-for="Account.AccountName" class="validation-message"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Account.AccountEmail" class="form-label">Email</label>
+                <input asp-for="Account.AccountEmail" type="email" class="form-input" placeholder="Enter email" />
+                <span asp-validation-for="Account.AccountEmail" class="validation-message"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Account.AccountRole" class="form-label">Role</label>
+                <select asp-for="Account.AccountRole" class="form-input">
+                    <option value="1">Staff</option>
+                    <option value="2">Lecturer</option>
+                </select>
+                <span asp-validation-for="Account.AccountRole" class="validation-message"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Account.AccountPassword" class="form-label">Password</label>
+                <input asp-for="Account.AccountPassword" type="password" class="form-input" placeholder="Enter new password (leave blank to keep current password)" />
+                <span asp-validation-for="Account.AccountPassword" class="validation-message"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a asp-page="/SystemAccounts/Index" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <style>
+        /* Container */
+        .edit-account-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        .edit-account-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Divider */
+        .edit-account-divider {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 20px 0;
+        }
+
+        /* Form */
+        .edit-account-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Form Fields */
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-input {
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .form-input:focus {
+                border-color: #6b46c1;
+                box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.1);
+                outline: none;
+            }
+
+        /* Validation Messages */
+        .validation-summary {
+            color: #dc2626;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .validation-message {
+            color: #dc2626;
+            font-size: 12px;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .submit-button {
+            padding: 12px 24px;
+            background: #10b981; /* Màu xanh thay vì tím để phù hợp với "Save" */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+            .submit-button:hover {
+                background: #059669; /* Xanh đậm hơn khi hover */
+                transform: translateY(-2px);
+            }
+
+        .back-link {
+            padding: 12px 24px;
+            background: #fff;
+            color: #6b46c1;
+            border: 1px solid #6b46c1;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+            .back-link:hover {
+                background: #6b46c1;
+                color: #fff;
+            }
+    </style>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        console.log("Edit account page loaded");
+    </script>
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
