@@ -52,6 +52,7 @@
                             <th>Headline</th>
                             <th>Created Date</th>
                             <th>Source</th>
+                            <th>Category</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -63,6 +64,7 @@
                                 <td>@article.Headline</td>
                                 <td>@article.CreatedDate?.ToString("yyyy-MM-dd")</td>
                                 <td>@article.NewsSource</td>
+                                <td>@article.CategoryName</td>
                                 <td>
                                     @if (article.NewsStatus.GetValueOrDefault())
                                     {
@@ -90,4 +92,47 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('newsChart').getContext('2d');
+        var ctxPie = document.getElementById('newsPieChart').getContext('2d');
+        var chartData = @Html.Raw(Model.ChartDataJson);
+        var pieChartData = @Html.Raw(Model.PieChartDataJson);
+
+        var labels = chartData.map(item => item.Date);
+        var dataValues = chartData.map(item => item.Count);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Số lượng bài viết',
+                    data: dataValues,
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                    fill: true
+                }]
+            }
+        });
+
+        // Biểu đồ tròn
+        var pieLabels = pieChartData.map(item => item.Category);
+        var pieValues = pieChartData.map(item => item.Count);
+
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: pieLabels,
+                datasets: [{
+                    label: 'Bài viết theo danh mục',
+                    data: pieValues,
+                    backgroundColor: ['blue', 'green', 'orange', 'purple'],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
 }
+<canvas id="newsChart" width="400" height="200"></canvas>
+<canvas id="newsPieChart" width="400" height="200"></canvas>
