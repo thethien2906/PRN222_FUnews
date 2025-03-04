@@ -15,5 +15,11 @@ namespace Repositories.Repository
         public IEnumerable<SystemAccount> Search(string search) => SystemAccountManager.Instance.Search(search);
         public void UpdateAccount(SystemAccount account) => SystemAccountManager.Instance.Update(account);
         public string GetNameById(int id) => SystemAccountManager.Instance.GetAccountNameById(id);
+
+        // Phương thức Authenticate
+        public SystemAccount Authenticate(string email, string password)
+        {
+            return SystemAccountManager.Instance.Authenticate(email, password);
+        }
     }
 }

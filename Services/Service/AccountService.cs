@@ -4,28 +4,54 @@ using Services.IService;
 using Services.DTOs;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace Services
 {
     public class AccountService : IAccountService
     {
         private readonly IAccountRepo _accountRepo;
+        private readonly IConfiguration _configuration; // Đọc cấu hình từ appsettings.json
 
-        public AccountService(IAccountRepo accountRepo)
+        public AccountService(IAccountRepo accountRepo, IConfiguration configuration)
         {
             _accountRepo = accountRepo ?? throw new ArgumentNullException(nameof(accountRepo));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
-        public IEnumerable<SystemAccountDTO> GetAccounts() =>
-            _accountRepo.GetAccounts().Select(account => new SystemAccountDTO
+        public SystemAccountDTO Authenticate(string email, string password)
+        {
+            // 1️⃣ Thử lấy từ Database trước
+            var account = _accountRepo.Authenticate(email, password);
+            if (account != null)
             {
-                AccountId = account.AccountId,
-                AccountName = account.AccountName,
-                AccountEmail = account.AccountEmail,
-                AccountRole = account.AccountRole,
-                AccountPassword = account.AccountPassword
-          
-            });
+                return new SystemAccountDTO
+                {
+                    AccountId = account.AccountId,
+                    AccountName = account.AccountName,
+                    AccountEmail = account.AccountEmail,
+                    AccountRole = account.AccountRole
+                };
+            }
+
+            // 2️⃣ Nếu không tìm thấy trong DB, kiểm tra trong `appsettings.json`
+            string adminEmail = _configuration["Admin:Account"];
+            string adminPass = _configuration["Admin:Pass"];
+
+            if (!string.IsNullOrEmpty(adminEmail) && !string.IsNullOrEmpty(adminPass) &&
+                email == adminEmail && password == adminPass)
+            {
+                return new SystemAccountDTO
+                {
+                    AccountId = 0, 
+                    AccountName = "Administrator",
+                    AccountEmail = adminEmail,
+           
+                };
+            }
+
+            return null; // Trả về null nếu không tìm thấy
+        }
 
         public SystemAccountDTO GetAccountById(int id)
         {
@@ -44,18 +70,34 @@ namespace Services
         public void InsertAccount(SystemAccountDTO accountDTO)
         {
             if (accountDTO == null) throw new ArgumentNullException(nameof(accountDTO));
-            if (string.IsNullOrWhiteSpace(accountDTO.AccountName)) throw new ArgumentException("AccountName cannot be empty.", nameof(accountDTO.AccountName));
 
+            // Kiểm tra các trường bắt buộc
+            if (string.IsNullOrWhiteSpace(accountDTO.AccountName))
+                throw new ArgumentException("Account Name cannot be empty.", nameof(accountDTO.AccountName));
+
+            if (string.IsNullOrWhiteSpace(accountDTO.AccountEmail))
+                throw new ArgumentException("Account Email cannot be empty.", nameof(accountDTO.AccountEmail));
+
+            if (accountDTO.AccountRole == null)
+                throw new ArgumentException("Account Role must be specified.", nameof(accountDTO.AccountRole));
+
+            if (string.IsNullOrWhiteSpace(accountDTO.AccountPassword))
+                throw new ArgumentException("Account Password cannot be empty.", nameof(accountDTO.AccountPassword));
+
+            // Tạo entity để lưu vào database
             var account = new SystemAccount
             {
-                AccountId = accountDTO.AccountId,
+
                 AccountName = accountDTO.AccountName,
                 AccountEmail = accountDTO.AccountEmail,
-                AccountRole = accountDTO.AccountRole,
+                AccountRole = accountDTO.AccountRole, // 1: Staff, 2: Manager
                 AccountPassword = accountDTO.AccountPassword
             };
             _accountRepo.InsertAccount(account);
         }
+
+
+
 
         public void UpdateAccount(SystemAccountDTO accountDTO)
         {
@@ -130,5 +172,17 @@ namespace Services
                 AccountRole = account.AccountRole,
                 AccountPassword = account.AccountPassword
             });
+
+        public IEnumerable<SystemAccountDTO> GetAccounts()
+        {
+            return _accountRepo.GetAccounts().Select(account => new SystemAccountDTO
+            {
+                AccountId = account.AccountId,
+                AccountName = account.AccountName,
+                AccountEmail = account.AccountEmail,
+                AccountRole = account.AccountRole
+            });
+        }
+
     }
 }
