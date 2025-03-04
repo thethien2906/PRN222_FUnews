@@ -1717,3 +1717,4 @@ C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\FUNewsManagementSystemMVC\obj\
 C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\FUNewsManagementSystemMVC\obj\Debug\net8.0\FUNewsManagementSystemMVC.pdb
 C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\FUNewsManagementSystemMVC\obj\Debug\net8.0\FUNewsManagementSystemMVC.genruntimeconfig.cache
 C:\FPT\PRN222\New folder\New folder\PRN222_FUnews\FUNewsManagementSystemMVC\obj\Debug\net8.0\ref\FUNewsManagementSystemMVC.dll
+D:\WorkSpacae .Net\assignment1\FUNewsManagementSystemMVC\bin\Debug\net8.0\libman.json
