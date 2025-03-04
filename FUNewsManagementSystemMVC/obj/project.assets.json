@@ -8031,23 +8031,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\admin\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\MINH DAT\\.nuget\\packages\\": {},
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
       "projectName": "FUNewsManagementSystemMVC",
       "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\FUNewsManagementSystemMVC\\obj\\",
+=======
+      "projectUniqueName": "D:\\WorkSpacae .Net\\assignment1\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
+      "projectName": "FUNewsManagementSystemMVC",
+      "projectPath": "D:\\WorkSpacae .Net\\assignment1\\FUNewsManagementSystemMVC\\FUNewsManagementSystemMVC.csproj",
+      "packagesPath": "C:\\Users\\MINH DAT\\.nuget\\packages\\",
+      "outputPath": "D:\\WorkSpacae .Net\\assignment1\\FUNewsManagementSystemMVC\\obj\\",
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\MINH DAT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8062,8 +8078,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
             "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Services\\Services.csproj": {
               "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Services\\Services.csproj"
+=======
+            "D:\\WorkSpacae .Net\\assignment1\\Services\\Services.csproj": {
+              "projectPath": "D:\\WorkSpacae .Net\\assignment1\\Services\\Services.csproj"
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
             }
           }
         }

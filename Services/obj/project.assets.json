@@ -5157,23 +5157,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\admin\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\MINH DAT\\.nuget\\packages\\": {},
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Services\\Services.csproj",
       "projectName": "Services",
       "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Services\\Services.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Services\\obj\\",
+=======
+      "projectUniqueName": "D:\\WorkSpacae .Net\\assignment1\\Services\\Services.csproj",
+      "projectName": "Services",
+      "projectPath": "D:\\WorkSpacae .Net\\assignment1\\Services\\Services.csproj",
+      "packagesPath": "C:\\Users\\MINH DAT\\.nuget\\packages\\",
+      "outputPath": "D:\\WorkSpacae .Net\\assignment1\\Services\\obj\\",
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\MINH DAT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5188,11 +5204,19 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
             "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\BusinessObjects\\BusinessObjects.csproj": {
               "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\BusinessObjects\\BusinessObjects.csproj"
             },
             "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Repositories\\Repositories.csproj": {
               "projectPath": "C:\\Users\\admin\\OneDrive\\Documents\\AgsignMent1_PRN222\\Repositories\\Repositories.csproj"
+=======
+            "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj": {
+              "projectPath": "D:\\WorkSpacae .Net\\assignment1\\BusinessObjects\\BusinessObjects.csproj"
+            },
+            "D:\\WorkSpacae .Net\\assignment1\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\WorkSpacae .Net\\assignment1\\Repositories\\Repositories.csproj"
+>>>>>>> 42e848331c2ba39e8a7c890a5ffceefd9e11a212
             }
           }
         }

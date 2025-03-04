@@ -27,6 +27,29 @@ namespace DataAccessObjects
                 }
             }
         }
+        // Login
+        public SystemAccount Authenticate(string email, string password)
+        {
+            try
+            {
+                using var _context = new FunewsManagementContext();
+
+                // Tìm tài khoản theo email
+                var account = _context.SystemAccounts
+                    .SingleOrDefault(a => a.AccountEmail == email);
+
+                if (account != null && account.AccountPassword == password) // So sánh mật khẩu (nên mã hóa mật khẩu trong thực tế)
+                {
+                    return account; // Trả về thông tin tài khoản nếu đăng nhập thành công
+                }
+
+                return null; // Nếu tài khoản không tồn tại hoặc mật khẩu sai
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error during authentication", ex);
+            }
+        }
 
         public IEnumerable<SystemAccount> GetSystemAccountList()
         {
