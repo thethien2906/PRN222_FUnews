@@ -1,58 +1,44 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using Services.DTOs;
+using Services.IService;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace FUNewsManagementSystemRazorPages.Pages.SystemAccounts
+namespace FUNewsManagementSystemRazorPages.Pages.SystemAccounts;
+
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly IAccountService _accountService;
+
+    public CreateModel(IAccountService accountService)
     {
-        private readonly ILogger<CreateModel> _logger;
+        _accountService = accountService;
+    }
 
-        public CreateModel(ILogger<CreateModel> logger)
+    [BindProperty]
+    public SystemAccountDTO SystemAccount { get; set; } = new SystemAccountDTO();
+
+    public void OnGet()
+    {
+        // Display the empty form
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        ModelState.Remove("Account.AccountId"); // Remove if AccountId is generated
+
+        if (!ModelState.IsValid)
         {
-            _logger = logger;
+            return Page(); // Return to the form if validation fails
         }
 
-        [BindProperty]
-        public SystemAccountInputModel SystemAccount { get; set; } = new SystemAccountInputModel();
+        var lastAccount = _accountService.GetAccounts().OrderByDescending(n => n.AccountId).FirstOrDefault();
+        int newId = lastAccount != null ? lastAccount.AccountId + 1 : 1;
+        SystemAccount.AccountId = (short)newId;
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+        _accountService.SaveAccount(SystemAccount);
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            // 🚀 TODO: Lưu thông tin tài khoản vào database (hiện tại chỉ log ra)
-            _logger.LogInformation("New Account Created: {AccountName}, {AccountEmail}, Role: {AccountRole}",
-                SystemAccount.AccountName, SystemAccount.AccountEmail, SystemAccount.AccountRole);
-
-            // Chuyển hướng về trang danh sách sau khi tạo thành công
-            return RedirectToPage("/SystemAccounts/Index");
-        }
-
-        public class SystemAccountInputModel
-        {
-            [Required(ErrorMessage = "Account Name is required")]
-            [StringLength(100, ErrorMessage = "Account Name must be less than 100 characters")]
-            public string AccountName { get; set; }
-
-            [Required(ErrorMessage = "Email is required")]
-            [EmailAddress(ErrorMessage = "Invalid email format")]
-            public string AccountEmail { get; set; }
-
-            [Required(ErrorMessage = "Please select a role")]
-            public string AccountRole { get; set; }
-
-            [Required(ErrorMessage = "Password is required")]
-            [StringLength(50, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters")]
-            public string AccountPassword { get; set; }
-        }
+        return RedirectToPage("Index"); // Redirect to the index page
     }
 }

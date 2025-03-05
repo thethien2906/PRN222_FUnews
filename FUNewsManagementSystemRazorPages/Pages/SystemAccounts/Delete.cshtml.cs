@@ -2,44 +2,52 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services.DTOs;
 using Services.IService;
+using System.Threading.Tasks;
+namespace FUNewsManagementSystemRazorPages.Pages.SystemAccounts;
 
-namespace FUNewsManagementSystemRazorPages.Pages.SystemAccounts
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly IAccountService _accountService;
+
+    public DeleteModel(IAccountService accountService)
     {
-        private readonly IAccountService _systemAccountService;
+        _accountService = accountService;
+    }
 
-        [BindProperty]
-        public SystemAccountDTO SystemAccount { get; set; }
+    [BindProperty]
+    public SystemAccountDTO SystemAccount { get; set; }
 
-        public DeleteModel(IAccountService systemAccountService)
+    public IActionResult OnGet(int id)
+    {
+        if (id <= 0)
         {
-            _systemAccountService = systemAccountService;
+            return NotFound();
         }
 
-        public IActionResult OnGet(int id)
+        SystemAccount = _accountService.GetAccountById(id);
+
+        if (SystemAccount == null)
         {
-            SystemAccount = _systemAccountService.GetAccountById(id);
-            if (SystemAccount == null)
-            {
-                TempData["ErrorMessage"] = "Account not found.";
-                return RedirectToPage("Index");
-            }
-            return Page();
+            return NotFound();
         }
 
-        public IActionResult OnPost()
+        return Page();
+    }
+
+    public IActionResult OnPostAsync(int id)
+    {
+        if (id <= 0)
         {
-            try
-            {
-                _systemAccountService.DeleteAccount(SystemAccount.AccountId);
-                TempData["SuccessMessage"] = "System account deleted successfully.";
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = $"Error deleting account: {ex.Message}";
-            }
-            return RedirectToPage("Index");
+            return NotFound();
         }
+
+        var account = _accountService.GetAccountById(id);
+
+        if (account != null)
+        {
+            _accountService.DeleteAccount(id);
+        }
+
+        return RedirectToPage("Index");
     }
 }
