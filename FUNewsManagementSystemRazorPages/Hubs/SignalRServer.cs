@@ -8,6 +8,6 @@ namespace FUNewsManagementSystemRazorPages.Hubs
 {
     public class SignalrServer : Hub
     {
-
+       
     }
 }

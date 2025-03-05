@@ -7,6 +7,8 @@ using System.Linq;
 using System;
 using Services.DTOs;
 using Services.IService;
+using Microsoft.AspNetCore.SignalR;
+using FUNewsManagementSystemRazorPages.Hubs;
 
 namespace FUNewsManagementSystemRazorPages.Pages.NewsArticles;
 
@@ -15,12 +17,14 @@ public class IndexModel : PageModel
     private readonly INewsArticleService _newsArticleService;
     private readonly ICategoryService _categoryService;
     private readonly ITagService _tagService;
+    private readonly IHubContext<SignalrServer> _hubContext;
 
-    public IndexModel(INewsArticleService newsArticleService, ICategoryService categoryService, ITagService tagService)
+    public IndexModel(INewsArticleService newsArticleService, ICategoryService categoryService, ITagService tagService, IHubContext<SignalrServer> hubContext)
     {
         _newsArticleService = newsArticleService;
         _categoryService = categoryService;
         _tagService = tagService;
+        _hubContext = hubContext;
     }
 
     public IEnumerable<NewsArticleDTO> NewsArticles { get; set; } = new List<NewsArticleDTO>();
@@ -63,7 +67,7 @@ public class IndexModel : PageModel
         Tags = new MultiSelectList(_tagService.GetAllTags(), "TagId", "TagName");
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPostAsync()
     {
         ModelState.Remove("NewsArticleId");
         ModelState.Remove("Headline");
@@ -105,7 +109,8 @@ public class IndexModel : PageModel
         NewArticle.UpdatedById = short.Parse(userId);
 
         _newsArticleService.CreateNewsArticle(NewArticle);
-
+        // Trigger SignalR notification
+        await _hubContext.Clients.All.SendAsync("ReceiveNewsUpdate");
         return RedirectToPage();
     }
 
@@ -120,7 +125,7 @@ public class IndexModel : PageModel
         return new JsonResult(article);
     }
 
-    public IActionResult OnPostEdit()
+    public async Task<IActionResult> OnPostEditAsync()
     {
         ModelState.Remove("Headline");
         ModelState.Remove("NewsArticleId");
@@ -173,6 +178,8 @@ public class IndexModel : PageModel
         EditArticle.UpdatedById = short.Parse(userId);
 
         _newsArticleService.UpdateNewsArticle(EditArticle);
+
+        await _hubContext.Clients.All.SendAsync("ReceiveNewsUpdate");
 
         return RedirectToPage();
     }
