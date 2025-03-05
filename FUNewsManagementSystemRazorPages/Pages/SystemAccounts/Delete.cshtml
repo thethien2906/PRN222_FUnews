@@ -1,0 +1,165 @@
+﻿@page "{id:int}"
+@model FUNewsManagementSystemRazorPages.Pages.SystemAccounts.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete System Account";
+}
+
+<div class="delete-account-container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>@TempData["ErrorMessage"]</span>
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <span>@TempData["SuccessMessage"]</span>
+        </div>
+    }
+
+    <h1 class="delete-account-title">Delete System Account</h1>
+    <h3 class="delete-account-subtitle">Are you sure you want to delete this account?</h3>
+    <hr class="delete-account-divider" />
+
+    <div class="account-details">
+        <h4 class="account-details-title">Account Details</h4>
+        <dl class="account-details-list">
+            <dt>Account Name</dt>
+            <dd>@Html.DisplayFor(model => model.SystemAccount.AccountName)</dd>
+
+            <dt>Email</dt>
+            <dd>@Html.DisplayFor(model => model.SystemAccount.AccountEmail)</dd>
+
+            <dt>Role</dt>
+            <dd>@Html.DisplayFor(model => model.SystemAccount.AccountRole)</dd>
+        </dl>
+    </div>
+
+    <div class="delete-actions">
+        <button type="button" class="delete-button" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">
+            Delete
+        </button>
+        <a asp-page="Index" class="cancel-link">Back to List</a>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this account? This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="modal-cancel-button" data-bs-dismiss="modal">Cancel</button>
+                    <form method="post">
+                        <input type="hidden" asp-for="SystemAccount.AccountId" />
+                        <button type="submit" class="modal-delete-button">Confirm Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling giống với trang Delete Tag */
+    .delete-account-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f9fafb;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .delete-account-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .delete-account-subtitle {
+        font-size: 18px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .account-details {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .account-details-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    dt {
+        font-weight: 600;
+        color: #555;
+    }
+
+    dd {
+        color: #777;
+        margin-left: 0;
+    }
+
+    .delete-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    .delete-button {
+        padding: 12px 24px;
+        background: #dc2626;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .delete-button:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+    .cancel-link {
+        padding: 12px 24px;
+        background: #fff;
+        color: #6b46c1;
+        border: 1px solid #6b46c1;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+        .cancel-link:hover {
+            background: #6b46c1;
+            color: #fff;
+        }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>

@@ -40,7 +40,7 @@ namespace FUNewsManagementSystemRazorPages.Pages.Login
                 HttpContext.Session.SetString("UserId", "admin");
                 HttpContext.Session.SetString("UserName", "Admin");
                 HttpContext.Session.SetString("Role", "admin");
-                return RedirectToPage("/Admin");
+                return RedirectToPage("/SystemAccounts/Index");
             }
 
             var account = _accountService.GetAccounts()
