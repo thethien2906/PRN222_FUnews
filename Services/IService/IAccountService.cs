@@ -11,6 +11,8 @@ namespace Services.IService
 {
     public interface IAccountService
     {
+        // Authenticate
+        SystemAccountDTO Authenticate(string username, string password);
         // Lấy tất cả tài khoản
         IEnumerable<SystemAccountDTO> GetAccounts();
 

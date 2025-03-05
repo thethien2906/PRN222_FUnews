@@ -4,18 +4,53 @@ using Services.IService;
 using Services.DTOs;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 
 namespace Services
 {
     public class AccountService : IAccountService
     {
         private readonly IAccountRepo _accountRepo;
+        private readonly IConfiguration _configuration; // Đọc cấu hình từ appsettings.json
 
-        public AccountService(IAccountRepo accountRepo)
+        public AccountService(IAccountRepo accountRepo, IConfiguration configuration)
         {
             _accountRepo = accountRepo ?? throw new ArgumentNullException(nameof(accountRepo));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
+        public SystemAccountDTO Authenticate(string email, string password)
+        {
+            // 1️⃣ Thử lấy từ Database trước
+            var account = _accountRepo.Authenticate(email, password);
+            if (account != null)
+            {
+                return new SystemAccountDTO
+                {
+                    AccountId = account.AccountId,
+                    AccountName = account.AccountName,
+                    AccountEmail = account.AccountEmail,
+                    AccountRole = account.AccountRole
+                };
+            }
 
+            // 2️⃣ Nếu không tìm thấy trong DB, kiểm tra trong `appsettings.json`
+            string adminEmail = _configuration["Admin:Account"];
+            string adminPass = _configuration["Admin:Pass"];
+
+            if (!string.IsNullOrEmpty(adminEmail) && !string.IsNullOrEmpty(adminPass) &&
+                email == adminEmail && password == adminPass)
+            {
+                return new SystemAccountDTO
+                {
+                    AccountId = 0,
+                    AccountName = "Administrator",
+                    AccountEmail = adminEmail,
+
+                };
+            }
+
+            return null; // Trả về null nếu không tìm thấy
+        }
         public IEnumerable<SystemAccountDTO> GetAccounts() =>
             _accountRepo.GetAccounts().Select(account => new SystemAccountDTO
             {

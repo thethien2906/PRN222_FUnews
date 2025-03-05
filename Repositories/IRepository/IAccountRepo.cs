@@ -13,5 +13,6 @@ namespace Repositories.IRepository
         IEnumerable<SystemAccount> Search(string search);
         void UpdateAccount(SystemAccount account);
         string GetNameById(int id);
+        SystemAccount Authenticate(string email, string password);
     }
 }
