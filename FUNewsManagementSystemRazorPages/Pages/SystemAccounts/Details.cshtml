@@ -1,0 +1,180 @@
+﻿@page "{id:int}"
+@model FUNewsManagementSystemRazorPages.Pages.SystemAccounts.DetailsModel
+@{
+    ViewData["Title"] = "Account Details";
+}
+
+<div class="details-account-container">
+    <h1 class="details-account-title">Account Details</h1>
+    <hr class="details-account-divider" />
+
+    <div class="details-account-content">
+        @if (Model?.Account == null)
+        {
+            <p class="no-details-message">No account details found.</p>
+        }
+        else
+        {
+            <dl class="account-details">
+                <dt class="detail-label">Account Name:</dt>
+                <dd class="detail-value">
+                    <strong>@Model.Account.AccountName</strong>
+                </dd>
+
+                <dt class="detail-label">Email:</dt>
+                <dd class="detail-value">
+                    <span class="email-highlight">@Model.Account.AccountEmail</span>
+                </dd>
+
+                <dt class="detail-label">Role:</dt>
+                <dd class="detail-value">
+                    <span class="role-highlight">@Model.Account.AccountRole</span>
+                </dd>
+
+                <dt class="detail-label">Password:</dt>
+                <dd class="detail-value">
+                    <span class="password-mask">[Hidden]</span> <!-- Không hiển thị mật khẩu -->
+                </dd>
+            </dl>
+
+            <div class="form-actions">
+                <a asp-page="/SystemAccounts/Edit" asp-route-id="@Model.Account.AccountId" class="edit-link">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <a asp-page="/SystemAccounts/Index" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Container */
+    .details-account-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f9fafb;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    .details-account-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a1a1a;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Divider */
+    .details-account-divider {
+        border: 0;
+        height: 1px;
+        background: #e0e0e0;
+        margin: 20px 0;
+    }
+
+    /* Content */
+    .details-account-content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* No Details Message */
+    .no-details-message {
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+    }
+
+    /* Details List */
+    .account-details {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .detail-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #666;
+    }
+
+    .detail-value {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .email-highlight {
+        color: #6b46c1;
+    }
+
+    .role-highlight {
+        background: #10b981;
+        color: #fff;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    .password-mask {
+        color: #666;
+    }
+
+    /* Form Actions */
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .edit-link {
+        padding: 12px 24px;
+        background: #f59e0b;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .edit-link:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+    .back-link {
+        padding: 12px 24px;
+        background: #fff;
+        color: #6b46c1;
+        border: 1px solid #6b46c1;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+        .back-link:hover {
+            background: #6b46c1;
+            color: #fff;
+        }
+</style>
+
+@section Scripts {
+    <script>
+        console.log("Account details page loaded");
+    </script>
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
