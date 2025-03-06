@@ -42,7 +42,7 @@ public class IndexModel : PageModel
     public int TotalItems { get; set; }
     public int TotalPages { get; set; }
 
-    public void OnGet(int pageNumber = 1)
+    public async Task OnGetAsync(int pageNumber = 1)
     {
         // Ensure page number is valid
         CurrentPage = pageNumber > 0 ? pageNumber : 1;
@@ -65,6 +65,11 @@ public class IndexModel : PageModel
 
         Categories = new SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName");
         Tags = new MultiSelectList(_tagService.GetAllTags(), "TagId", "TagName");
+
+
+
+        //SignalR
+        await _hubContext.Clients.All.SendAsync("ReceiveNewsUpdate");
     }
 
     public async Task<IActionResult> OnPostAsync()
