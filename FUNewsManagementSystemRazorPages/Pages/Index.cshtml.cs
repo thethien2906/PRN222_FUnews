@@ -8,6 +8,8 @@ using System;
 using Services.DTOs;
 using Services.IService;
 using BusinessObjects.Entities;
+using Microsoft.AspNetCore.SignalR;
+using FUNewsManagementSystemRazorPages.Hubs;
 
 namespace FUNewsManagementSystemRazorPages.Pages
 {
@@ -17,13 +19,14 @@ namespace FUNewsManagementSystemRazorPages.Pages
         private readonly ICategoryService _categoryService;
         private readonly ITagService _tagService;
         private readonly IAccountService _accountService;
-
-        public IndexModel(INewsArticleService newsArticleService, ICategoryService categoryService, ITagService tagService, IAccountService accountService)
+        private readonly IHubContext<SignalrServer> _hubContext;
+        public IndexModel(INewsArticleService newsArticleService, ICategoryService categoryService, ITagService tagService, IAccountService accountService, IHubContext<SignalrServer> hubContext)
         {
             _newsArticleService = newsArticleService;
             _categoryService = categoryService;
             _tagService = tagService;
             _accountService = accountService;
+            _hubContext = hubContext;
         }
 
         public IEnumerable<NewsArticleDTO> NewsArticles { get; set; } = new List<NewsArticleDTO>();
@@ -41,7 +44,7 @@ namespace FUNewsManagementSystemRazorPages.Pages
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
 
-        public void OnGet(int pageNumber = 1)
+        public async Task OnGetAsync(int pageNumber = 1)
         {
             var allArticles = _newsArticleService.GetActiveNewsArticles().OrderByDescending(a => a.CreatedDate).ToList();
 
@@ -57,7 +60,8 @@ namespace FUNewsManagementSystemRazorPages.Pages
             Categories = new SelectList(_categoryService.GetCategories(), "CategoryId", "CategoryName");
             Tags = new MultiSelectList(_tagService.GetAllTags(), "TagId", "TagName");
 
-
+            //SignalR
+            await _hubContext.Clients.All.SendAsync("ReceiveNewsUpdate");
         }
     }
 }

@@ -40,7 +40,7 @@ namespace FUNewsManagementSystemRazorPages.Pages.Login
                 HttpContext.Session.SetString("UserId", "admin");
                 HttpContext.Session.SetString("UserName", "Admin");
                 HttpContext.Session.SetString("Role", "admin");
-                return RedirectToPage("/SystemAccounts/Index");
+                return RedirectToPage("/Admin/Index");
             }
 
             var account = _accountService.GetAccounts()
@@ -49,14 +49,14 @@ namespace FUNewsManagementSystemRazorPages.Pages.Login
             if (account != null)
             {
                 HttpContext.Session.SetString("UserId", account.AccountId.ToString());
-                HttpContext.Session.SetString("Username", account.AccountName.ToString());
+                HttpContext.Session.SetString("UserName", account.AccountName.ToString());
                 HttpContext.Session.SetString("Role", account.AccountRole.ToString());
 
                 return account.AccountRole switch
                 {
-                    1 => RedirectToPage("/Staff"),
+                    1 => RedirectToPage("/Staff/Index"),
                     2 => RedirectToPage("/Lecturer/Index"),
-                    _ => RedirectToPage("/Index"),
+                    _ => RedirectToPage("/Admin/Index"),
                 };
             }
 

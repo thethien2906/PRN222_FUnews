@@ -1,0 +1,78 @@
+﻿@page
+@model ReportModel
+@{
+    ViewData["Title"] = "News Statistics Report";
+}
+
+<h2>News Statistics Report</h2>
+
+<!-- Date Range Selection -->
+<form method="get">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="StartDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" required>
+        </div>
+        <div class="col-md-4">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="EndDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" required>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </div>
+    </div>
+</form>
+
+<!-- Chart Section -->
+<div class="card p-3">
+    <canvas id="newsChart"></canvas>
+</div>
+
+<!-- Summary Table -->
+<div class="table-responsive mt-4">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Article Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stat in Model.ReportData)
+            {
+                <tr>
+                    <td>@stat.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@stat.Count</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('newsChart').getContext('2d');
+        var chartData = {
+            labels: @Html.Raw(Json.Serialize(Model.ReportData.Select(d => d.Date.ToString("yyyy-MM-dd")))),
+            datasets: [{
+                label: 'Articles Created',
+                data: @Html.Raw(Json.Serialize(Model.ReportData.Select(d => d.Count))),
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+}
