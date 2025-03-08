@@ -1,78 +1,138 @@
 ﻿@page
-@model ReportModel
+@model FUNewsManagementSystemRazorPages.Pages.NewsArticles.ReportModel
+
+
 @{
-    ViewData["Title"] = "News Statistics Report";
+    ViewData["Title"] = "News Report";
 }
 
-<h2>News Statistics Report</h2>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-warning">@TempData["Message"]</div>
+}
 
-<!-- Date Range Selection -->
-<form method="get">
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate" name="StartDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" required>
+<div class="container-fluid px-5" style="width: 100%; font-size: 18px;">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h2 class="mb-0"><i class="bi bi-file-earmark-bar-graph"></i> News Articles Report</h2>
         </div>
-        <div class="col-md-4">
-            <label for="endDate">End Date:</label>
-            <input type="date" id="endDate" name="EndDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" required>
-        </div>
-        <div class="col-md-4 d-flex align-items-end">
-            <button type="submit" class="btn btn-primary">Generate Report</button>
+
+        <div class="card-body p-4">
+            <form method="get">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group mb-3">
+                            <label for="startDate" class="control-label fw-bold">Start Date</label>
+                            <input type="date" id="startDate" name="startDate" class="form-control" required value="@ViewData["StartDate"]" />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group mb-3">
+                            <label for="endDate" class="control-label fw-bold">End Date</label>
+                            <input type="date" id="endDate" name="endDate" class="form-control" required value="@ViewData["EndDate"]" />
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-center justify-content-center mt-3">
+                        <button type="submit" class="btn btn-primary w-100"><i class="bi bi-search"></i> Generate Report</button>
+                    </div>
+                </div>
+            </form>
+
+            @if (!string.IsNullOrEmpty(ViewData["Message"] as string))
+            {
+                <p class="text-danger mt-3">@ViewData["Message"]</p>
+            }
+
+            @if (Model.NewsArticles != null && Model.NewsArticles.Any())
+            {
+                <table class="table mt-4 table-striped table-bordered w-100 align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Headline</th>
+                            <th>Created Date</th>
+                            <th>Source</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var article in Model.NewsArticles.OrderByDescending(a => a.CreatedDate))
+                        {
+                            <tr>
+                                <td>@article.NewsTitle</td>
+                                <td>@article.Headline</td>
+                                <td>@article.CreatedDate?.ToString("yyyy-MM-dd")</td>
+                                <td>@article.NewsSource</td>
+                                <td>@article.CategoryName</td>
+                                <td>
+                                    @if (article.NewsStatus.GetValueOrDefault())
+                                    {
+                                        <span class="badge bg-success">Active</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="mt-3 text-muted">No articles found for the selected period.</p>
+            }
         </div>
     </div>
-</form>
-
-<!-- Chart Section -->
-<div class="card p-3">
-    <canvas id="newsChart"></canvas>
-</div>
-
-<!-- Summary Table -->
-<div class="table-responsive mt-4">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Article Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var stat in Model.ReportData)
-            {
-                <tr>
-                    <td>@stat.Date.ToString("yyyy-MM-dd")</td>
-                    <td>@stat.Count</td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>
 
 @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var ctx = document.getElementById('newsChart').getContext('2d');
-        var chartData = {
-            labels: @Html.Raw(Json.Serialize(Model.ReportData.Select(d => d.Date.ToString("yyyy-MM-dd")))),
-            datasets: [{
-                label: 'Articles Created',
-                data: @Html.Raw(Json.Serialize(Model.ReportData.Select(d => d.Count))),
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        };
+        var ctxPie = document.getElementById('newsPieChart').getContext('2d');
+        var chartData = @Html.Raw(Model.ChartDataJson);
+        var pieChartData = @Html.Raw(Model.PieChartDataJson);
+
+        var labels = chartData.map(item => item.Date);
+        var dataValues = chartData.map(item => item.Count);
 
         new Chart(ctx, {
-            type: 'bar',
-            data: chartData,
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true }
-                }
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Số lượng bài viết',
+                    data: dataValues,
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                    fill: true
+                }]
+            }
+        });
+
+        // Biểu đồ tròn
+        var pieLabels = pieChartData.map(item => item.Category);
+        var pieValues = pieChartData.map(item => item.Count);
+
+        new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: pieLabels,
+                datasets: [{
+                    label: 'Bài viết theo danh mục',
+                    data: pieValues,
+                    backgroundColor: ['blue', 'green', 'orange', 'purple'],
+                    borderWidth: 1
+                }]
             }
         });
     </script>
 }
+<canvas id="newsChart" width="400" height="200"></canvas>
+<canvas id="newsPieChart" width="400" height="200"></canvas>
