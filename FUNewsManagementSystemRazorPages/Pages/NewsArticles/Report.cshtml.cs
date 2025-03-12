@@ -1,57 +1,85 @@
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using Newtonsoft.Json;
+using Services.DTOs;
 using Services.IService;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FUNewsManagementSystemRazorPages.Pages.NewsArticles
 {
     public class ReportModel : PageModel
     {
         private readonly INewsArticleService _newsArticleService;
+        private readonly ICategoryService _categoryService;
 
-        public ReportModel(INewsArticleService newsArticleService)
+        public ReportModel(INewsArticleService newsArticleService, ICategoryService categoryService)
         {
             _newsArticleService = newsArticleService;
+            _categoryService = categoryService;
         }
 
-        [BindProperty(SupportsGet = true)]
-        public DateTime? StartDate { get; set; }
+        public List<NewsArticleDTO> NewsArticles { get; set; } = new List<NewsArticleDTO>();
+        public SelectList Categories { get; set; }
+        public string ChartDataJson { get; set; }
+        public string PieChartDataJson { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public DateTime? EndDate { get; set; }
-
-        public List<NewsReportDTO> ReportData { get; set; } = new List<NewsReportDTO>();
-
-        public void OnGet()
+        public void OnGet(DateTime? startDate, DateTime? endDate)
         {
-            if (StartDate == null || EndDate == null)
+            if (!startDate.HasValue || !endDate.HasValue)
             {
-                // Default: Last 30 days report
-                StartDate = DateTime.UtcNow.AddDays(-30);
-                EndDate = DateTime.UtcNow;
+                startDate = DateTime.Now.AddMonths(-1);
+                endDate = DateTime.Now;
             }
 
-            // Fetch data and filter by date range
-            var articles = _newsArticleService.GetAllNewsArticles()
-                .Where(a => a.CreatedDate >= StartDate && a.CreatedDate <= EndDate)
-                .GroupBy(a => a.CreatedDate?.Date)
-                .Select(g => new NewsReportDTO
-                {
-                    Date = g.Key ?? DateTime.UtcNow,
-                    Count = g.Count()
-                })
-                .OrderBy(d => d.Date)
+            ViewData["StartDate"] = startDate.Value.ToString("yyyy-MM-dd");
+            ViewData["EndDate"] = endDate.Value.ToString("yyyy-MM-dd");
+
+            // Lấy danh sách bài báo
+            var articles = _newsArticleService
+                .GetNewsArticlesByPeriod(startDate.Value, endDate.Value)
+                .OrderBy(a => a.CreatedDate)
                 .ToList();
 
-            ReportData = articles;
-        }
-    }
+            // Lấy danh mục và ánh xạ CategoryId -> CategoryName
+            var categories = _categoryService.GetCategories()
+                .ToDictionary(c => c.CategoryId, c => c.CategoryName);
 
-    public class NewsReportDTO
-    {
-        public DateTime Date { get; set; }
-        public int Count { get; set; }
+            foreach (var article in articles)
+            {
+                if (article.CategoryId.HasValue && categories.TryGetValue(article.CategoryId.Value, out string categoryName))
+                {
+                    article.CategoryName = categoryName;
+                }
+            }
+
+            NewsArticles = articles;
+
+            // Chuẩn bị dữ liệu biểu đồ cột (số lượng bài viết theo ngày)
+            var chartData = NewsArticles
+                .Where(a => a.CreatedDate.HasValue)
+                .GroupBy(a => a.CreatedDate.Value.Date)
+                .Select(g => new
+                {
+                    Date = g.Key.ToString("yyyy-MM-dd"),
+                    Count = g.Count()
+                }).ToList();
+
+            ChartDataJson = JsonConvert.SerializeObject(chartData);
+
+            // Dữ liệu cho biểu đồ tròn (Phân loại bài viết theo danh mục)
+            var pieChartData = NewsArticles
+                .Where(a => !string.IsNullOrEmpty(a.CategoryName))
+                .GroupBy(a => a.CategoryName)
+                .Select(g => new
+                {
+                    Category = g.Key,
+                    Count = g.Count()
+                }).ToList();
+
+            PieChartDataJson = JsonConvert.SerializeObject(pieChartData);
+        }
     }
 }
