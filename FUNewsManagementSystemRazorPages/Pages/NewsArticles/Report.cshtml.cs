@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,13 +38,13 @@ namespace FUNewsManagementSystemRazorPages.Pages.NewsArticles
             ViewData["StartDate"] = startDate.Value.ToString("yyyy-MM-dd");
             ViewData["EndDate"] = endDate.Value.ToString("yyyy-MM-dd");
 
-            // L?y danh s�ch b�i b�o
+            // L?y danh sách bài báo
             var articles = _newsArticleService
                 .GetNewsArticlesByPeriod(startDate.Value, endDate.Value)
                 .OrderBy(a => a.CreatedDate)
                 .ToList();
 
-            // L?y danh m?c v� �nh x? CategoryId -> CategoryName
+            // L?y danh m?c và ánh x? CategoryId -> CategoryName
             var categories = _categoryService.GetCategories()
                 .ToDictionary(c => c.CategoryId, c => c.CategoryName);
 
@@ -57,7 +58,7 @@ namespace FUNewsManagementSystemRazorPages.Pages.NewsArticles
 
             NewsArticles = articles;
 
-            // Chu?n b? d? li?u bi?u ?? c?t (s? l??ng b�i vi?t theo ng�y)
+            // Chuáº©n bá» dá»¯ liá»u biá»u Äá» cá»t (sá» lÆ°á»£ng bÃ i viáº¿t theo ngÃ y)
             var chartData = NewsArticles
                 .Where(a => a.CreatedDate.HasValue)
                 .GroupBy(a => a.CreatedDate.Value.Date)
@@ -68,8 +69,7 @@ namespace FUNewsManagementSystemRazorPages.Pages.NewsArticles
                 }).ToList();
 
             ChartDataJson = JsonConvert.SerializeObject(chartData);
-
-            // D? li?u cho bi?u ?? tr�n (Ph�n lo?i b�i vi?t theo danh m?c)
+            // D? li?u cho bi?u ?? tròn (Phân lo?i bài vi?t theo danh m?c)
             var pieChartData = NewsArticles
                 .Where(a => !string.IsNullOrEmpty(a.CategoryName))
                 .GroupBy(a => a.CategoryName)
