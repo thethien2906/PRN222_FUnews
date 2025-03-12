@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model FUNewsManagementSystemRazorPages.Pages.NewsArticles.IndexModel
 @{
     ViewData["Title"] = "News Articles";
 }
@@ -76,8 +76,10 @@
     </ul>
 </nav>
 <div class="d-flex justify-content-between mb-3">
-    <a asp-action="Create" class="btn btn-primary">Create New Article</a>
-    <div class="mt-auto">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        Create New Article
+    </button>
+
         <a asp-page="/Tags/Index" class="btn btn-primary">Tags</a>
     </div>
 </div>
